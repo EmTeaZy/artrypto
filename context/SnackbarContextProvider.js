@@ -24,8 +24,8 @@ export const SnackbarContextProvider = ({children}) => {
 
     return(
         <SnackbarContext.Provider value={{show}}>
-            <Snackbar open={open} autoHideDuration={6000} onClose={hide}>
-                <Alert onClose={hide} severity={severity} sx={{ width: '100%' }}>
+            <Snackbar anchorOrigin={{vertical: 'bottom', horizontal: 'right'}} open={open} autoHideDuration={3000} onClose={hide}>
+                <Alert variant="filled" elevation={6} onClose={hide} severity={severity} sx={{ width: '100%' }}>
                     {message}
                 </Alert>
             </Snackbar>
