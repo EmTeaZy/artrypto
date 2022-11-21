@@ -2,11 +2,13 @@ import React, {useState} from 'react'
 import {Button, Form} from 'react-bootstrap'
 import {useAuth} from "../context/AuthContext";
 import {useRouter} from "next/router";
+import {useSnackbar} from "../context/SnackbarContextProvider";
 
 const Login = () => {
 
     const {login} = useAuth()
     const router = useRouter()
+    const {show} = useSnackbar()
 
     const [data, setData] = useState({
         email: '',
@@ -16,7 +18,10 @@ const Login = () => {
     const handleLogin = e => {
         e.preventDefault()
         login(data.email, data.password)
-            .then(() => router.push('/dashboard'))
+            .then(() => {
+                show("Login successful!");
+                router.push('/dashboard')
+            })
             .catch(err => console.log(err))
     }
 

@@ -1,10 +1,20 @@
 import {createContext, useContext, useEffect, useState} from "react";
-import {onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut} from 'firebase/auth'
-import {auth} from '../config/firebase'
+import {createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile} from 'firebase/auth'
+import {auth, database} from '../config/firebase'
+import {ref, set} from "firebase/database";
 
 const AuthContext = createContext({});
 
 export const useAuth = () => useContext(AuthContext)
+
+const writeUserData = async (user) => {
+    const {uid: userId, displayName: name, email} = user
+    console.log(userId, name, email);
+    await set(ref(database, 'users/' + userId), {
+        username: name,
+        email: email,
+    });
+}
 
 export const AuthContextProvider = ({children}) => {
 
@@ -24,8 +34,11 @@ export const AuthContextProvider = ({children}) => {
         })
     }, [])
 
-    const signUp = (email, password) => {
-        return createUserWithEmailAndPassword(auth, email, password);
+    const signUp = async (email, password, username) => {
+        const response = await createUserWithEmailAndPassword(auth, email, password)
+        await updateProfile(auth.currentUser, {displayName: username})
+        await writeUserData(response.user)
+        return response;
     }
 
     const login = (email, password) => {

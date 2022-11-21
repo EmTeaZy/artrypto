@@ -1,17 +1,19 @@
 import React from 'react'
 import {Container, Nav, Navbar} from 'react-bootstrap'
-import Link from 'next/link'
 import {useAuth} from "../context/AuthContext";
 import {useRouter} from "next/router";
+import Link from 'next/link'
+import {useSnackbar} from "../context/SnackbarContextProvider";
 
 const NavbarComp = () => {
 
     const {user, logout} = useAuth()
     const router = useRouter()
+    const {show} = useSnackbar();
 
     const handleLogout = () => {
         logout();
-        router.push("/login").then(() => null);
+        router.push("/login").then(() => show("Logged out successfully"))
     }
 
     return (
@@ -22,19 +24,19 @@ const NavbarComp = () => {
                 </Link>
                 <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                 <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="me-auto">
+                    <Nav className="ms-auto">
                         {user ?
-                            <Nav.Link onClick={handleLogout}>
+                            <Nav.Link className="p-0" onClick={handleLogout}>
                                 Logout
                             </Nav.Link>
                             : <>
-                            <Link href="/signup" passHref>
-                                Signup
-                            </Link>
-                            <Link className="ms-2" href="/login" passHref>
-                                Login
-                            </Link>
-                        </>}
+                                <Link href="/signup" passHref>
+                                    Signup
+                                </Link>
+                                <Link className="ms-2" href="/login" passHref>
+                                    Login
+                                </Link>
+                            </>}
                         <Link className="ms-2" href="/about" passHref>
                             About
                         </Link>
