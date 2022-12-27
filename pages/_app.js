@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar";
 import { useRouter } from "next/router";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/globals.css";
+import Head from "../components/Head";
 
 const publicRoutes = ["/login", "/", "/signup", "/about", "/user"];
 
@@ -13,16 +14,14 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
-      <AuthContextProvider>
-        <SnackbarContextProvider>
+    <Head/>
           <Navbar />
           {publicRoutes.includes(router.pathname) ? (
             <Component {...pageProps} />
           ) : (
             <Component {...pageProps} />
           )}
-        </SnackbarContextProvider>
-      </AuthContextProvider>
+
     </>
   );
 }

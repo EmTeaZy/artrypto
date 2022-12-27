@@ -13,7 +13,7 @@ const NavbarComp = () => {
 
     const handleLogout = () => {
         logout();
-        router.push("/login").then(() => show("Logged out successfully"))
+        router.push("/admin/login").then(() => show("Logged out successfully"))
     }
 
     return (
@@ -30,14 +30,14 @@ const NavbarComp = () => {
                                 Logout
                             </Nav.Link>
                             : <>
-                                <Link href="/signup" passHref>
+                                <Link href="/admin/signup" passHref>
                                     Signup
                                 </Link>
-                                <Link className="ms-2" href="/login" passHref>
+                                <Link className="ms-2" href="/admin/login" passHref>
                                     Login
                                 </Link>
                             </>}
-                        <Link className="ms-2" href="/about" passHref>
+                        <Link className="ms-2" href="/admin/about" passHref>
                             About
                         </Link>
                     </Nav>

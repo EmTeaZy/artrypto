@@ -1,31 +1,26 @@
 import React, {useState} from 'react'
 import {Button, Form} from 'react-bootstrap'
-import {useAuth} from "../context/AuthContext";
-import {useSnackbar} from "../context/SnackbarContextProvider";
+import {useAuth} from "../../context/AuthContext";
+import {useRouter} from "next/router";
+import {useSnackbar} from "../../context/SnackbarContextProvider";
 
-const Signup = () => {
+const Login = () => {
 
-    const {signUp} = useAuth()
+    const {login} = useAuth()
+    const router = useRouter()
     const {show} = useSnackbar()
 
     const [data, setData] = useState({
         email: '',
         password: '',
-        username: '',
     })
 
-    const handleSignup = e => {
+    const handleLogin = e => {
         e.preventDefault()
-
-        if (data.username === '' || data.email === '' || data.password === '') {
-            show("Please fill all the fields.", "error");
-            return;
-        }
-
-        signUp(data.email, data.password, data.username)
-            .then(res => {
-                console.log("Sign up successful", res)
-                show("Sign up successful!");
+        login(data.email, data.password)
+            .then(() => {
+                show("Login successful!");
+                router.push('/dashboard')
             })
             .catch(err => console.log(err))
     }
@@ -37,29 +32,11 @@ const Signup = () => {
                 margin: 'auto',
             }}
         >
-            <h1 className="text-center my-3 ">Signup</h1>
-            <Form onSubmit={handleSignup}>
-
-                <Form.Group className="mb-3" controlId="formBasicName">
-                    <Form.Label>Username</Form.Label>
-                    <Form.Control
-                        type="text"
-                        placeholder="Enter username"
-                        onChange={e =>
-                            setData({
-                                ...data,
-                                username: e.target.value,
-                            })
-                        }
-                        value={data.username}
-                    />
-                </Form.Group>
-
+            <h1 className="text-center my-3 ">Login</h1>
+            <Form onSubmit={handleLogin}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
                     <Form.Control
-                        type="email"
-                        placeholder="Enter email"
                         onChange={e =>
                             setData({
                                 ...data,
@@ -67,14 +44,15 @@ const Signup = () => {
                             })
                         }
                         value={data.email}
+                        required
+                        type="email"
+                        placeholder="Enter email"
                     />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
                     <Form.Control
-                        type="password"
-                        placeholder="Password"
                         onChange={e =>
                             setData({
                                 ...data,
@@ -82,15 +60,17 @@ const Signup = () => {
                             })
                         }
                         value={data.password}
+                        required
+                        type="password"
+                        placeholder="Password"
                     />
                 </Form.Group>
-
                 <Button variant="primary" type="submit">
-                    Signup
+                    Login
                 </Button>
             </Form>
         </div>
     )
 }
 
-export default Signup
+export default Login
