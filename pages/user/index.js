@@ -1,70 +1,76 @@
 import { Button } from "@mui/material";
 import { ethers } from "ethers";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRef } from "react";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
+
 const index = () => {
   const [walletConnected, setWalletConnected] = useState(false); //hook to check wallet is connected or not
-  
+  const [userAddress, setUserAddress] = useState("");
   //to server side routing between pages
   const router = useRouter();
 
-const [status,changeStatus]=useState("");
+  useEffect(() => {
+    checkIfWalletIsConnected(setUserAddress);
+  }, []);
 
-  //connect metamask wallet in this function
-  const getProviderOrSigner = async (needSigner = false) => {
-    // Connect to Metamask
 
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
 
-    await provider.send("eth_requestAccounts", []);
+  //on account change
+  window.ethereum.on('accountsChanged',(accounts)=>{
+    setUserAddress(accounts[0])
+  })
 
-    
-    // If user is not connected to the Goerli Test network, let them know and throw an error
-    
-    const { chainId } = await provider.getNetwork();
-    if (chainId !== 5) {
-      window.alert("Change the network to Goerli");
-      throw new Error("Change network to Goerli");
+  
+  //connect metamask
+  async function connect(onConnected) {
+    if(setWalletConnected)
+    {
+      router.push("/user/account")
+      return;
     }
-
-    if (needSigner) {
-      const signer = provider.getSigner();
-      return signer;
-    }
-
-    return provider.getSigner();
-  };
-
-
-  //function to connect wallet and go to user profile page
-  const connectWallet = async () => {
-    console.log(status)
-   if(!walletConnected)
-   {
-      try {
-        const signer = await getProviderOrSigner();
-        setWalletConnected(true);
-        console.log(await signer.getAddress())
-        //push to account page
-        //  router.push('/user/account')
-      } catch (err) {
-        console.error(err);
+    else
+    {
+      if (!window.ethereum) {
+        alert("Get MetaMask!");
+        return;
       }
-   }
-   else
-   {
-      //  router.push('/user/account')
-   }
-  };
+      
+      const accounts = await window.ethereum.request({
+        method: "eth_requestAccounts",
+      });
+      setWalletConnected(true)
+      onConnected(accounts[0]);
+      router.push("/user/account")
+    }
+  }
+
+  //check if wallet is connected
+  async function checkIfWalletIsConnected(onConnected) {
+    if (window.ethereum) {
+      const accounts = await window.ethereum.request({
+        method: "eth_accounts",
+      });
+
+      if (accounts.length > 0) {
+        const account = accounts[0];
+        onConnected(account);
+        setWalletConnected(true)
+        return;
+      }
+    }
+  }
+
   return (
     <>
       <h1>This is user landing page</h1>
-      <Button variant="contained" onClick={connectWallet}>
+      <Button variant="contained" onClick={() => connect(setUserAddress)}>
         Profile
       </Button>
-
-      <p>hwllo</p>
+      <p>
+        {walletConnected ? "Wallet is connected" : "Wallet is not connected"}
+      </p>
+      <p>{userAddress}</p>
     </>
   );
 };
