@@ -13,14 +13,17 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
-    <Head/>
+      <AuthContextProvider>
+        <SnackbarContextProvider>
+          <Head />
           <Navbar />
           {publicRoutes.includes(router.pathname) ? (
             <Component {...pageProps} />
           ) : (
             <Component {...pageProps} />
           )}
-
+        </SnackbarContextProvider>
+      </AuthContextProvider>
     </>
   );
 }
