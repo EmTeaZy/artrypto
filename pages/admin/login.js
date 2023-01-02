@@ -20,7 +20,7 @@ const Login = () => {
         login(data.email, data.password)
             .then(() => {
                 show("Login successful!");
-                router.push('/dashboard')
+                router.push('/admin/dashboard')
             })
             .catch(err => console.log(err))
     }
