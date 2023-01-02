@@ -1,4 +1,4 @@
-import {useSnackbar} from "../context/SnackbarContextProvider";
+import {useSnackbar} from "../../context/SnackbarContextProvider";
 
 export default function About() {
 
