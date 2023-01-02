@@ -18,7 +18,7 @@ const index = () => {
 
   //connect metamask
   async function connect(onConnected) {
-    if(setWalletConnected)
+    if(walletConnected)
     {
       router.push("/account")
       return;
