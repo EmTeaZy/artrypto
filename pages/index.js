@@ -56,9 +56,9 @@ const index = () => {
   }
 
   //on account change
-  // window.ethereum.on('accountsChanged',(accounts)=>{
-  //   setUserAddress(accounts[0])
-  // })
+  window.ethereum.on('accountsChanged',(accounts)=>{
+    setUserAddress(accounts[0])
+  })
 
 
 
