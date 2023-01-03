@@ -3,6 +3,8 @@ import {Button, Form} from 'react-bootstrap'
 import {useAuth} from "../../context/AuthContext";
 import {useRouter} from "next/router";
 import {useSnackbar} from "../../context/SnackbarContextProvider";
+import Typography from "@mui/material/Typography";
+import Link from "next/link";
 
 const Login = () => {
 
@@ -20,7 +22,7 @@ const Login = () => {
         login(data.email, data.password)
             .then(() => {
                 show("Login successful!");
-                router.push('/admin/dashboard')
+                router.push('/admin/')
             })
             .catch(err => console.log(err))
     }
@@ -32,7 +34,7 @@ const Login = () => {
                 margin: 'auto',
             }}
         >
-            <h1 className="text-center my-3 ">Login</h1>
+            <Typography variant="h3" className="text-center my-3 ">Login</Typography>
             <Form onSubmit={handleLogin}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
@@ -65,7 +67,11 @@ const Login = () => {
                         placeholder="Password"
                     />
                 </Form.Group>
-                <Button variant="primary" type="submit">
+                <Typography variant="p" className="text-end" > Don't have an account?
+                    <Link href="/admin/signup"> Sign Up </Link>
+                </Typography>
+                <br/>
+                <Button className="mt-2" variant="primary" type="submit">
                     Login
                 </Button>
             </Form>

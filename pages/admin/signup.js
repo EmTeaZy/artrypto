@@ -2,6 +2,8 @@ import React, {useState} from 'react'
 import {Button, Form} from 'react-bootstrap'
 import {useAuth} from "../../context/AuthContext";
 import {useSnackbar} from "../../context/SnackbarContextProvider";
+import Typography from "@mui/material/Typography";
+import Link from "next/link";
 
 const Signup = () => {
 
@@ -84,8 +86,11 @@ const Signup = () => {
                         value={data.password}
                     />
                 </Form.Group>
-
-                <Button variant="primary" type="submit">
+                <Typography variant="p" className="text-end" > Already have an account?
+                    <Link href="/admin/login"> Login </Link>
+                </Typography>
+                <br/>
+                <Button className="mt-2" variant="primary" type="submit">
                     Signup
                 </Button>
             </Form>
