@@ -8,10 +8,6 @@ const Account = () => {
     checkIfWalletIsConnected(setAccount);
   }, []);
 
-  //on account change
-  window.ethereum.on('accountsChanged',(accounts)=>{
-    setAccount(accounts[0])
-  })
 
   async function checkIfWalletIsConnected(onConnected) {
     if (window.ethereum) {

@@ -5,6 +5,9 @@ import { useRouter } from "next/router";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/globals.css";
 import Head from "../components/Head";
+import wagmiClient from "../config/wagmiClient";
+import { WagmiConfig } from "wagmi";
+
 
 const publicRoutes = ["/login", "/", "/signup", "/about", "/user"];
 
@@ -17,11 +20,14 @@ function MyApp({ Component, pageProps }) {
         <SnackbarContextProvider>
           <Head />
           <Navbar />
+          <WagmiConfig client={wagmiClient}>
           {publicRoutes.includes(router.pathname) ? (
             <Component {...pageProps} />
           ) : (
             <Component {...pageProps} />
           )}
+          </WagmiConfig>
+        
         </SnackbarContextProvider>
       </AuthContextProvider>
     </>

@@ -3,75 +3,54 @@ import { ethers } from "ethers";
 import React, { useEffect, useState } from "react";
 import { useRef } from "react";
 import { useRouter } from "next/navigation";
+import { useAccount, useConnect, useNetwork  } from "wagmi";
+import { InjectedConnector } from "wagmi/connectors/injected";
+import { async } from "@firebase/util";
 
 const index = () => {
-
-  const [walletConnected, setWalletConnected] = useState(false); //hook to check wallet is connected or not
+  const { address, isConnected } = useAccount();
   const [userAddress, setUserAddress] = useState("");
   //to server side routing between pages
   const router = useRouter();
+  const { chain, chains } = useNetwork()
 
   useEffect(() => {
     checkIfWalletIsConnected(setUserAddress);
   }, []);
 
-
-  //connect metamask
-  async function connect(onConnected) {
-    if(walletConnected)
-    {
-      router.push("/account")
-      return;
-    }
-    else
-    {
-      if (!window.ethereum) {
-        alert("Get MetaMask!");
-        return;
-      }
-      
-      const accounts = await window.ethereum.request({
-        method: "eth_requestAccounts",
-      });
-      setWalletConnected(true)
-      onConnected(accounts[0]);
-      router.push("/account")
-    }
-  }
+  const { connect } = useConnect({
+    connector: new InjectedConnector(),
+  });
 
   //check if wallet is connected
   async function checkIfWalletIsConnected(onConnected) {
-    if (window.ethereum) {
-      const accounts = await window.ethereum.request({
-        method: "eth_accounts",
-      });
-
-      if (accounts.length > 0) {
-        const account = accounts[0];
-        onConnected(account);
-        setWalletConnected(true)
-        return;
-      }
+    if (isConnected) {
+      onConnected(address);
     }
   }
 
-  //on account change
-  window.ethereum.on('accountsChanged',(accounts)=>{
-    setUserAddress(accounts[0])
-  })
-
-
+  async function connectWallet() {
+    if (!isConnected) {
+      connect();
+    }
+    else{
+      router.push("/account")
+    }
+  }
 
   return (
     <>
       <h1>This is user landing page</h1>
-      <Button variant="contained" onClick={() => connect(setUserAddress)}>
+      <Button variant="contained" onClick={() => connectWallet()}>
         Profile
       </Button>
-      <p>
-        {walletConnected ? "Wallet is connected" : "Wallet is not connected"}
-      </p>
-      <p>{userAddress}</p>
+
+      <p>{isConnected ? "Wallet is connected" : "Wallet is not connected"}</p>
+      <p>{address}</p>
+      {chain && <div>Connected to {chain.name}</div>}
+      {chains && (
+        <div>Available chains: {chains.map((chain) => chain.name)}</div>
+      )}
     </>
   );
 };
