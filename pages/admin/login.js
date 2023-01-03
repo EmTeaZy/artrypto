@@ -70,7 +70,6 @@ const Login = () => {
                 <Typography variant="subtitle1" className="text-end" > Don't have an account?
                     <Link href="/admin/signup"> Sign Up </Link>
                 </Typography>
-                <br/>
                 <Button className="mt-2" variant="primary" type="submit">
                     Login
                 </Button>

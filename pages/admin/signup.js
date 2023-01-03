@@ -89,7 +89,6 @@ const Signup = () => {
                 <Typography variant="subtitle1" className="text-end" > Already have an account?
                     <Link href="/admin/login"> Login </Link>
                 </Typography>
-                <br/>
                 <Button className="mt-2" variant="primary" type="submit">
                     Signup
                 </Button>
