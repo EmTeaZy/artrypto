@@ -2,6 +2,8 @@ import React, {useState} from 'react'
 import {Button, Form} from 'react-bootstrap'
 import {useAuth} from "../../context/AuthContext";
 import {useSnackbar} from "../../context/SnackbarContextProvider";
+import Typography from "@mui/material/Typography";
+import Link from "next/link";
 
 const Signup = () => {
 
@@ -37,7 +39,7 @@ const Signup = () => {
                 margin: 'auto',
             }}
         >
-            <h1 className="text-center my-3 ">Signup</h1>
+            <Typography variant="h3" className="text-center my-3 ">Signup</Typography>
             <Form onSubmit={handleSignup}>
 
                 <Form.Group className="mb-3" controlId="formBasicName">
@@ -84,8 +86,10 @@ const Signup = () => {
                         value={data.password}
                     />
                 </Form.Group>
-
-                <Button variant="primary" type="submit">
+                <Typography variant="subtitle1" className="text-end" > Already have an account?
+                    <Link href="/admin/login"> Login </Link>
+                </Typography>
+                <Button className="mt-2" variant="primary" type="submit">
                     Signup
                 </Button>
             </Form>

@@ -1,8 +1,7 @@
-import { Button } from "@mui/material";
-import { ethers } from "ethers";
-import React, { useEffect, useState } from "react";
-import { useRef } from "react";
-import { useRouter } from "next/navigation";
+import {Button} from "@mui/material";
+import React, {useEffect, useState} from "react";
+import {useRouter} from "next/navigation";
+import Typography from '@mui/material/Typography'
 
 const index = () => {
 
@@ -21,7 +20,6 @@ const index = () => {
     if(walletConnected)
     {
       router.push("/account")
-      return;
     }
     else
     {
@@ -29,7 +27,7 @@ const index = () => {
         alert("Get MetaMask!");
         return;
       }
-      
+
       const accounts = await window.ethereum.request({
         method: "eth_requestAccounts",
       });
@@ -50,29 +48,26 @@ const index = () => {
         const account = accounts[0];
         onConnected(account);
         setWalletConnected(true)
-        return;
       }
     }
   }
 
   //on account change
-  window.ethereum.on('accountsChanged',(accounts)=>{
+  window.ethereum?.on('accountsChanged',(accounts)=>{
     setUserAddress(accounts[0])
   })
 
-
-
   return (
-    <>
-      <h1>This is user landing page</h1>
+    <div className="text-center m-5">
+      <Typography variant="h1"> This is user landing page </Typography>
       <Button variant="contained" onClick={() => connect(setUserAddress)}>
         Profile
       </Button>
-      <p>
+      <Typography variant="subtitle1">
         {walletConnected ? "Wallet is connected" : "Wallet is not connected"}
-      </p>
-      <p>{userAddress}</p>
-    </>
+      </Typography>
+      <Typography variant="subtitle1">{userAddress}</Typography>
+    </div>
   );
 };
 
