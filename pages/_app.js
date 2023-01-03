@@ -9,7 +9,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/globals.css";
 import ProtectedRoute from "../components/ProtectedRoute";
 
-const publicRoutes = ["/admin/login", "/admin/signup", "/admin/about", "/", "/user"];
+const publicRoutes = ["/admin/login", "/admin/signup", "/admin/about", "/", "/account"];
 
 function MyApp({Component, pageProps}) {
     const router = useRouter();
