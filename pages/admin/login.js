@@ -67,7 +67,7 @@ const Login = () => {
                         placeholder="Password"
                     />
                 </Form.Group>
-                <Typography variant="p" className="text-end" > Don't have an account?
+                <Typography variant="subtitle1" className="text-end" > Don't have an account?
                     <Link href="/admin/signup"> Sign Up </Link>
                 </Typography>
                 <br/>

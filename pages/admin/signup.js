@@ -39,7 +39,7 @@ const Signup = () => {
                 margin: 'auto',
             }}
         >
-            <h1 className="text-center my-3 ">Signup</h1>
+            <Typography variant="h3" className="text-center my-3 ">Signup</Typography>
             <Form onSubmit={handleSignup}>
 
                 <Form.Group className="mb-3" controlId="formBasicName">
@@ -86,7 +86,7 @@ const Signup = () => {
                         value={data.password}
                     />
                 </Form.Group>
-                <Typography variant="p" className="text-end" > Already have an account?
+                <Typography variant="subtitle1" className="text-end" > Already have an account?
                     <Link href="/admin/login"> Login </Link>
                 </Typography>
                 <br/>

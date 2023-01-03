@@ -1,4 +1,5 @@
 import {useSnackbar} from "../../context/SnackbarContextProvider";
+import Typography from "@mui/material/Typography";
 
 export default function About() {
 
@@ -6,7 +7,7 @@ export default function About() {
 
     return(
         <div className="text-center">
-            <h1>About Page</h1>
+            <Typography variant="h3">About Page</Typography>
             <button onClick={() => show("Hey there!")} className="btn btn-success"> Show message </button>
         </div>
     )

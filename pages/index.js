@@ -63,10 +63,10 @@ const index = () => {
       <Button variant="contained" onClick={() => connect(setUserAddress)}>
         Profile
       </Button>
-      <p>
+      <Typography variant="subtitle1">
         {walletConnected ? "Wallet is connected" : "Wallet is not connected"}
-      </p>
-      <p>{userAddress}</p>
+      </Typography>
+      <Typography variant="subtitle1">{userAddress}</Typography>
     </div>
   );
 };
