@@ -25,7 +25,6 @@ const index = () => {
   async function connectWallet() {
     if (!isConnected) {
       connect();
-      router.push("/account")
     }
     else{
       router.push("/account")
