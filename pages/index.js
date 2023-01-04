@@ -3,31 +3,20 @@ import { ethers } from "ethers";
 import React, { useEffect, useState } from "react";
 import { useRef } from "react";
 import { useRouter } from "next/navigation";
-import { useAccount, useConnect, useNetwork  } from "wagmi";
+import { useAccount, useConnect  } from "wagmi";
 import { InjectedConnector } from "wagmi/connectors/injected";
 import { async } from "@firebase/util";
 
 const index = () => {
+  //get metamask account from wagmi hook
   const { address, isConnected } = useAccount();
-  const [userAddress, setUserAddress] = useState("");
+
   //to server side routing between pages
   const router = useRouter();
-  const { chain, chains } = useNetwork()
-
-  useEffect(() => {
-    checkIfWalletIsConnected(setUserAddress);
-  }, []);
 
   const { connect } = useConnect({
     connector: new InjectedConnector(),
   });
-
-  //check if wallet is connected
-  async function checkIfWalletIsConnected(onConnected) {
-    if (isConnected) {
-      onConnected(address);
-    }
-  }
 
   async function connectWallet() {
     if (!isConnected) {
@@ -47,12 +36,16 @@ const index = () => {
 
       <p>{isConnected ? "Wallet is connected" : "Wallet is not connected"}</p>
       <p>{address}</p>
-      {chain && <div>Connected to {chain.name}</div>}
-      {chains && (
-        <div>Available chains: {chains.map((chain) => chain.name)}</div>
-      )}
+    
     </>
   );
 };
 
 export default index;
+
+
+
+//telling user to remain at goerli testnet component.
+// import useNetwork
+//const { chain, chains } = useNetwork()
+//  <p>{chain.name!='Goerli'?"Change your network to goerli":""}</p>

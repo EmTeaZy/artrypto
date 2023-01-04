@@ -1,30 +1,13 @@
 import React, { useEffect, useState } from 'react'
+import { useAccount } from 'wagmi';
 
 const Account = () => {
-  const [account,setAccount]=useState("");
-  const [walletConnected, setWalletConnected] = useState(false);
 
-  useEffect(() => {
-    checkIfWalletIsConnected(setAccount);
-  }, []);
+  const { address, isConnected } = useAccount();
 
 
-  async function checkIfWalletIsConnected(onConnected) {
-    if (window.ethereum) {
-      const accounts = await window.ethereum.request({
-        method: "eth_accounts",
-      });
-
-      if (accounts.length > 0) {
-        const account = accounts[0];
-        onConnected(account);
-        setWalletConnected(true)
-        return;
-      }
-    }
-  }
   return (
-    <div><p>Account Address {account}</p></div>
+    <div><p>Account Address {address}</p></div>
   )
 }
 
