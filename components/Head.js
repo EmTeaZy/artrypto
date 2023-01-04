@@ -6,7 +6,7 @@ const _Head = () => {
     <div>
     <Head>
       <title>Artrypto</title>
-      <link rel="icon" href="/artrypto-icon.jpg" />
+      <link rel="icon" href="/logo.png" />
     </Head>
   </div>
   )
