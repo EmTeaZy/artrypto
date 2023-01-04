@@ -9,7 +9,6 @@ export const useAuth = () => useContext(AuthContext)
 
 const writeUserData = async (user) => {
     const {uid: userId, displayName: name, email} = user
-    console.log(userId, name, email);
     await set(ref(database, 'users/' + userId), {
         username: name,
         email: email,
