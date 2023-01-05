@@ -4,7 +4,6 @@ import {useAuth} from "../../context/AuthContext";
 import {useRouter} from "next/router";
 import {useSnackbar} from "../../context/SnackbarContextProvider";
 import Typography from "@mui/material/Typography";
-import Link from "next/link";
 
 const Login = () => {
 
@@ -67,9 +66,6 @@ const Login = () => {
                         placeholder="Password"
                     />
                 </Form.Group>
-                <Typography variant="subtitle1" className="text-end" > Don't have an account?
-                    <Link href="/admin/signup"> Sign Up </Link>
-                </Typography>
                 <Button className="mt-2" variant="primary" type="submit">
                     Login
                 </Button>

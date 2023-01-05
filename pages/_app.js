@@ -4,40 +4,40 @@ import Navbar from "../components/Navbar";
 import Head from "../components/Head";
 import {ThemeProvider} from "@mui/material/styles";
 import {useRouter} from "next/router";
-import {theme} from '../styles/global_theme'
+import theme from ".././src/theme/theme";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/globals.css";
 import ProtectedRoute from "../components/ProtectedRoute";
 import wagmiClient from "../config/wagmiClient";
-import { WagmiConfig } from "wagmi";
+import {WagmiConfig} from "wagmi";
 
 const publicRoutes = ["/admin/login", "/admin/signup", "/admin/about", "/", "/account"];
 
 function MyApp({Component, pageProps}) {
     const router = useRouter();
 
-  return (
-    <>
-     <ThemeProvider theme={theme}>
-      <AuthContextProvider>
-        <SnackbarContextProvider>
-          <Head />
-          <Navbar />
-          <WagmiConfig client={wagmiClient}>
-          {publicRoutes.includes(router.pathname) ? (
-            <Component {...pageProps} />
-          ) : (
-           <ProtectedRoute>
+    return (
+        <>
+            <ThemeProvider theme={theme}>
+                <AuthContextProvider>
+                    <SnackbarContextProvider>
+                        <Head><title> Artrypto </title></Head>
+                        <Navbar/>
+                        <WagmiConfig client={wagmiClient}>
+                            {publicRoutes.includes(router.pathname) ? (
                                 <Component {...pageProps} />
-                            </ProtectedRoute>
-          )}
-          </WagmiConfig>
-        
-        </SnackbarContextProvider>
-      </AuthContextProvider>
-       </ThemeProvider>
-    </>
-  );
+                            ) : (
+                                <ProtectedRoute>
+                                    <Component {...pageProps} />
+                                </ProtectedRoute>
+                            )}
+                        </WagmiConfig>
+
+                    </SnackbarContextProvider>
+                </AuthContextProvider>
+            </ThemeProvider>
+        </>
+    );
 }
 
 export default MyApp;

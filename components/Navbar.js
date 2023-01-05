@@ -30,9 +30,6 @@ const NavbarComp = () => {
                                 Logout
                             </Nav.Link>
                             : <>
-                                <Link href="/admin/signup" passHref>
-                                    Signup
-                                </Link>
                                 <Link className="ms-2" href="/admin/login" passHref>
                                     Login
                                 </Link>
