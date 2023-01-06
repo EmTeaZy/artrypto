@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 import Head from "../components/Head";
 import { ThemeProvider } from "@mui/material/styles";
 import { useRouter } from "next/router";
-import theme  from "../utils/theme";
+import theme from "../utils/theme/theme";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../utils/globals.css";
 import ProtectedRoute from "../components/ProtectedRoute";

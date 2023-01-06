@@ -1,6 +1,8 @@
 import { red } from "@mui/material/colors";
 import { createTheme, responsiveFontSizes } from "@mui/material/styles";
-
+import components from "./ComponentOverRide";
+import shadows from "./Shadows";
+import typography from "./Typoraphy";
 const theme = createTheme({
   palette: {
     primary: {
@@ -24,18 +26,6 @@ const theme = createTheme({
     background: {
       default: "#020710",
       secondary: "#0B101A",
-    },
-  },
-  typography: {
-    allVariants: {
-      color: "#fff",
-    },
-    h1: {
-      fontWeight: 100,
-
-    },
-    h3: {
-      fontWeight: 100,
     },
   },
   components: {
