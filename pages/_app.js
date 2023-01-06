@@ -25,7 +25,6 @@ const publicRoutes = [
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
-
 function MyApp(props) {
   const router = useRouter();
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
