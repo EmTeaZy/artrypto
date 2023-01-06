@@ -21,6 +21,7 @@ const publicRoutes = [
   "/admin/about",
   "/",
   "/account",
+  "/account/settings",
 ];
 
 // Client-side cache, shared for the whole session of the user in the browser.
@@ -35,8 +36,8 @@ function MyApp(props) {
           <AuthContextProvider>
             <SnackbarContextProvider>
               <Head />
-              <Navbar />
               <WagmiConfig client={wagmiClient}>
+              <Navbar />
                 {publicRoutes.includes(router.pathname) ? (
                   <Component {...pageProps} />
                 ) : (

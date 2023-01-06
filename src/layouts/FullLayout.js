@@ -30,23 +30,26 @@ const PageWrapper = experimentalStyled("div")(({ theme }) => ({
   },
 }));
 
-const FullLayout = ({ children }) => {
+const FullLayout = ({ children,check }) => {
   const [isSidebarOpen, setSidebarOpen] = React.useState(true);
   const [isMobileSidebarOpen, setMobileSidebarOpen] = React.useState(false);
   const lgUp = useMediaQuery((theme) => theme.breakpoints.up("lg"));
   return (
     <MainWrapper>
+    {check=="admin"?
       <Header
         sx={{
           paddingLeft: isSidebarOpen && lgUp ? "265px" : "",
           backgroundColor: "#fbfbfb",
         }}
         toggleMobileSidebar={() => setMobileSidebarOpen(true)}
-      />
+      />:<></>
+    }
       <Sidebar
         isSidebarOpen={isSidebarOpen}
         isMobileSidebarOpen={isMobileSidebarOpen}
         onSidebarClose={() => setMobileSidebarOpen(false)}
+        check={check}
       />
       <PageWrapper>
         <Container
@@ -56,8 +59,8 @@ const FullLayout = ({ children }) => {
             paddingLeft: isSidebarOpen && lgUp ? "280px!important" : "",
           }}
         >
-          <Box sx={{ minHeight: "calc(100vh - 170px)" }}>{children}</Box>
-          <Footer />
+          <Box bgcolor={"primary.main"} sx={{ minHeight: "calc(100vh - 170px)" }}>{children}</Box>
+          {check=="admin"?<Footer />:<></>}
         </Container>
       </PageWrapper>
     </MainWrapper>
