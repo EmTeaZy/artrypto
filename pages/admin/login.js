@@ -1,14 +1,13 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Button, Form} from 'react-bootstrap'
 import {useAuth} from "../../context/AuthContext";
 import {useRouter} from "next/router";
 import {useSnackbar} from "../../context/SnackbarContextProvider";
 import Typography from "@mui/material/Typography";
-import Link from "next/link";
 
 const Login = () => {
 
-    const {login} = useAuth()
+    const {user, login} = useAuth()
     const router = useRouter()
     const {show} = useSnackbar()
 
@@ -26,6 +25,12 @@ const Login = () => {
             })
             .catch(err => console.log(err))
     }
+
+    // If a user is logged in, redirect them to the dashboard
+    useEffect(() => {
+        if(user)
+            router.push("/admin")
+    })
 
     return (
         <div
@@ -67,9 +72,6 @@ const Login = () => {
                         placeholder="Password"
                     />
                 </Form.Group>
-                <Typography variant="subtitle1" className="text-end" > Don't have an account?
-                    <Link href="/admin/signup"> Sign Up </Link>
-                </Typography>
                 <Button className="mt-2" variant="primary" type="submit">
                     Login
                 </Button>
