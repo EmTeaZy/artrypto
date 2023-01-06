@@ -40,7 +40,6 @@ const index = () => {
       <Typography variant="h3">
         {isConnected ? "Wallet is connected" : "Wallet is not connected"}
       </Typography>
-      <Typography variant="h3">{address}</Typography>
     </Box>
     
     </>

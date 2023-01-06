@@ -1,5 +1,5 @@
 const typography = {
-  fontFamily: "'DM Sans', sans-serif",
+  fontFamily: "Poppins",
   body1: {
     fontWeight: 400, // or 'bold'
   },
@@ -44,6 +44,11 @@ const typography = {
   subtitle2: {
     fontSize: "0.875rem",
     fontWeight: "400",
+  },
+  navlink:{
+    fontSize:"16px",
+    fontWeight:"800",
+    color:"#949DB2",
   },
 };
 
