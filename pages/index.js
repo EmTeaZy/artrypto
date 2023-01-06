@@ -8,6 +8,7 @@ import { useAccount, useConnect  } from "wagmi";
 import { InjectedConnector } from "wagmi/connectors/injected";
 import { async } from "@firebase/util";
 import Typography from '@mui/material/Typography'
+import { Box } from "@mui/material";
 
 
 const index = () => {
@@ -34,16 +35,19 @@ const index = () => {
 
 
   return (
-    <div className="text-center m-5">
+    <>
+    <Box bgcolor={"primary.main"} sx={{textAlign:"center"}}>
       <Typography variant="h1"> This is user landing page </Typography>
       <Button variant="contained" onClick={() => connectWallet()}>
         Profile
       </Button>
-      <Typography variant="subtitle1">
+      <Typography variant="h3">
         {isConnected ? "Wallet is connected" : "Wallet is not connected"}
       </Typography>
-      <Typography variant="subtitle1">{address}</Typography>
-    </div>
+      <Typography variant="h3">{address}</Typography>
+    </Box>
+    
+    </>
   );
 };
 
