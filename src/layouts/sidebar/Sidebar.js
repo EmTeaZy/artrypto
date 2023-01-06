@@ -5,9 +5,10 @@ import {Box, Drawer, List, ListItem, ListItemIcon, ListItemText, useMediaQuery,}
 import FeatherIcon from "feather-icons-react";
 import LogoIcon from "../logo/LogoIcon";
 import Menuitems from "./MenuItems";
+import UserSettings from "./UserSettings";
 import {useRouter} from "next/router";
 
-const Sidebar = ({isMobileSidebarOpen, onSidebarClose, isSidebarOpen}) => {
+const Sidebar = ({isMobileSidebarOpen, onSidebarClose, isSidebarOpen,check}) => {
     const [open, setOpen] = React.useState(true);
 
     const lgUp = useMediaQuery((theme) => theme.breakpoints.up("lg"));
@@ -21,13 +22,19 @@ const Sidebar = ({isMobileSidebarOpen, onSidebarClose, isSidebarOpen}) => {
     };
     let curl = useRouter();
     const location = curl.pathname;
-
+    let items;
+    if(check=="admin")
+    {
+        items=Menuitems
+    }
+    else 
+     items = UserSettings
     const SidebarContent = (
-        <Box p={2} height="100%">
-            <LogoIcon toLink={"/admin"}/>
-            <Box mt={2}>
+        <Box p={2}  height="100%" bgcolor={"primary.main"}>
+        {check=="admin"? <LogoIcon toLink={"/admin"}/>:<LogoIcon toLink={"/"}/>}
+            <Box mt={4}>
                 <List>
-                    {Menuitems.map((item, index) => (
+                    {items.map((item, index) => (
                         <List component="li" disablePadding key={item.title}>
                             <NextLink href={item.href}>
                                 <ListItem
@@ -39,14 +46,14 @@ const Sidebar = ({isMobileSidebarOpen, onSidebarClose, isSidebarOpen}) => {
                                         ...(location === item.href && {
                                             color: "white",
                                             backgroundColor: (theme) =>
-                                                `${theme.palette.primary.main}!important`,
+                                                `${theme.palette.secondary.main}!important`,
                                         }),
                                     }}
                                 >
                                     <ListItemIcon>
                                         <FeatherIcon
                                             style={{
-                                                color: `${location === item.href ? "white" : ""} `,
+                                                color: `${location === item.href ? "black" : "white"} `,
                                             }}
                                             icon={item.icon}
                                             width="20"
@@ -54,7 +61,9 @@ const Sidebar = ({isMobileSidebarOpen, onSidebarClose, isSidebarOpen}) => {
                                         />
                                     </ListItemIcon>
 
-                                    <ListItemText onClick={onSidebarClose}>
+                                    <ListItemText style={{
+                                                color: `${location === item.href ? "black" : "white"} `,
+                                            }} onClick={onSidebarClose}>
                                         {item.title}
                                     </ListItemText>
                                 </ListItem>

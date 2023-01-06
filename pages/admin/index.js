@@ -8,7 +8,7 @@ import FullLayout from "../../src/layouts/FullLayout";
 export default function Home() {
     return (
         <>
-            <FullLayout>
+            <FullLayout check={"admin"}>
                 <Grid container spacing={0}>
                     <Grid item xs={12} lg={12}>
                         <SalesOverview />
