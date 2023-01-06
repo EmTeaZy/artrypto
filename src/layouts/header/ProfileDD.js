@@ -43,7 +43,7 @@ const ProfileDD = () => {
             }}
           >
             <Typography
-              color="textSecondary"
+              color="text.contrast"
               variant="h5"
               fontWeight="400"
               sx={{ ml: 1 }}
@@ -81,9 +81,10 @@ const ProfileDD = () => {
               component="nav"
               aria-label="secondary mailbox folder"
               onClick={handleClose4}
+              sx={{color:"text.contrast"}}
             >
               <ListItemButton>
-                <ListItemText primary="Edit Profile" />
+                <ListItemText sx={{color:"text.contrast"}} primary="Edit Profile" />
               </ListItemButton>
               <ListItemButton>
                 <ListItemText primary="Account" />

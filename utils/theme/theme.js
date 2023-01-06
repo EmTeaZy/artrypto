@@ -6,13 +6,13 @@ import typography from "./Typoraphy";
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#343434",
+      main: "#202225",
       light: "#e5fafb",
       dark: "#0662da",
-      contrastText: "#ffffff",
+      contrastText: "#F2B809",
     },
     secondary: {
-      main: "#fb9678",
+      main: "#F2B809",
       light: "#fcf1ed",
       dark: "#e67e5f",
       contrastText: "#ffffff",
@@ -42,7 +42,9 @@ const theme = createTheme({
       contrastText: "#ffffff",
     },
     text: {
-      secondary: "#777e89",
+      primary:"#FFFFFF",
+      secondary: "#8A939B",
+      contrast:"#F2B809",
       danger: "#fc4b6c",
     },
     grey: {
@@ -52,12 +54,13 @@ const theme = createTheme({
       A700: "#e6f4ff",
     },
     action: {
-      disabledBackground: "rgba(73,82,88,0.12)",
+      disabledBackground: "#FFFFFF",
+      disabled:"#FFFFFF",
       hoverOpacity: 0.02,
-      hover: "rgba(0, 0, 0, 0.03)",
+      hover: "#4C505C",
     },
     background: {
-      default: "#fafbfb",
+      default: "#202225",
     },
   },
   mixins: {
