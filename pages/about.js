@@ -1,5 +1,5 @@
-import {useSnackbar} from "../../context/SnackbarContextProvider";
 import Typography from "@mui/material/Typography";
+import {useSnackbar} from "../context/SnackbarContextProvider";
 
 export default function About() {
 

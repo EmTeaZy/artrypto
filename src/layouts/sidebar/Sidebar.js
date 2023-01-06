@@ -24,7 +24,7 @@ const Sidebar = ({isMobileSidebarOpen, onSidebarClose, isSidebarOpen}) => {
 
     const SidebarContent = (
         <Box p={2} height="100%">
-            <LogoIcon/>
+            <LogoIcon toLink={"/admin"}/>
             <Box mt={2}>
                 <List>
                     {Menuitems.map((item, index) => (

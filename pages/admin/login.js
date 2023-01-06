@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Button, Form} from 'react-bootstrap'
 import {useAuth} from "../../context/AuthContext";
 import {useRouter} from "next/router";
@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 
 const Login = () => {
 
-    const {login} = useAuth()
+    const {user, login} = useAuth()
     const router = useRouter()
     const {show} = useSnackbar()
 
@@ -25,6 +25,12 @@ const Login = () => {
             })
             .catch(err => console.log(err))
     }
+
+    // If a user is logged in, redirect them to the dashboard
+    useEffect(() => {
+        if(user)
+            router.push("/admin")
+    })
 
     return (
         <div

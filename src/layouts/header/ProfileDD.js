@@ -1,13 +1,24 @@
 import React from "react";
 import FeatherIcon from "feather-icons-react";
 import {Box, Button, Divider, Link, List, ListItemButton, ListItemText, Menu, Typography,} from "@mui/material";
+import {useAuth} from "../../../context/AuthContext";
+import {useRouter} from "next/router";
+import {useSnackbar} from "../../../context/SnackbarContextProvider";
 
 const ProfileDD = () => {
   const [anchorEl4, setAnchorEl4] = React.useState(null);
+  const {user, logout} = useAuth();
+  const router = useRouter()
+  const {show} = useSnackbar();
 
   const handleClick4 = (event) => {
     setAnchorEl4(event.currentTarget);
   };
+
+  const handleLogout = () => {
+    logout();
+    router.push("/admin/login").then(() => show("Logged out successfully"))
+  }
 
   const handleClose4 = () => {
     setAnchorEl4(null);
@@ -46,7 +57,7 @@ const ProfileDD = () => {
                 ml: 1,
               }}
             >
-              Julia
+              {user.name}
             </Typography>
             <FeatherIcon icon="chevron-down" width="20" height="20" />
           </Box>
@@ -88,7 +99,11 @@ const ProfileDD = () => {
           <Divider />
           <Box p={2}>
             <Link to="/">
-              <Button fullWidth variant="contained" color="primary">
+              <Button
+                  onClick={handleLogout}
+                  fullWidth
+                  variant="contained"
+                  color="primary">
                 Logout
               </Button>
             </Link>

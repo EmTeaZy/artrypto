@@ -1,16 +1,13 @@
 import React from "react";
-import {CssBaseline, Grid} from "@mui/material";
+import {Grid} from "@mui/material";
 import SalesOverview from "../../src/components/dashboard/SalesOverview";
 import DailyActivity from "../../src/components/dashboard/DailyActivity";
-import ProductPerfomance from "../../src/components/dashboard/ProductPerfomance";
-import {ThemeProvider} from "@mui/material/styles";
+import ProductPerformance from "../../src/components/dashboard/ProductPerformance";
 import FullLayout from "../../src/layouts/FullLayout";
-import theme from "../../src/theme/theme";
 
 export default function Home() {
     return (
-        <ThemeProvider theme={theme}>
-            <CssBaseline />
+        <>
             <FullLayout>
                 <Grid container spacing={0}>
                     <Grid item xs={12} lg={12}>
@@ -21,10 +18,10 @@ export default function Home() {
                         <DailyActivity />
                     </Grid>
                     <Grid item xs={12} lg={8}>
-                        <ProductPerfomance />
+                        <ProductPerformance />
                     </Grid>
                 </Grid>
             </FullLayout>
-        </ThemeProvider>
+        </>
     )
 }

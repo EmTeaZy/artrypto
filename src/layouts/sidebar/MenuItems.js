@@ -10,9 +10,9 @@ const Menuitems = [
     href: "/admin/addAdmin",
   },
   {
-    title: "Tables",
+    title: "Users",
     icon: "grid",
-    href: "/table",
+    href: "/admin/viewUsers",
   },
 ];
 

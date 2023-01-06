@@ -1,10 +1,8 @@
 import React, {useState} from 'react'
 import {useAuth} from "../../context/AuthContext";
 import {useSnackbar} from "../../context/SnackbarContextProvider";
-import {Button, CssBaseline, Grid, Stack, TextField,} from "@mui/material";
+import {Button, Grid, Stack, TextField,} from "@mui/material";
 import BaseCard from "../../src/components/baseCard/BaseCard";
-import {ThemeProvider} from "@mui/material/styles";
-import theme from "../../src/theme/theme";
 import FullLayout from "../../src/layouts/FullLayout";
 
 
@@ -36,9 +34,7 @@ const AddAdmin = () => {
     }
 
     return (
-
-        <ThemeProvider theme={theme}>
-            <CssBaseline/>
+        <>
             <FullLayout>
                 <Grid container spacing={0}>
                     <Grid item xs={12} lg={12}>
@@ -93,7 +89,7 @@ const AddAdmin = () => {
                     </Grid>
                 </Grid>
             </FullLayout>
-        </ThemeProvider>
+        </>
     )
 }
 

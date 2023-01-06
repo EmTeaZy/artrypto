@@ -1,4 +1,3 @@
-
 import { Button } from "@mui/material";
 import { ethers } from "ethers";
 import React, { useEffect, useState } from "react";
@@ -21,7 +20,6 @@ const index = () => {
     connector: new InjectedConnector(),
   });
 
-
   async function connectWallet() {
     if (!isConnected) {
       connect();
@@ -30,8 +28,6 @@ const index = () => {
       router.push("/account")
     }
   }
-
-
 
   return (
     <div className="text-center m-5">
