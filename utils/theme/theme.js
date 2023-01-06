@@ -6,36 +6,74 @@ import typography from "./Typoraphy";
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#020710",
-      contrastText: "#fff",
+      main: "#2d61d3",
+      light: "#e5fafb",
+      dark: "#0662da",
+      contrastText: "#ffffff",
     },
     secondary: {
-      main: "#0B1224",
+      main: "#fb9678",
+      light: "#fcf1ed",
+      dark: "#e67e5f",
+      contrastText: "#ffffff",
+    },
+    success: {
+      main: "#00c21a",
+      dark: "#00964b",
+      contrastText: "#ffffff",
+    },
+    danger: {
+      main: "#e46a76",
+      light: "#fdf3f5",
+    },
+    info: {
+      main: "#0bb2fb",
+      light: "#a7e3f4",
     },
     error: {
-      main: red.A400,
+      main: "#e46a76",
+
+      dark: "#e45a68",
+    },
+    warning: {
+      main: "#fec90f",
+
+      dark: "#dcb014",
+      contrastText: "#ffffff",
     },
     text: {
-      primary: "#FFFF",
-      secondary: "#BBA0FE",
-      card: "#FFFFFF80",
-      price: "#C3C3C3",
-      profit: "#00E3A4",
-      loss: "#F43030",
+      secondary: "#777e89",
+      danger: "#fc4b6c",
+    },
+    grey: {
+      A100: "#ecf0f2",
+      A200: "#99abb4",
+      A400: "#767e89",
+      A700: "#e6f4ff",
+    },
+    action: {
+      disabledBackground: "rgba(73,82,88,0.12)",
+      hoverOpacity: 0.02,
+      hover: "rgba(0, 0, 0, 0.03)",
     },
     background: {
-      default: "#020710",
-      secondary: "#0B101A",
+      default: "#fafbfb",
     },
   },
-  components: {
-    MuiButton: {
-      styleOverrides: {
-        root: {
-          fontSize: "1rem",
-        },
+  mixins: {
+    toolbar: {
+      color: "#949db2",
+      "@media(min-width:1280px)": {
+        minHeight: "64px",
+        padding: "0 30px",
+      },
+      "@media(max-width:1280px)": {
+        minHeight: "64px",
       },
     },
   },
+  components,
+  shadows,
+  typography,
 });
 export default theme;
