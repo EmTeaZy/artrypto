@@ -7,7 +7,7 @@
     <img src="public/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-<h3 align="center">Artrpto</h3>
+<h3 align="center">Artrypto</h3>
 
   <p align="center">
     <a href="https://artrypto-one.vercel.app//">View Demo</a>
