@@ -39,7 +39,7 @@ const Login = () => {
                 margin: 'auto',
             }}
         >
-            <Typography variant="h3" className="text-center my-3 ">Login</Typography>
+            <Typography color="text.primary" variant="h1" className="text-center my-3 ">Login</Typography>
             <Form onSubmit={handleLogin}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
@@ -58,7 +58,7 @@ const Login = () => {
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>Password</Form.Label>
+                    <Form.Label >Password</Form.Label>
                     <Form.Control
                         onChange={e =>
                             setData({

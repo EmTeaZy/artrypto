@@ -1,15 +1,12 @@
 import React from "react";
 import {Link, Typography} from "@mui/material";
 import Image from "next/image";
-import logo from '../../../public/logo.png'
+import txtlogo from '../../../public/txtlogo.png'
 
 const LogoIcon = ({toLink}) => {
   return (
     <Link href={toLink} className="d-flex align-items-center justify-content-center">
-      <Image src={logo} height={20} width={20} alt={logo} className="me-2"/>
-        <Typography variant="h3">
-            Artrypto
-        </Typography>
+      <Image src={txtlogo} height={31} width={150} alt={txtlogo} className="me-2"/>
     </Link>
   );
 };

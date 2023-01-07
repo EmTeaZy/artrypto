@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {useAuth} from "../../context/AuthContext";
 import {useSnackbar} from "../../context/SnackbarContextProvider";
-import {Button, Grid, Stack, TextField,} from "@mui/material";
+import {Button, Grid, Stack, TextField, Typography,} from "@mui/material";
 import BaseCard from "../../src/components/baseCard/BaseCard";
 import FullLayout from "../../src/layouts/FullLayout";
 
@@ -35,10 +35,10 @@ const AddAdmin = () => {
 
     return (
         <>
-            <FullLayout>
+            <FullLayout check={"admin"}>
                 <Grid container spacing={0}>
                     <Grid item xs={12} lg={12}>
-                        <BaseCard title="Add an admin">
+                        <Typography variant='h1' color="text.primary">Add an admin</Typography>
                             <Stack spacing={3}>
                                 <TextField
                                     id="name-basic"
@@ -68,10 +68,10 @@ const AddAdmin = () => {
                                 />
                                 <TextField
                                     id="pass-basic"
-                                    label="Password"
+                                    label="Enter Password"
                                     type="password"
-                                    variant="outlined"
-                                    placeholder="Enter password"
+                                    variant="filled"
+                                    placeholder="Enter Password"
                                     onChange={e =>
                                         setData({
                                             ...data,
@@ -85,7 +85,7 @@ const AddAdmin = () => {
                             <Button variant="contained" mt={2} onClick={handleSignup}>
                                 Submit
                             </Button>
-                        </BaseCard>
+                        
                     </Grid>
                 </Grid>
             </FullLayout>
