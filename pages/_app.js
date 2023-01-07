@@ -1,19 +1,20 @@
 import {SnackbarContextProvider} from "../context/SnackbarContextProvider";
 import {AuthContextProvider} from "../context/AuthContext";
-import Navbar from "../components/Navbar";
-import Head from "../components/Head";
+import ProtectedRoute from "../components/ProtectedRoute";
 import {ThemeProvider} from "@mui/material/styles";
-import {useRouter} from "next/router";
+import wagmiClient from "../config/wagmiClient";
+import Navbar from "../components/Navbar";
 import theme from ".././src/theme/theme";
+import Head from "../components/Head";
+import {useRouter} from "next/router";
+import {WagmiConfig} from "wagmi";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/globals.css";
-import ProtectedRoute from "../components/ProtectedRoute";
-import wagmiClient from "../config/wagmiClient";
-import {WagmiConfig} from "wagmi";
 
-const publicRoutes = ["/admin/login", "/admin/signup", "/admin/about", "/", "/account"];
+const publicRoutes = ["/admin/login", "/", "/account", "/about"];
 
 function MyApp({Component, pageProps}) {
+
     const router = useRouter();
 
     return (
