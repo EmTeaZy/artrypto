@@ -7,31 +7,37 @@ const typography = {
     fontWeight: 500,
     fontSize: "1.875rem",
     lineHeight: "1.5",
+    color: "white",
   },
   h2: {
     fontWeight: 500,
     fontSize: "1.5rem",
     lineHeight: "1.5",
+    color: "white",
   },
   h3: {
     fontWeight: 100,
     fontSize: "1.3125rem",
     lineHeight: "1.5",
+    color: "white",
   },
   h4: {
     fontWeight: 500,
     fontSize: "1.125rem",
     lineHeight: "1.5",
+    color: "white",
   },
   h5: {
     fontWeight: 500,
     fontSize: "1rem",
     lineHeight: "1.5",
+    color: "white",
   },
   h6: {
     fontWeight: 500,
     fontSize: "0.875rem",
     lineHeight: "1.5",
+    color: "white",
   },
   button: {
     textTransform: "none",
@@ -40,10 +46,12 @@ const typography = {
   subtitle1: {
     fontSize: "1rem",
     fontWeight: "400",
+    color: "white",
   },
   subtitle2: {
     fontSize: "0.875rem",
     fontWeight: "400",
+    color: "white",
   },
   navlink:{
     fontSize:"16px",

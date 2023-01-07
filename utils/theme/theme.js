@@ -32,12 +32,10 @@ const theme = createTheme({
     },
     error: {
       main: "#e46a76",
-
       dark: "#e45a68",
     },
     warning: {
       main: "#fec90f",
-
       dark: "#dcb014",
       contrastText: "#ffffff",
     },
@@ -46,6 +44,7 @@ const theme = createTheme({
       secondary: "#8A939B",
       contrast:"#F2B809",
       danger: "#fc4b6c",
+      tertiary: "#000000",
     },
     grey: {
       A100: "#ecf0f2",

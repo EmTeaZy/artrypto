@@ -23,3 +23,26 @@ a {
     color: black;
   }
 }
+
+.slick-slide > div {
+  margin: 0 10px;
+}
+.slick-list {
+  margin: 0 -10px;
+}
+
+.card {
+  background: black;
+  border-radius: 15px;
+  overflow: hidden;
+  height: 400px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.card-top > img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  background: black;
+}
