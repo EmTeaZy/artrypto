@@ -1,8 +1,8 @@
-import { red } from "@mui/material/colors";
-import { createTheme, responsiveFontSizes } from "@mui/material/styles";
+import {createTheme} from "@mui/material/styles";
 import components from "./ComponentOverRide";
 import shadows from "./Shadows";
 import typography from "./Typoraphy";
+
 const theme = createTheme({
   palette: {
     primary: {

@@ -1,27 +1,13 @@
-import {Button} from "@mui/material";
+import {Box} from "@mui/material";
 import React from "react";
-import {useRouter} from "next/navigation";
-import {useAccount, useConnect} from "wagmi";
-import {InjectedConnector} from "wagmi/connectors/injected";
-import { Button } from "@mui/material";
-import { ethers } from "ethers";
-import React, { useEffect, useState } from "react";
-import { useRef } from "react";
-import { useRouter } from "next/navigation";
-import { useAccount  } from "wagmi";
-import { async } from "@firebase/util";
+import {useAccount} from "wagmi";
 import Typography from '@mui/material/Typography'
-import { Box } from "@mui/material";
 
 
 const index = () => {
 
   //get metamask account from wagmi hook
-  const { address, isConnected } = useAccount();
-
-  //to server side routing between pages
-  const router = useRouter();
-
+  const { isConnected } = useAccount();
 
   return (
     <>

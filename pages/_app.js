@@ -4,16 +4,14 @@ import ProtectedRoute from "../components/ProtectedRoute";
 import {ThemeProvider} from "@mui/material/styles";
 import wagmiClient from "../config/wagmiClient";
 import Navbar from "../components/Navbar";
-import theme from ".././src/theme/theme";
+import theme from ".././utils/theme/theme";
 import Head from "../components/Head";
-import { useRouter } from "next/router";
+import {useRouter} from "next/router";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../utils/globals.css";
-import { WagmiConfig } from "wagmi";
-import { CacheProvider } from "@emotion/react";
-import CssBaseline from "@mui/material/CssBaseline";
+import {WagmiConfig} from "wagmi";
+import {CacheProvider} from "@emotion/react";
 import createEmotionCache from "../utils/createEmotionCache";
-import PropTypes from "prop-types";
 
 const publicRoutes = [
   "/admin/login",
