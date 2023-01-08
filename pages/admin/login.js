@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react'
-import {Button, Form} from 'react-bootstrap'
+import {Form} from 'react-bootstrap'
 import {useAuth} from "../../context/AuthContext";
 import {useRouter} from "next/router";
 import {useSnackbar} from "../../context/SnackbarContextProvider";
 import Typography from "@mui/material/Typography";
+import {Button} from "@mui/material";
 
 const Login = () => {
 
@@ -28,7 +29,7 @@ const Login = () => {
 
     // If a user is logged in, redirect them to the dashboard
     useEffect(() => {
-        if(user)
+        if (user)
             router.push("/admin")
     })
 
@@ -42,7 +43,7 @@ const Login = () => {
             <Typography color="text.primary" variant="h1" className="text-center my-3 ">Login</Typography>
             <Form onSubmit={handleLogin}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
+                    <Typography variant="subtitle1">Email address</Typography>
                     <Form.Control
                         onChange={e =>
                             setData({
@@ -58,7 +59,7 @@ const Login = () => {
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label >Password</Form.Label>
+                    <Typography variant="subtitle1">Password</Typography>
                     <Form.Control
                         onChange={e =>
                             setData({
@@ -72,7 +73,11 @@ const Login = () => {
                         placeholder="Password"
                     />
                 </Form.Group>
-                <Button className="mt-2" variant="primary" type="submit">
+                <Button
+                    variant="contained"
+                    color="primary"
+                    className="mt-2"
+                    type="submit">
                     Login
                 </Button>
             </Form>

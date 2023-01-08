@@ -38,6 +38,13 @@ const components = {
       },
     },
   },
+  MuiIcon:{
+    styleOverrides: {
+      root: {
+        color: "white"
+      },
+    },
+  },
   MuiContainer: {
     styleOverrides: {
       root: {
@@ -51,11 +58,13 @@ const components = {
   MuiButton: {
     styleOverrides: {
       root: {
+        backgroundColor: "#000000",
+        color: "#F2B809",
         textTransform: "none",
         boxShadow: "none",
-
         "&:hover": {
           boxShadow: "none",
+          backgroundColor: "#121213",
         },
       },
     },
