@@ -70,6 +70,16 @@ const components = {
     },
   },
 
+  MuiTextField: {
+    styleOverrides: {
+      root: {
+        ".mui-style-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input.Mui-disabled":{
+          "-webkit-text-fill-color": "rgba(255, 255, 255, 0.3)",
+        }
+      }
+    },
+  },
+
   MuiListItem: {
     styleOverrides: {
       root: {

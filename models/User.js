@@ -16,6 +16,7 @@ const UserSchema = new mongoose.Schema({
     walletAddress: {
         type: String,
         required: true,
+        unique: true,
     },
     links: {
         instagram: {
