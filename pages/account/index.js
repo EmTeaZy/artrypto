@@ -10,7 +10,7 @@ const Account = () => {
 
     useEffect(() => getUserData, []);
     const getUserData = () => {
-        axios.post("/api/findOne", {walletAddress: address})
+        axios.post("/api/findUser", {walletAddress: address})
             .then(res => {
                 if (res.data) {
                     setUser(res.data);
