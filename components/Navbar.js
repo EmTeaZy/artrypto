@@ -7,7 +7,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import MoreIcon from "@mui/icons-material/MoreVert";
-import {IconButton} from "@mui/material";
+import {IconButton, Typography} from "@mui/material";
 import Searchbar from "./NavbarComponents/Searchbar";
 import Iconbutton from "./NavbarComponents/Icon-button";
 import {AccountCircle} from "@mui/icons-material";
@@ -25,6 +25,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import {useTheme} from "@mui/material/styles";
 import Image from "next/image";
+import ConnectStatus from "./NavbarComponents/ConnectStatus";
 
 //hover of nav-elements
 const styles = {
@@ -43,61 +44,6 @@ const NavbarComp = (props) => {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
-  const mobileMenuId = "primary-search-account-menu-mobile";
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem>
-      <MenuItem
-        sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
-      >
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <IconButton
-            size="large"
-            edge="end"
-            aria-label="admin"
-            onClick={() => {
-              router.push("/admin");
-            }}
-            color="inherit"
-          >
-            <AdminPanelSettingsTwoToneIcon />
-          </IconButton>
-          <p>Admin</p>
-        </Box>
-      </MenuItem>
-    </Menu>
-  );
 
   const router = useRouter();
   //metamask account hook
@@ -136,6 +82,57 @@ const NavbarComp = (props) => {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const mobileMenuId = "primary-search-account-menu-mobile";
+  const renderMobileMenu = (
+    <Menu
+      anchorEl={mobileMoreAnchorEl}
+      anchorOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+      id={mobileMenuId}
+      keepMounted
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+      open={isMobileMenuOpen}
+      onClose={handleMobileMenuClose}
+    >
+      <MenuItem>
+        <IconButton
+          size="large"
+          aria-label="account of current user"
+          aria-controls="primary-search-account-menu"
+          aria-haspopup="true"
+          color="primary"
+          onClick={handleClickOpen}
+        >
+          <AccountCircle />
+        </IconButton>
+        <Typography color="text.secondary">Profile</Typography>
+      </MenuItem>
+      <MenuItem
+        sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
+      >
+          <IconButton
+            size="large"
+            edge="end"
+            aria-label="admin"
+            onClick={() => {
+              router.push("/admin");
+            }}
+            color="primary"
+          >
+            <AdminPanelSettingsTwoToneIcon />
+          </IconButton>
+         <Typography color="text.secondary">Admin</Typography>
+      </MenuItem>
+    </Menu>
+  );
+
+  
 
   return (
     <>
@@ -181,6 +178,9 @@ const NavbarComp = (props) => {
                   className={props.classes.navlinkhover}
                 />
               </IconButton>
+              <Box mx={1}>
+               <ConnectStatus/>
+              </Box>
             </Box>
             <Box sx={{ display: { xs: "flex", md: "none" } }}>
               <IconButton

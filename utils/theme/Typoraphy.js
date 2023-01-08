@@ -58,6 +58,10 @@ const typography = {
     fontWeight:"800",
     color:"#949DB2",
   },
+  connectStatus:{
+    fontSize:"12px",
+    fontWeight:"300",
+  },
   formlabel:{
     fontSize:"16px",
     fontWeight:"600",
