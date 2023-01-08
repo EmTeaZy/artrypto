@@ -14,7 +14,7 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="text.secondary">
+    <Typography variant="body2" color="#58595C">
       {'Copyright © '}
       <Link color="inherit" href="http://localhost:3000/">
         Artrypto
