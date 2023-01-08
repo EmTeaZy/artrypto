@@ -27,6 +27,8 @@ import {useTheme} from "@mui/material/styles";
 import Image from "next/image";
 import ConnectStatus from "./NavbarComponents/ConnectStatus";
 
+
+
 //hover of nav-elements
 const styles = {
   navlinkhover: {

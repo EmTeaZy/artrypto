@@ -3,9 +3,10 @@ import Image from "next/image";
 import React from "react";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useRouter } from "next/router";
+import CreateButton from "./CreateButton";
 
 const UserDetails = ({ user, check }) => {
-    const router = useRouter();
+  const router = useRouter();
   return (
     <>
       <Box
@@ -30,15 +31,9 @@ const UserDetails = ({ user, check }) => {
           </Typography>
         </Box>
         {check == "user" ? (
-          <Button
-            variant="contained"
-            sx={{ borderRadius: "100px", width: "10px" }}
-            onClick={() => {
-              router.push("/account/settings");
-            }}
-          >
-            <MoreVertIcon color="white" />
-          </Button>
+          <>
+            <CreateButton />
+          </>
         ) : (
           <></>
         )}
