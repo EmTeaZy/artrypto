@@ -8,6 +8,7 @@ import { abi, NFT_MINTING_CONTRACT_ADDRESS } from "../../constants";
 import { Contract } from "ethers";
 import { useSnackbar } from "../../context/SnackbarContextProvider";
 import { useRouter } from "next/router";
+import { LoadingButton } from "@mui/lab";
 
 const GetArtworkDetails = () => {
   const [image, setSelectedImage] = useState(null);
@@ -16,7 +17,7 @@ const GetArtworkDetails = () => {
   const {address,isConnected}=useAccount();
   const {show} = useSnackbar()
   const router = useRouter();
-
+  const [setLoading,changeLoading]=useState();
 
   const { data: signer, isError, isLoading } = useSigner({
     chainId: goerli.id,
@@ -59,14 +60,18 @@ const GetArtworkDetails = () => {
   const storeNFT = async () => {
     const metadata = await generateMetaData()
     console.log(metadata.url)
-    mintNFT(metadata.url)
+    await mintNFT(metadata.url)
   }
 
-  const handleSubmit = (e)=>
+  const handleSubmit = async(e)=>
   {
     e.preventDefault();
     if(isConnected)
-    storeNFT()
+    {
+      changeLoading(true)
+      await storeNFT()
+      changeLoading(false)
+    }
     else console.log("wallet not connected")
   }
 
@@ -158,8 +163,8 @@ const GetArtworkDetails = () => {
                 </Box>
               </Grid>
               <Grid item xs={10} md={7}>
-                <Button type="submit" variant="outlined" color="secondary">
-                  Mint NFT
+                <Button disabled={setLoading} type="submit" variant="outlined" color="secondary">
+                  {setLoading?"Minting....":"Mint NFT"}
                 </Button>
               </Grid>
             </Grid>
