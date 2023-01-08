@@ -24,7 +24,3 @@ const index = () => {
 export default index;
 
 
-//telling user to remain at goerli testnet component.
-// import useNetwork
-//const { chain, chains } = useNetwork()
-//  <p>{chain.name!='Goerli'?"Change your network to goerli":""}</p>
