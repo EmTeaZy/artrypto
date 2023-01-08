@@ -4,13 +4,20 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import TwitterIcon from '@mui/icons-material/Twitter';
+import YouTubeIcon from '@mui/icons-material/YouTube';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import RssFeedIcon from '@mui/icons-material/RssFeed';
+import GitHubIcon from '@mui/icons-material/GitHub';
 
 function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary">
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
+      <Link color="inherit" href="http://localhost:3000/">
+        Artrypto
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -20,24 +27,59 @@ function Copyright() {
 
 export default function StickyFooter() {
   return (
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        minHeight: '100vh',
+
+      }}
+    >
+      <CssBaseline />
       <Box
         component="footer"
         sx={{
-          py: 3,
-          px: 2,
+          py: 2,
+          px: 1,
           mt: 'auto',
-          backgroundColor: (theme) =>
-            theme.palette.mode === 'light'
-              ? theme.palette.grey[200]
-              : theme.palette.grey[800],
+          textAlign: "center",
+          backgroundColor: "black"
         }}
       >
         <Container maxWidth="sm">
-          <Typography variant="body1">
-            My sticky footer can be found here.
-          </Typography>
+
+          <Link href="#">
+            <a><FacebookIcon/></a>
+          </Link>
+          
+          <Link href="#">
+            <a><InstagramIcon/></a>
+          </Link>
+
+          <Link href="#">
+            <a><TwitterIcon/></a>
+          </Link>
+
+          <Link href="#">
+            <a><YouTubeIcon/></a>
+          </Link>
+
+          <Link href="#">
+            <a><LinkedInIcon/></a>
+          </Link>
+
+          <Link href="#">
+            <a><GitHubIcon/></a>
+          </Link>
+
+          <Link href="#">
+            <a><RssFeedIcon/></a>
+          </Link>
+          
           <Copyright />
+          
         </Container>
       </Box>
+    </Box>
   );
 }
