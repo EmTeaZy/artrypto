@@ -12,6 +12,7 @@ import "../utils/globals.css";
 import {WagmiConfig} from "wagmi";
 import {CacheProvider} from "@emotion/react";
 import createEmotionCache from "../utils/createEmotionCache";
+import Footer from "../components/Footer/Footer";
 
 const publicRoutes = [
   "/admin/login",
@@ -43,6 +44,7 @@ function MyApp(props) {
                     <Component {...pageProps} />
                   </ProtectedRoute>
                 )}
+                <Footer/>
               </WagmiConfig>
             </SnackbarContextProvider>
           </AuthContextProvider>
