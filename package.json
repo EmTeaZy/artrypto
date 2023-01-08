@@ -39,6 +39,7 @@
     "react-icons": "^4.7.1",
     "react-slick": "^0.29.0",
     "slick-carousel": "^1.8.1",
+    "styled-components": "^5.3.6",
     "wagmi": "^0.10.4",
     "web3modal": "^1.9.10",
     "yup": "^0.32.11"

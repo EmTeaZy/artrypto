@@ -13,7 +13,7 @@ import {WagmiConfig} from "wagmi";
 import {CacheProvider} from "@emotion/react";
 import createEmotionCache from "../utils/createEmotionCache";
 import Footer from "../components/Footer/Footer";
-import Timeline from '../components/NFT101/Timeline';
+import Hero from '../components/HeroSection/Hero'
 
 
 const publicRoutes = [
@@ -39,6 +39,7 @@ function MyApp(props) {
               <Head />
               <WagmiConfig client={wagmiClient}>
               <Navbar />
+              <Hero/>
                 {publicRoutes.includes(router.pathname) ? (
                   <Component {...pageProps} />
                 ) : (
@@ -46,7 +47,6 @@ function MyApp(props) {
                     <Component {...pageProps} />
                   </ProtectedRoute>
                 )}
-                <Timeline/>
                 <Footer/>
               </WagmiConfig>
             </SnackbarContextProvider>
