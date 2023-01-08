@@ -12,10 +12,10 @@ export default function Carousel() {
     const [sliderRef, setSliderRef] = useState(null)
 
     return (
-        <div className="d-flex">
+        <div className="d-flex align-items-center">
             <ChevronLeftIcon
                 color="secondary"
-                sx={{width: "3%", fontSize: 40, marginTop: "195px"}}
+                sx={arrowStyles}
                 onClick={sliderRef?.slickPrev}/>
             <Slider style={{width: "94%"}} ref={setSliderRef} {...settings}>
                 {NFTsData.map((item) => (
@@ -23,13 +23,11 @@ export default function Carousel() {
                         <div className="card-top">
                             <img src={item.linkImg} alt={item.title}/>
                         </div>
-                        <div style={{textAlign: "start"}}>
-                            <Typography sx={{margin: "10px 0 0 10px"}}
-                                        variant="h3">
+                        <div className="text-start">
+                            <Typography sx={{margin: "10px 0 0 10px"}} variant="h3">
                                 {item.title}
                             </Typography>
-                            <Typography sx={{marginLeft: "10px"}}
-                                        variant="subtitle1">
+                            <Typography sx={{marginLeft: "10px"}} variant="subtitle1">
                                 {item.price}ETH
                             </Typography>
                         </div>
@@ -38,10 +36,22 @@ export default function Carousel() {
             </Slider>
             <ChevronRightIcon
                 color="secondary"
-                sx={{width: "3%", fontSize: 40, marginTop: "195px"}}
+                sx={arrowStyles}
                 onClick={sliderRef?.slickNext}/>
         </div>
     )
+}
+
+const arrowStyles = {
+    width: "3%",
+    fontSize: 40,
+    cursor: "pointer",
+    padding: "2px",
+    borderRadius: "20px",
+    backgroundColor: "black",
+    ":hover": {
+        color: "warning.dark"
+    }
 }
 
 const settings = {
