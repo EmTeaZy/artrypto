@@ -1,6 +1,6 @@
 import {createContext, useContext, useEffect, useState} from "react";
 import {createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile} from 'firebase/auth'
-import {auth, database} from '../config/firebase'
+import {auth, secondaryAuth, database} from '../config/firebase'
 import {ref, set} from "firebase/database";
 
 const AuthContext = createContext({});
@@ -34,9 +34,10 @@ export const AuthContextProvider = ({children}) => {
     }, [])
 
     const signUp = async (email, password, username) => {
-        const response = await createUserWithEmailAndPassword(auth, email, password)
-        await updateProfile(auth.currentUser, {displayName: username})
+        const response = await createUserWithEmailAndPassword(secondaryAuth, email, password)
+        await updateProfile(secondaryAuth.currentUser, {displayName: username})
         await writeUserData(response.user)
+        await signOut(secondaryAuth);
         return response;
     }
 
