@@ -18,13 +18,14 @@ const UserDetails = ({ user, check }) => {
         <Box sx={{ display: "flex" }}>
           <Image src="/eth.png" width={20} height={20} alt={"eth"}></Image>
           <Typography mx={1} color="text.primary" variant="h5">
-            {user.username||
-            " "
+
+            {user?.username||
+            "null"
             }
           </Typography>
           <Typography mx={1} color="text.primary" variant="h5">
-            {user.walletAddress||
-            " "
+            {user?.walletAddress||
+            "null"
             }
           </Typography>
         </Box>
