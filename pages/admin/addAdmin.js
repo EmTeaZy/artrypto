@@ -2,7 +2,6 @@ import React, {useState} from 'react'
 import {useAuth} from "../../context/AuthContext";
 import {useSnackbar} from "../../context/SnackbarContextProvider";
 import {Button, Grid, Stack, TextField, Typography,} from "@mui/material";
-import BaseCard from "../../src/components/baseCard/BaseCard";
 import FullLayout from "../../src/layouts/FullLayout";
 
 
@@ -27,10 +26,25 @@ const AddAdmin = () => {
 
         signUp(data.email, data.password, data.username)
             .then(res => {
-                console.log("Sign up successful", res)
-                show("Sign up successful!");
+                show("Admin added successfully");
+                setData({
+                    email: '',
+                    password: '',
+                    username: '',
+                });
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                switch (err.code) {
+                    case "auth/email-already-in-use":
+                        show("ERROR: Email is already in use", "error");
+                        break;
+                    case "auth/invalid-email":
+                        show("ERROR: Invalid email", "error");
+                        break;
+                    default:
+                        console.log("Error creating user:", err);
+                }
+            })
     }
 
     return (
