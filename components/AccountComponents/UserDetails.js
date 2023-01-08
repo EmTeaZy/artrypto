@@ -19,12 +19,12 @@ const UserDetails = ({ user, check }) => {
           <Image src="/eth.png" width={20} height={20} alt={"eth"}></Image>
           <Typography mx={1} color="text.primary" variant="h5">
             {user.username||
-            "hi"
+            "null"
             }
           </Typography>
           <Typography mx={1} color="text.primary" variant="h5">
             {user.walletAddress||
-            "hi1"
+            "null"
             }
           </Typography>
         </Box>

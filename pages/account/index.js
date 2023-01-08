@@ -14,7 +14,6 @@ const Account = () => {
     getUserData();
   });
   const getUserData = async () => {
-    console.log("in")
     let JSONdata = JSON.stringify({ walletAddress: address });
     let options = {
       method: "POST",

@@ -1,19 +1,25 @@
 import { Box, Button, Grid, TextField, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAccount } from "wagmi";
 
-const SettingsForm = () => {
+const SettingsForm = ({user}) => {
   const [name, changeName] = useState("");
   const [bio, changeBio] = useState("");
   const [email, changeEmail] = useState("");
-  const { address, isConnected } = useAccount();
+  const [address,changeAddress]=useState("")
+  useEffect(( )=>{
+   changeName(user.username)
+   changeBio(user.bio)
+   changeEmail(user.email)
+   changeAddress(user.walletAddress)
+  },[])
   const handleSubmit = async (e) =>{
     e.preventDefault();
     console.log(name,bio,email);
   }
   return (
     <>
-      <Box px={10}>
+      <Box px={{xs:2,md:10}}>
         <Typography mb={6} variant="h1" color="text.primary">
           Profile Details
         </Typography>
@@ -21,49 +27,50 @@ const SettingsForm = () => {
           <Grid
             container
             rowSpacing={5}
-            columnSpacing={{ xs: 1, sm: 2, md: 9 }}
+            columnSpacing={{ xs: 1, sm: 2, md: 14 }}
           >
-            <Grid item xs={6}>
+            <Grid item xs={10} md={6} >
+            <Typography variant="formlabel">Username</Typography>
               <TextField
-                value={name}
+                value={name || ''}
                 fullWidth
-                label="Username"
                 id="Username"
                 color="secondary"
                 placeholder="Username"
-                onInput={(e) => changeName(e.target.value)}
+                onChange={(e) => {changeName(e.target.value)}}
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={10} md={6}>
+            <Typography variant="formlabel">Bio</Typography>
               <TextField
-                value={bio}
+                value={bio || ''}
                 multiline
                 maxRows={4}
                 fullWidth
-                label="Bio"
                 id="Bio"
                 color="secondary"
                 placeholder="Bio"
                 onInput={(e) => changeBio(e.target.value)}
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={10} md={6}>
+            <Typography variant="formlabel">Email</Typography>
               <TextField
-                value={email}
+                value={email || ''}
                 fullWidth
-                label="Email"
                 id="Email"
                 color="secondary"
                 placeholder="Email"
+                type={"email"}
                 onInput={(e) => changeEmail(e.target.value)}
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={10} md={6}>
+            <Typography variant="formlabel">Wallet Address</Typography>
               <TextField
                 fullWidth
-                value={address}
+                value={address || ''}
                 color="secondary"
-                label="Wallet Address"
                 id="WalletAddress"
                 placeholder="Wallet Address"
               />
@@ -71,7 +78,7 @@ const SettingsForm = () => {
             {
               //social connections remaining
             }
-            <Grid item xs={6}>
+            <Grid item xs={10} md={6}>
               <Button type="submit" variant="outlined" color="secondary">
                 Save Changes
               </Button>
@@ -84,3 +91,7 @@ const SettingsForm = () => {
 };
 
 export default SettingsForm;
+
+export async function getStaticProps({user}) {
+  console.log("user");
+}
