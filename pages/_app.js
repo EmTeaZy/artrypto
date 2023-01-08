@@ -20,6 +20,7 @@ const publicRoutes = [
   "/",
   "/account",
   "/account/settings",
+  "/artwork/create",
 ];
 
 // Client-side cache, shared for the whole session of the user in the browser.

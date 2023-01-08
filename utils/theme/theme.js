@@ -46,6 +46,7 @@ const theme = createTheme({
       danger: "#fc4b6c",
       success: "#00c21a",
       tertiary: "#000000",
+      info: "#949DB2",
     },
     grey: {
       A100: "#ecf0f2",

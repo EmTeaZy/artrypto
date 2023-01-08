@@ -26,6 +26,9 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import {useTheme} from "@mui/material/styles";
 import Image from "next/image";
 import ConnectStatus from "./NavbarComponents/ConnectStatus";
+import CreateButton from "./NavbarComponents/CreateButton";
+
+
 
 //hover of nav-elements
 const styles = {
@@ -155,6 +158,7 @@ const NavbarComp = (props) => {
             <Box
               sx={{ display: { xs: "none", md: "flex" }, alignItems: "center" }}
             >
+              <CreateButton/>
               <IconButton
                 size="large"
                 edge="end"

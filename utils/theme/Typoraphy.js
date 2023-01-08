@@ -53,6 +53,11 @@ const typography = {
     fontWeight: "400",
     color: "white",
   },
+  subtitle3: {
+    fontSize: "0.675rem",
+    fontWeight: "400",
+    color: "white",
+  },
   navlink:{
     fontSize:"16px",
     fontWeight:"800",
