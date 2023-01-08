@@ -14,7 +14,7 @@ const index = () => {
     return (
         <>
             <Box sx={{textAlign: "center"}}>
-                <Typography sx={{margin: "20px 0 20px 0"}} variant="h1"> Explore, buy and sell NFTs</Typography>
+                <Typography sx={{margin: "20px 0 20px 0"}} variant="h1"> Explore, buy and sell NFTs.</Typography>
                 <Carousel/>
             </Box>
         </>
