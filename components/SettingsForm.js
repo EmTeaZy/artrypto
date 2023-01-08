@@ -14,7 +14,7 @@ const SettingsForm = ({walletAddress}) => {
     useEffect(() => getUserData, [])
 
     const getUserData = async () => {
-        axios.post("/api/findOne", {walletAddress: walletAddress})
+        axios.post("/api/findUser", {walletAddress: walletAddress})
             .then(res => {
                 if (res.data) {
                     const user = res.data
