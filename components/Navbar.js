@@ -1,23 +1,20 @@
-import { useState } from "react"; 
+import {useState} from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import MoreIcon from "@mui/icons-material/MoreVert";
-import LogoIcon from "../src/layouts/logo/LogoIcon";
-import { display } from "@mui/system";
-import { IconButton, Link } from "@mui/material";
+import {IconButton} from "@mui/material";
 import Searchbar from "./NavbarComponents/Searchbar";
 import Iconbutton from "./NavbarComponents/Icon-button";
-import { AccountCircle } from "@mui/icons-material";
+import {AccountCircle} from "@mui/icons-material";
 import AdminPanelSettingsTwoToneIcon from "@mui/icons-material/AdminPanelSettingsTwoTone";
-import { useRouter } from "next/router";
-import { useAccount, useConnect } from "wagmi";
-import { InjectedConnector } from "wagmi/connectors/injected";
-import { withStyles } from "@material-ui/styles";
+import {useRouter} from "next/router";
+import {useAccount, useConnect} from "wagmi";
+import {InjectedConnector} from "wagmi/connectors/injected";
+import {withStyles} from "@material-ui/styles";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -25,7 +22,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { useTheme } from "@mui/material/styles";
+import {useTheme} from "@mui/material/styles";
 import Image from "next/image";
 
 //hover of nav-elements
@@ -41,10 +38,6 @@ const NavbarComp = (props) => {
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
-  };
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-    handleMobileMenuClose();
   };
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
@@ -107,7 +100,7 @@ const NavbarComp = (props) => {
 
   const router = useRouter();
   //metamask account hook
-  const { address, isConnected } = useAccount();
+  const { isConnected } = useAccount();
   const [buttonStatus,changeStatus]=useState("Connect To Metamask Wallet");
   //metamask connection
   const { connectAsync } = useConnect({
@@ -220,9 +213,9 @@ const NavbarComp = (props) => {
           {"Connect Metamask Account"}
         </DialogTitle>
         <DialogContent>
-          <DialogContentText mt={4} color="black" sx={{ fontSize: "16px" }}>
-            Metamask connection is needed to make your profile on Artrypto. Do
-            you want to Connect your metamask wallet to Artrypto.
+          <DialogContentText mt={4} color="black" sx={{ fontSize: "16px", textAlign: "center" }}>
+            Metamask connection is needed to make your profile on Artrypto. <br/>
+            Do you want to connect your metamask wallet to Artrypto?
           </DialogContentText>
         </DialogContent>
         <DialogActions >

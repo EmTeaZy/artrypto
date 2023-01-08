@@ -1,29 +1,27 @@
 import {Box} from "@mui/material";
-import React from "react";
+import React, {useEffect} from "react";
 import {useAccount} from "wagmi";
 import Typography from '@mui/material/Typography'
-
+import Carousel from "../components/carousel/Carousel";
 
 const index = () => {
 
-  //get metamask account from wagmi hook
-  const { isConnected } = useAccount();
+    //get metamask account from wagmi hook
+    const {isConnected} = useAccount();
 
-  return (
-    <>
-    <Box sx={{textAlign:"center"}}>
-      <Typography color="text.primary" variant="h1"> This is user landing page </Typography>
-      <Typography variant="h3">
-        {isConnected ? "Wallet is connected" : "Wallet is not connected"}
-      </Typography>
-    </Box>
-    
-    </>
-  );
+    useEffect(() => console.log(isConnected ? "Connected" : "Not connected"), [isConnected])
+
+    return (
+        <>
+            <Box sx={{textAlign: "center"}}>
+                <Typography sx={{margin: "20px 0 20px 0"}} variant="h1"> Explore, buy and sell NFTs</Typography>
+                <Carousel/>
+            </Box>
+        </>
+    );
 };
 
 export default index;
-
 
 
 //telling user to remain at goerli testnet component.

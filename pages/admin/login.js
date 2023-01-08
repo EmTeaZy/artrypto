@@ -42,7 +42,7 @@ const Login = () => {
             <Typography color="text.primary" variant="h1" className="text-center my-3 ">Login</Typography>
             <Form onSubmit={handleLogin}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
+                    <Typography variant="subtitle1" >Email address</Typography>
                     <Form.Control
                         onChange={e =>
                             setData({
@@ -58,7 +58,7 @@ const Login = () => {
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label >Password</Form.Label>
+                    <Typography variant="subtitle1" >Password</Typography>
                     <Form.Control
                         onChange={e =>
                             setData({

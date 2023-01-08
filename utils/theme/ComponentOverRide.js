@@ -38,6 +38,13 @@ const components = {
       },
     },
   },
+  MuiIcon:{
+    styleOverrides: {
+      root: {
+        color: "white"
+      },
+    },
+  },
   MuiContainer: {
     styleOverrides: {
       root: {
