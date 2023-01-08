@@ -1,4 +1,5 @@
-import {useState} from "react";
+
+import { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -100,23 +101,25 @@ const NavbarComp = (props) => {
 
   const router = useRouter();
   //metamask account hook
-  const { isConnected } = useAccount();
-  const [buttonStatus,changeStatus]=useState("Connect To Metamask Wallet");
+  const { address, isConnected } = useAccount();
+  const [buttonStatus, changeStatus] = useState("Connect To Metamask Wallet");
+
   //metamask connection
   const { connectAsync } = useConnect({
     connector: new InjectedConnector(),
   });
+
   //dialog box of connecting to wallet
   const connectWallet = async () => {
     if (!isConnected) {
-    try {
-        changeStatus("Loading...")
+      try {
+        changeStatus("Loading...");
         await connectAsync();
-        setOpen(false);
-        router.push("/account")
-    } catch (error) {
-       changeStatus("Connect To Metamask Wallet")
-    }
+       handleClose()
+        router.push("/account");
+      } catch (error) {
+        changeStatus("Connect To Metamask Wallet");
+      }
     } else router.push("/account");
   };
 
@@ -126,7 +129,7 @@ const NavbarComp = (props) => {
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
   const handleClickOpen = () => {
     if (!isConnected) {
-        changeStatus("Connect To Metamask Wallet")
+      changeStatus("Connect To Metamask Wallet");
       setOpen(true);
     } else router.push("/account");
   };
@@ -137,7 +140,14 @@ const NavbarComp = (props) => {
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar  sx={{ bgcolor: "primary.main", py: "8px",position:"sticky",top:"0" }}>
+        <AppBar
+          sx={{
+            bgcolor: "primary.main",
+            py: "8px",
+            position: "sticky",
+            top: "0",
+          }}
+        >
           <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
             <Iconbutton />
             <Box
@@ -218,16 +228,21 @@ const NavbarComp = (props) => {
             Do you want to connect your metamask wallet to Artrypto?
           </DialogContentText>
         </DialogContent>
-        <DialogActions >
+        <DialogActions>
           <Button
             color="success"
             onClick={connectWallet}
             autoFocus
             sx={{ fontSize: "18px", width: "100%" }}
           >
-          <Box  mx={2}>
-            <Image src="/mm.png" width="30" height="30" alt="metamask" ></Image>
-          </Box>
+            <Box mx={2}>
+              <Image
+                src="/mm.png"
+                width="30"
+                height="30"
+                alt="metamask"
+              ></Image>
+            </Box>
             {buttonStatus}
           </Button>
         </DialogActions>

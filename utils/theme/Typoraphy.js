@@ -4,8 +4,8 @@ const typography = {
     fontWeight: 400, // or 'bold'
   },
   h1: {
-    fontWeight: 500,
-    fontSize: "1.875rem",
+    fontWeight: 800,
+    fontSize: "2.375rem",
     lineHeight: "1.5",
     color: "white",
   },
@@ -57,6 +57,11 @@ const typography = {
     fontSize:"16px",
     fontWeight:"800",
     color:"#949DB2",
+  },
+  formlabel:{
+    fontSize:"16px",
+    fontWeight:"600",
+    color:"#FFFFFF"
   },
 };
 
