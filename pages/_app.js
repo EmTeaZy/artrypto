@@ -13,6 +13,8 @@ import {WagmiConfig} from "wagmi";
 import {CacheProvider} from "@emotion/react";
 import createEmotionCache from "../utils/createEmotionCache";
 import Footer from "../components/Footer/Footer";
+import Timeline from '../components/NFT101/Timeline';
+
 
 const publicRoutes = [
   "/admin/login",
@@ -44,6 +46,7 @@ function MyApp(props) {
                     <Component {...pageProps} />
                   </ProtectedRoute>
                 )}
+                <Timeline/>
                 <Footer/>
               </WagmiConfig>
             </SnackbarContextProvider>
