@@ -35,7 +35,7 @@ function MyApp(props) {
             <SnackbarContextProvider>
               <Head />
               <WagmiConfig client={wagmiClient}>
-              <Navbar />
+                {(!router.pathname.includes("admin") || router.pathname.includes("login")) && <Navbar />}
                 {publicRoutes.includes(router.pathname) ? (
                   <Component {...pageProps} />
                 ) : (

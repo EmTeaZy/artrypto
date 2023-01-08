@@ -1,6 +1,6 @@
 import React from "react";
 import {Grid} from "@mui/material";
-import ProductPerformance from "../../src/components/dashboard/ProductPerformance";
+import UsersList from "../../src/components/dashboard/UsersList";
 import FullLayout from "../../src/layouts/FullLayout";
 
 const ViewUsers = () => {
@@ -9,7 +9,7 @@ const ViewUsers = () => {
             <FullLayout check={"admin"}>
                 <Grid container spacing={0}>
                     <Grid item xs={12} lg={12}>
-                        <ProductPerformance/>
+                        <UsersList/>
                     </Grid>
                 </Grid>
             </FullLayout>

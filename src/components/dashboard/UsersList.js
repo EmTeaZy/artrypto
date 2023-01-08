@@ -4,7 +4,7 @@ import BaseCard from "../baseCard/BaseCard";
 import axios from "axios";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 
-const ProductPerformance = () => {
+const UsersList = () => {
 
     const [users, setUsers] = useState([]);
 
@@ -81,4 +81,4 @@ const ProductPerformance = () => {
     );
 };
 
-export default ProductPerformance;
+export default UsersList;

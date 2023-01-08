@@ -22,12 +22,12 @@ const PageWrapper = experimentalStyled("div")(({ theme }) => ({
   overflow: "hidden",
 
   backgroundColor: theme.palette.background.default,
-  // [theme.breakpoints.up("lg")]: {
-  //   paddingTop: "64px",
-  // },
-  // [theme.breakpoints.down("lg")]: {
-  //   paddingTop: "64px",
-  // },
+  [theme.breakpoints.up("lg")]: {
+    paddingTop: "64px",
+  },
+  [theme.breakpoints.down("lg")]: {
+    paddingTop: "64px",
+  },
 }));
 
 const FullLayout = ({ children,check }) => {

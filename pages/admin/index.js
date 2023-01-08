@@ -2,7 +2,7 @@ import React from "react";
 import {Grid} from "@mui/material";
 import SalesOverview from "../../src/components/dashboard/SalesOverview";
 import DailyActivity from "../../src/components/dashboard/DailyActivity";
-import ProductPerformance from "../../src/components/dashboard/ProductPerformance";
+import UsersList from "../../src/components/dashboard/UsersList";
 import FullLayout from "../../src/layouts/FullLayout";
 
 export default function Home() {
@@ -17,7 +17,7 @@ export default function Home() {
                         <DailyActivity />
                     </Grid>
                     <Grid item xs={12} lg={8}>
-                        <ProductPerformance />
+                        <UsersList />
                     </Grid>
                 </Grid>
             </FullLayout>

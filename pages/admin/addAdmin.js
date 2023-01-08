@@ -53,12 +53,11 @@ const AddAdmin = () => {
                 <Grid container spacing={0}>
                     <Grid item xs={12} lg={12}>
                         <Typography variant='h1' color="text.primary">Add an admin</Typography>
-                            <Stack spacing={3}>
+                            <Stack className="mt-3" spacing={3}>
                                 <TextField
                                     id="name-basic"
                                     label="Name"
                                     variant="outlined"
-                                    placeholder="Enter username"
                                     onChange={e =>
                                         setData({
                                             ...data,
@@ -71,7 +70,6 @@ const AddAdmin = () => {
                                            label="Email"
                                            variant="outlined"
                                            type="email"
-                                           placeholder="Enter email"
                                            onChange={e =>
                                                setData({
                                                    ...data,
@@ -85,7 +83,6 @@ const AddAdmin = () => {
                                     label="Enter Password"
                                     type="password"
                                     variant="filled"
-                                    placeholder="Enter Password"
                                     onChange={e =>
                                         setData({
                                             ...data,
