@@ -40,9 +40,7 @@ function MyApp(props) {
             <SnackbarContextProvider>
               <Head />
               <WagmiConfig client={wagmiClient}>
-              <Navbar />
-              <Hero/>
-                {(!router.pathname.includes("admin") || router.pathname.includes("login")) &&<> <Navbar /> <SwitchGoerli/></>}
+                {(!router.pathname.includes("admin") || router.pathname.includes("login")) &&<> <Navbar /> <SwitchGoerli/></> }
                 {publicRoutes.includes(router.pathname) ? (
                   <Component {...pageProps} />
                 ) : (
@@ -50,7 +48,7 @@ function MyApp(props) {
                     <Component {...pageProps} />
                   </ProtectedRoute>
                 )}
-                <Footer/>
+                {/*<Footer/>*/}
               </WagmiConfig>
             </SnackbarContextProvider>
           </AuthContextProvider>

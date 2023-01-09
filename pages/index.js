@@ -4,6 +4,7 @@ import { useAccount } from "wagmi";
 import Typography from "@mui/material/Typography";
 import Carousel from "../components/carousel/Carousel";
 import UsersList from "../src/components/dashboard/UsersList";
+import Hero from "../components/HeroSection/Hero";
 
 const index = () => {
   //get metamask account from wagmi hook
@@ -16,6 +17,7 @@ const index = () => {
 
   return (
     <>
+        <Hero/>
       <Box sx={{ textAlign: "left" }}>
       <Typography sx={{marginLeft: "88px", my: 3}} variant="h1">
           {" "}
