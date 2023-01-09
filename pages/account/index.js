@@ -4,12 +4,10 @@ import {useAccount} from "wagmi";
 import UserDetails from "../../components/AccountComponents/UserDetails";
 import axios from "axios";
 import CreatedNFTs from "../../components/AccountComponents/CreatedNFTs";
-import { res } from "pino-std-serializers";
 
 const Account = () => {
     const {address} = useAccount();
     const [user, setUser] = useState({});
-
     useEffect(() => getUserData, []);
     const getUserData = async () => {
         axios.post("/api/findUser", {walletAddress: address})

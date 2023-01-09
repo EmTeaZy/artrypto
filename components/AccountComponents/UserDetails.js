@@ -1,14 +1,19 @@
-import { Avatar, Box, Button, Typography } from "@mui/material";
+import {Avatar, Box, Typography} from "@mui/material";
 import Image from "next/image";
 import React from "react";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { useRouter } from "next/router";
 import CreateButton from "./CreateButton";
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import {useSnackbar} from "../../context/SnackbarContextProvider";
+import {withStyles} from "@material-ui/styles";
 
-const UserDetails = ({ user, check }) => {
-  const router = useRouter();
+const styles = {
+    navlinkhover: {
+        "&:hover": {
+            color: "#EFBA0A",
+        },
+    },
+};
+const UserDetails = ({ user, check, classes }) => {
   const {show} = useSnackbar();
   const imgsrc="/profiles/"+user.imgid+".png";
   return (
@@ -40,13 +45,14 @@ const UserDetails = ({ user, check }) => {
             </Typography>
               <ContentCopyIcon
                   color="light"
+                  className={classes.navlinkhover}
                   sx={{cursor: "pointer"}}
                   onClick={() => {
                       navigator.clipboard.writeText(user?.walletAddress)
                           .then(() => show("Copied to clipboard!"))
                   }}/>
           </Box>
-          {check == "user" ? (
+          {check === "user" ? (
             <>
               <CreateButton />
             </>
@@ -59,4 +65,4 @@ const UserDetails = ({ user, check }) => {
   );
 };
 
-export default UserDetails;
+export default withStyles(styles)(UserDetails);

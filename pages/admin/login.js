@@ -24,7 +24,11 @@ const Login = () => {
                 show("Login successful!");
                 router.push('/admin/')
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                console.log(err)
+                if(err.code === "auth/wrong-password")
+                    show("ERROR: Wrong credentials", "error")
+            })
     }
 
     // If a user is logged in, redirect them to the dashboard
