@@ -14,8 +14,6 @@ import {CacheProvider} from "@emotion/react";
 import createEmotionCache from "../utils/createEmotionCache";
 import Footer from "../components/Footer/Footer";
 import Hero from '../components/HeroSection/Hero'
-import InfoSection from "../components/info/InfoSection";
-
 
 const publicRoutes = [
   "/admin/login",
@@ -48,7 +46,6 @@ function MyApp(props) {
                     <Component {...pageProps} />
                   </ProtectedRoute>
                 )}
-                <InfoSection/>
                 <Footer/>
               </WagmiConfig>
             </SnackbarContextProvider>

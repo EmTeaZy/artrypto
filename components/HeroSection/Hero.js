@@ -1,29 +1,40 @@
 import { Box } from "@mui/material";
 import React from "react";
 import Typography from "@mui/material/Typography";
-import Profile from '/public/images/nft101.png';
+import Profile from '/public/images/nfts105.png';
+import Image from "next/image";
 
 const Hero = () => {
   return (
     <>
     
-      <Box sx={{ 
+      <Box px= {10} sx={{ 
         textAlign: "left",
+        display: "flex",
+        flexDirection: {xs:"column", md:"row"},
+        alignItems: "center",
+        justifyContent: "space-between",
+        my: 0
         }}>
-        <Typography sx={{marginLeft: "88px", my: 25, fontSize: 58 }} variant="h1">
+
+            <Box>
+        <Typography sx={{fontSize: 49 }} variant="h1">
           {" "}
           Explore, Buy and Sell NFTs
-          <Typography variant="h3">
+        </Typography>
+        
+          <Typography variant="h4">
           {" "}
-          Pakistan's first and largest digital marketplace for crypto collectibles <br></br>
-          and non-fungible tokens (NFTs). Discover exclusive digital items and<br></br>
-          add them to your collection or sell them.
-        </Typography>
-        </Typography>
+          Pakistan's first and largest digital marketplace for crypto
+          collectibles and non-fungible tokens (NFTs). Discover exclusive digital items and
+          add them to your collection.
+         </Typography>
+
+        </Box>
+
         
-        
-        <Box px={4}>
-         
+        <Box>
+            <Image src={Profile} width={730} height={410}></Image>
         </Box>
       </Box>
     </>
