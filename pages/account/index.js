@@ -40,7 +40,7 @@ const Account = () => {
             <Box bgcolor={"primary.main"} px={8} py={4}>
                 <UserDetails user={user} check={"user"}/>
                 <hr style={{borderColor:"white"}}/>
-                <CreatedNFTs />
+                <CreatedNFTs address={user.walletAddress} />
             </Box>
         </>
     );
