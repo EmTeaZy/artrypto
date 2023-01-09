@@ -6,9 +6,9 @@ import Profile from '/public/images/nft101.png';
 const Hero = () => {
   return (
     <>
+    
       <Box sx={{ 
         textAlign: "left",
-        
         }}>
         <Typography sx={{marginLeft: "88px", my: 25, fontSize: 58 }} variant="h1">
           {" "}

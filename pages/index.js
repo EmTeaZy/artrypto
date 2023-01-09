@@ -15,15 +15,16 @@ const index = () => {
 
   return (
     <>
-      <Box sx={{ textAlign: "center" }}>
-        <Typography my={3} variant="h1">
+      <Box sx={{ textAlign: "left" }}>
+      <Typography sx={{marginLeft: "88px", my: 3}} variant="h1">
           {" "}
-          Explore, buy and sell NFTs.
+          Featured NFTs
         </Typography>
         <Box px={4}>
           <Carousel />
         </Box>
       </Box>
+
     </>
   );
 };
