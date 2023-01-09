@@ -39,12 +39,17 @@ const theme = createTheme({
       dark: "#dcb014",
       contrastText: "#ffffff",
     },
+    light:{
+      main:"#FFFFFF"
+    },
     text: {
       primary:"#FFFFFF",
       secondary: "#8A939B",
       contrast:"#F2B809",
       danger: "#fc4b6c",
+      success: "#00c21a",
       tertiary: "#000000",
+      info: "#949DB2",
     },
     grey: {
       A100: "#ecf0f2",

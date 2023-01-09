@@ -2,7 +2,6 @@ import React, {useState} from 'react'
 import {useAuth} from "../../context/AuthContext";
 import {useSnackbar} from "../../context/SnackbarContextProvider";
 import {Button, Grid, Stack, TextField, Typography,} from "@mui/material";
-import BaseCard from "../../src/components/baseCard/BaseCard";
 import FullLayout from "../../src/layouts/FullLayout";
 
 
@@ -27,10 +26,25 @@ const AddAdmin = () => {
 
         signUp(data.email, data.password, data.username)
             .then(res => {
-                console.log("Sign up successful", res)
-                show("Sign up successful!");
+                show("Admin added successfully");
+                setData({
+                    email: '',
+                    password: '',
+                    username: '',
+                });
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                switch (err.code) {
+                    case "auth/email-already-in-use":
+                        show("ERROR: Email is already in use", "error");
+                        break;
+                    case "auth/invalid-email":
+                        show("ERROR: Invalid email", "error");
+                        break;
+                    default:
+                        console.log("Error creating user:", err);
+                }
+            })
     }
 
     return (
@@ -39,12 +53,11 @@ const AddAdmin = () => {
                 <Grid container spacing={0}>
                     <Grid item xs={12} lg={12}>
                         <Typography variant='h1' color="text.primary">Add an admin</Typography>
-                            <Stack spacing={3}>
+                            <Stack className="mt-3" spacing={3}>
                                 <TextField
                                     id="name-basic"
                                     label="Name"
                                     variant="outlined"
-                                    placeholder="Enter username"
                                     onChange={e =>
                                         setData({
                                             ...data,
@@ -57,7 +70,6 @@ const AddAdmin = () => {
                                            label="Email"
                                            variant="outlined"
                                            type="email"
-                                           placeholder="Enter email"
                                            onChange={e =>
                                                setData({
                                                    ...data,
@@ -71,7 +83,6 @@ const AddAdmin = () => {
                                     label="Enter Password"
                                     type="password"
                                     variant="filled"
-                                    placeholder="Enter Password"
                                     onChange={e =>
                                         setData({
                                             ...data,

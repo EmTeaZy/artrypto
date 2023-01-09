@@ -14,6 +14,7 @@ import {CacheProvider} from "@emotion/react";
 import createEmotionCache from "../utils/createEmotionCache";
 import Footer from "../components/Footer/Footer";
 import Hero from '../components/HeroSection/Hero'
+import SwitchGoerli from "../components/SwitchGoerli";
 
 const publicRoutes = [
   "/admin/login",
@@ -22,6 +23,8 @@ const publicRoutes = [
   "/",
   "/account",
   "/account/settings",
+  "/artwork/create",
+  "/view/profile",
 ];
 
 // Client-side cache, shared for the whole session of the user in the browser.
@@ -39,6 +42,7 @@ function MyApp(props) {
               <WagmiConfig client={wagmiClient}>
               <Navbar />
               <Hero/>
+                {(!router.pathname.includes("admin") || router.pathname.includes("login")) &&<> <Navbar /> <SwitchGoerli/></>}
                 {publicRoutes.includes(router.pathname) ? (
                   <Component {...pageProps} />
                 ) : (

@@ -7,13 +7,18 @@ const UserSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        required: true,
+        required: false,
     },
     bio: {
         type: String,
         required: false,
     },
     walletAddress: {
+        type: String,
+        required: true,
+        unique: true,
+    }, 
+    imgid: {
         type: String,
         required: true,
     },
@@ -23,14 +28,6 @@ const UserSchema = new mongoose.Schema({
             required: false,
         },
         twitter: {
-            type: String,
-            required: false,
-        },
-        linkedIn: {
-            type: String,
-            required: false,
-        },
-        website:{
             type: String,
             required: false,
         }

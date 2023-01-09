@@ -19,7 +19,7 @@ export default function Carousel() {
                 onClick={sliderRef?.slickPrev}/>
             <Slider style={{width: "94%"}} ref={setSliderRef} {...settings}>
                 {NFTsData.map((item) => (
-                    <div className="card">
+                    <div key={item.id} className="card">
                         <div className="card-top">
                             <img src={item.linkImg} alt={item.title}/>
                         </div>

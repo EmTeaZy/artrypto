@@ -1,4 +1,5 @@
-import {useState} from "react";
+
+import { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -6,7 +7,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import MoreIcon from "@mui/icons-material/MoreVert";
-import {IconButton} from "@mui/material";
+import {IconButton, Typography} from "@mui/material";
 import Searchbar from "./NavbarComponents/Searchbar";
 import Iconbutton from "./NavbarComponents/Icon-button";
 import {AccountCircle} from "@mui/icons-material";
@@ -24,6 +25,9 @@ import DialogTitle from "@mui/material/DialogTitle";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import {useTheme} from "@mui/material/styles";
 import Image from "next/image";
+import ConnectStatus from "./NavbarComponents/ConnectStatus";
+
+
 
 //hover of nav-elements
 const styles = {
@@ -42,6 +46,45 @@ const NavbarComp = (props) => {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+
+  const router = useRouter();
+  //metamask account hook
+  const { address, isConnected } = useAccount();
+  const [buttonStatus, changeStatus] = useState("Connect To Metamask Wallet");
+
+  //metamask connection
+  const { connectAsync } = useConnect({
+    connector: new InjectedConnector(),
+  });
+
+  //dialog box of connecting to wallet
+  const connectWallet = async () => {
+    if (!isConnected) {
+      try {
+        changeStatus("Loading...");
+        await connectAsync();
+       handleClose()
+        router.push("/account");
+      } catch (error) {
+        changeStatus("Connect To Metamask Wallet");
+      }
+    } else router.push("/account");
+  };
+
+  //dialogbox
+  const [open, setOpen] = useState(false);
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
+  const handleClickOpen = () => {
+    if (!isConnected) {
+      changeStatus("Connect To Metamask Wallet");
+      setOpen(true);
+    } else router.push("/account");
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
     <Menu
@@ -65,22 +108,16 @@ const NavbarComp = (props) => {
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
           aria-haspopup="true"
-          color="inherit"
+          color="primary"
+          onClick={handleClickOpen}
         >
           <AccountCircle />
         </IconButton>
-        <p>Profile</p>
+        <Typography color="text.secondary">Profile</Typography>
       </MenuItem>
       <MenuItem
         sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
       >
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
           <IconButton
             size="large"
             edge="end"
@@ -88,56 +125,28 @@ const NavbarComp = (props) => {
             onClick={() => {
               router.push("/admin");
             }}
-            color="inherit"
+            color="primary"
           >
             <AdminPanelSettingsTwoToneIcon />
           </IconButton>
-          <p>Admin</p>
-        </Box>
+         <Typography color="text.secondary">Admin</Typography>
       </MenuItem>
     </Menu>
   );
 
-  const router = useRouter();
-  //metamask account hook
-  const { isConnected } = useAccount();
-  const [buttonStatus,changeStatus]=useState("Connect To Metamask Wallet");
-  //metamask connection
-  const { connectAsync } = useConnect({
-    connector: new InjectedConnector(),
-  });
-  //dialog box of connecting to wallet
-  const connectWallet = async () => {
-    if (!isConnected) {
-    try {
-        changeStatus("Loading...")
-        await connectAsync();
-        setOpen(false);
-        router.push("/account")
-    } catch (error) {
-       changeStatus("Connect To Metamask Wallet")
-    }
-    } else router.push("/account");
-  };
-
-  //dialogbox
-  const [open, setOpen] = useState(false);
-  const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
-  const handleClickOpen = () => {
-    if (!isConnected) {
-        changeStatus("Connect To Metamask Wallet")
-      setOpen(true);
-    } else router.push("/account");
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
+  
 
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar  sx={{ bgcolor: "primary.main", py: "8px",position:"sticky",top:"0" }}>
+        <AppBar
+          sx={{
+            bgcolor: "primary.main",
+            py: "8px",
+            position: "sticky",
+            top: "0",
+          }}
+        >
           <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
             <Iconbutton />
             <Box
@@ -171,6 +180,9 @@ const NavbarComp = (props) => {
                   className={props.classes.navlinkhover}
                 />
               </IconButton>
+              <Box mx={1}>
+               <ConnectStatus/>
+              </Box>
             </Box>
             <Box sx={{ display: { xs: "flex", md: "none" } }}>
               <IconButton
@@ -218,16 +230,21 @@ const NavbarComp = (props) => {
             Do you want to connect your metamask wallet to Artrypto?
           </DialogContentText>
         </DialogContent>
-        <DialogActions >
+        <DialogActions>
           <Button
             color="success"
             onClick={connectWallet}
             autoFocus
             sx={{ fontSize: "18px", width: "100%" }}
           >
-          <Box  mx={2}>
-            <Image src="/mm.png" width="30" height="30" alt="metamask" ></Image>
-          </Box>
+            <Box mx={2}>
+              <Image
+                src="/mm.png"
+                width="30"
+                height="30"
+                alt="metamask"
+              ></Image>
+            </Box>
             {buttonStatus}
           </Button>
         </DialogActions>

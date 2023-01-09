@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { useAccount } from "wagmi";
 import Typography from "@mui/material/Typography";
 import Carousel from "../components/carousel/Carousel";
+import UsersList from "../src/components/dashboard/UsersList";
 
 const index = () => {
   //get metamask account from wagmi hook
@@ -25,13 +26,13 @@ const index = () => {
         </Box>
       </Box>
 
-    </>
-  );
+            <Box px={5} mt={3}>
+            <Typography sx={{textAlign: "center"}} variant="h1">Available Users</Typography>
+                <UsersList/>
+            </Box>
+        </>
+    );
 };
 
 export default index;
 
-//telling user to remain at goerli testnet component.
-// import useNetwork
-//const { chain, chains } = useNetwork()
-//  <p>{chain.name!='Goerli'?"Change your network to goerli":""}</p>

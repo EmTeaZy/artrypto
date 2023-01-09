@@ -4,8 +4,8 @@ const typography = {
     fontWeight: 400, // or 'bold'
   },
   h1: {
-    fontWeight: 500,
-    fontSize: "1.875rem",
+    fontWeight: 800,
+    fontSize: "2.375rem",
     lineHeight: "1.5",
     color: "white",
   },
@@ -53,10 +53,24 @@ const typography = {
     fontWeight: "400",
     color: "white",
   },
+  subtitle3: {
+    fontSize: "0.675rem",
+    fontWeight: "400",
+    color: "white",
+  },
   navlink:{
     fontSize:"16px",
     fontWeight:"800",
     color:"#949DB2",
+  },
+  connectStatus:{
+    fontSize:"12px",
+    fontWeight:"300",
+  },
+  formlabel:{
+    fontSize:"16px",
+    fontWeight:"600",
+    color:"#FFFFFF"
   },
 };
 

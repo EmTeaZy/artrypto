@@ -5,15 +5,16 @@ export default async function handler(req, res) {
     try {
         const {username, email, bio, walletAddress, links} = req.body
         await connectDb();
-        const user = await User.updateOne({
-            username,
-            email,
-            bio,
-            walletAddress,
-            links
+        const user = await User.updateOne({walletAddress: walletAddress}, {
+            $set: {
+                username: username,
+                email: email,
+                bio: bio,
+                links: links
+            }
         });
-        res.json({user});
+        res.status(200).json({user});
     } catch (err) {
-        res.json({err})
+        res.status(400).json({err})
     }
 }

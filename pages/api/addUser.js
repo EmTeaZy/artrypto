@@ -3,17 +3,18 @@ import User from "../../models/User"
 
 export default async function handler(req, res) {
     try {
-        const {username, email, bio, walletAddress, links} = req.body
+        const {username, email, bio, walletAddress,imgid, links} = req.body
         await connectDb();
         const user = await User.create({
             username,
             email,
             bio,
             walletAddress,
+            imgid,
             links
         });
-        res.json({user});
+        res.status(200).json({user});
     } catch (err) {
-        res.json({err})
+        res.status(400).json({err})
     }
 }

@@ -8,6 +8,9 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "engines": {
+    "node": ">=16.0.0 <17.0.0"
+  },
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/server": "^11.10.0",
@@ -31,6 +34,7 @@
     "formik": "^2.2.9",
     "mongoose": "^6.8.2",
     "next": "13.0.4",
+    "nft.storage": "^7.0.0",
     "prop-types": "^15.8.1",
     "react": "18.2.0",
     "react-apexcharts": "^1.3.7",
@@ -40,6 +44,8 @@
     "react-slick": "^0.29.0",
     "slick-carousel": "^1.8.1",
     "styled-components": "^5.3.6",
+    "url": "^0.11.0",
+    "vercel": "^28.10.3",
     "wagmi": "^0.10.4",
     "web3modal": "^1.9.10",
     "yup": "^0.32.11"
