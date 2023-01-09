@@ -1,12 +1,15 @@
 import React, {useEffect, useState} from "react";
-import {Table, TableBody, TableCell, TableHead, TableRow, Typography,} from "@mui/material";
+import {IconButton, Table, TableBody, TableCell, TableHead, TableRow, Typography,} from "@mui/material";
 import BaseCard from "../baseCard/BaseCard";
 import axios from "axios";
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 const UsersList = () => {
 
     const [users, setUsers] = useState([]);
+    const router = useRouter();
 
     useEffect(() => fetchUsers, [])
 
@@ -71,7 +74,13 @@ const UsersList = () => {
                                 </Typography>
                             </TableCell>
                             <TableCell align="right">
+                            <IconButton onClick={()=>{
+                                console.log(user)
+                                router.push({pathname:"/view/profile",query: user})
+
+                                }}>
                                 <VisibilityIcon color="primary" sx={{cursor: "pointer"}}/>
+                            </IconButton>
                             </TableCell>
                         </TableRow>
                     ))}
