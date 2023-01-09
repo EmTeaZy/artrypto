@@ -9,7 +9,7 @@ import Head from "../components/Head";
 import {useRouter} from "next/router";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../utils/globals.css";
-import {WagmiConfig} from "wagmi";
+import {useAccount, WagmiConfig} from "wagmi";
 import {CacheProvider} from "@emotion/react";
 import createEmotionCache from "../utils/createEmotionCache";
 import Footer from "../components/Footer/Footer";
@@ -31,6 +31,7 @@ const publicRoutes = [
 const clientSideEmotionCache = createEmotionCache();
 function MyApp(props) {
   const router = useRouter();
+  const {isConnected} = useAccount();
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
   return (
     <>
@@ -40,7 +41,8 @@ function MyApp(props) {
             <SnackbarContextProvider>
               <Head />
               <WagmiConfig client={wagmiClient}>
-                {(!router.pathname.includes("admin") || router.pathname.includes("login")) &&<> <Navbar /> <SwitchGoerli/></> }
+                {(!router.pathname.includes("admin") || router.pathname.includes("login")) && <Navbar /> }
+                {(!router.pathname.includes("admin") || router.pathname.includes("login")) && isConnected && <SwitchGoerli/> }
                 {publicRoutes.includes(router.pathname) ? (
                   <Component {...pageProps} />
                 ) : (
