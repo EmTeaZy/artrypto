@@ -24,6 +24,11 @@ const AddAdmin = () => {
             return;
         }
 
+        if (data.password.length < 6) {
+            show("Password should be at least 6 characters.", "error");
+            return;
+        }
+
         signUp(data.email, data.password, data.username)
             .then(res => {
                 show("Admin added successfully");

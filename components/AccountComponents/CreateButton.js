@@ -1,9 +1,8 @@
 import React from "react";
-import CreateSharpIcon from "@mui/icons-material/CreateSharp";
-import { withStyles } from "@material-ui/styles";
-import Button from "@mui/material/Button";
-import { Box, IconButton } from "@mui/material";
-import { useRouter } from "next/router";
+import {withStyles} from "@material-ui/styles";
+import AddIcon from '@mui/icons-material/Add';
+import {Box, IconButton} from "@mui/material";
+import {useRouter} from "next/router";
 import SettingsSharpIcon from "@mui/icons-material/SettingsSharp";
 //hover of nav-elements
 const styles = {
@@ -26,7 +25,7 @@ const CreateButton = (props) => {
           onClick={() => router.push("/artwork/create")}
           color="light"
         >
-          <CreateSharpIcon className={props.classes.navlinkhover} />
+          <AddIcon fontSize="medium" className={props.classes.navlinkhover} />
         </IconButton>
         <IconButton
           size="large"
