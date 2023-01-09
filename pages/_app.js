@@ -12,8 +12,6 @@ import "../utils/globals.css";
 import {useAccount, WagmiConfig} from "wagmi";
 import {CacheProvider} from "@emotion/react";
 import createEmotionCache from "../utils/createEmotionCache";
-import Footer from "../components/Footer/Footer";
-import Hero from '../components/HeroSection/Hero'
 import SwitchGoerli from "../components/SwitchGoerli";
 
 const publicRoutes = [
