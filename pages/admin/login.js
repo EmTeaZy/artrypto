@@ -19,6 +19,12 @@ const Login = () => {
 
     const handleLogin = e => {
         e.preventDefault()
+
+        if(!data.email || !data.password){
+            show("All fields must be provided..", "error")
+            return;
+        }
+
         login(data.email, data.password)
             .then(() => {
                 show("Login successful!");
@@ -56,7 +62,6 @@ const Login = () => {
                             })
                         }
                         value={data.email}
-                        required
                         type="email"
                         placeholder="Enter email"
                     />
@@ -72,7 +77,6 @@ const Login = () => {
                             })
                         }
                         value={data.password}
-                        required
                         type="password"
                         placeholder="Password"
                     />

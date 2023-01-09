@@ -1,14 +1,13 @@
-import { Box, Button, Grid, TextField, Typography } from "@mui/material";
-import React, { useState } from "react";
-import { NFTStorage } from 'nft.storage'
-import { NFT_STORAGE_KEY } from "../../config/Nftstorage";
-import { useContract, useSigner,useAccount } from 'wagmi'
-import { goerli } from "wagmi/chains";
-import { abi, NFT_MINTING_CONTRACT_ADDRESS } from "../../constants";
-import { Contract } from "ethers";
-import { useSnackbar } from "../../context/SnackbarContextProvider";
-import { useRouter } from "next/router";
-import { LoadingButton } from "@mui/lab";
+import {Box, Button, Grid, TextField, Typography} from "@mui/material";
+import React, {useState} from "react";
+import {NFTStorage} from 'nft.storage'
+import {NFT_STORAGE_KEY} from "../../config/Nftstorage";
+import {useAccount, useSigner} from 'wagmi'
+import {goerli} from "wagmi/chains";
+import {abi, NFT_MINTING_CONTRACT_ADDRESS} from "../../constants";
+import {Contract} from "ethers";
+import {useSnackbar} from "../../context/SnackbarContextProvider";
+import {useRouter} from "next/router";
 
 const GetArtworkDetails = () => {
   const [image, setSelectedImage] = useState(null);
@@ -67,6 +66,12 @@ const GetArtworkDetails = () => {
   const handleSubmit = async(e)=>
   {
     e.preventDefault();
+
+    if (!name || !description || !image){
+      show("All fields must be provided..", "error")
+      return;
+    }
+
     if(isConnected)
     {
       changeLoading(true)
@@ -130,7 +135,6 @@ const GetArtworkDetails = () => {
                     </Typography>
                   </Box>
                   <TextField
-                    required
                     id="Name"
                     color="secondary"
                     placeholder="Name"
@@ -152,11 +156,9 @@ const GetArtworkDetails = () => {
                     </Typography>
                   </Box>
                   <TextField
-                    required
                     multiline
                     maxRows={6}
                     id="Details"
-                    required
                     color="secondary"
                     placeholder="Details"
                     onInput={(e) => changeDetails(e.target.value)}
