@@ -59,6 +59,7 @@ const GetArtworkDetails = () => {
   //store nft in ipfs and generate metadata
   const storeNFT = async () => {
     const metadata = await generateMetaData()
+    show("metadata created successfully")
     console.log(metadata.url)
     await mintNFT(metadata.url)
   }
