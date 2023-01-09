@@ -17,6 +17,10 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
+    }, 
+    imgid: {
+        type: String,
+        required: true,
     },
     links: {
         instagram: {
