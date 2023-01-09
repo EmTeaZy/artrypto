@@ -35,9 +35,8 @@ const CreatedNFTs = () => {
   return (
     <>
       <Typography variant="h1">Created NFTs</Typography>
-      {!gotNFT?<Typography color={"text.danger"} variant="subtitle1">No NFTs created</Typography>:<></>}
       <Box
-        p={6}
+      
         sx={{
           display: "flex",
           flexWrap: "wrap",
