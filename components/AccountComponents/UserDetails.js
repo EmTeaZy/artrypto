@@ -4,9 +4,12 @@ import React from "react";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useRouter } from "next/router";
 import CreateButton from "./CreateButton";
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import {useSnackbar} from "../../context/SnackbarContextProvider";
 
 const UserDetails = ({ user, check }) => {
   const router = useRouter();
+  const {show} = useSnackbar();
   const imgsrc="/profiles/"+user.imgid+".png";
   return (
     <>
@@ -35,6 +38,13 @@ const UserDetails = ({ user, check }) => {
             <Typography mx={1} color="text.primary" variant="h5">
               {user?.walletAddress || " "}
             </Typography>
+              <ContentCopyIcon
+                  color="light"
+                  sx={{cursor: "pointer"}}
+                  onClick={() => {
+                      navigator.clipboard.writeText(user?.walletAddress)
+                          .then(() => show("Copied to clipboard!"))
+                  }}/>
           </Box>
           {check == "user" ? (
             <>

@@ -6,7 +6,7 @@ const SwitchGoerli = () => {
   const { chain, chains } = useNetwork();
   return (
     <>
-      {chain.name !== "Goerli" ? (
+      {chain?.name !== "Goerli" ? (
         <Box sx={{bgcolor:"warning.main" , textAlign:"center"}}>
           <Typography color="black" variant="subtitle2">
             Change your Ethereum network to Goerli testnet from Metamask
