@@ -12,6 +12,8 @@ import "../utils/globals.css";
 import {WagmiConfig} from "wagmi";
 import {CacheProvider} from "@emotion/react";
 import createEmotionCache from "../utils/createEmotionCache";
+import Footer from "../components/Footer/Footer";
+import Hero from '../components/HeroSection/Hero'
 import SwitchGoerli from "../components/SwitchGoerli";
 
 const publicRoutes = [
@@ -38,6 +40,8 @@ function MyApp(props) {
             <SnackbarContextProvider>
               <Head />
               <WagmiConfig client={wagmiClient}>
+              <Navbar />
+              <Hero/>
                 {(!router.pathname.includes("admin") || router.pathname.includes("login")) &&<> <Navbar /> <SwitchGoerli/></>}
                 {publicRoutes.includes(router.pathname) ? (
                   <Component {...pageProps} />
@@ -46,6 +50,7 @@ function MyApp(props) {
                     <Component {...pageProps} />
                   </ProtectedRoute>
                 )}
+                <Footer/>
               </WagmiConfig>
             </SnackbarContextProvider>
           </AuthContextProvider>
