@@ -8,12 +8,13 @@ import {abi, NFT_MINTING_CONTRACT_ADDRESS} from "../../constants";
 import {Contract} from "ethers";
 import {useSnackbar} from "../../context/SnackbarContextProvider";
 import {useRouter} from "next/router";
+import { useAddress } from "@thirdweb-dev/react";
 
 const GetArtworkDetails = () => {
   const [image, setSelectedImage] = useState(null);
   const [name,changeName]=useState("");
   const[description,changeDetails]=useState("")
-  const {address,isConnected}=useAccount();
+  const {address} = useAddress()
   const {show} = useSnackbar()
   const router = useRouter();
   const [setLoading,changeLoading]=useState();
@@ -72,7 +73,7 @@ const GetArtworkDetails = () => {
       return;
     }
 
-    if(isConnected)
+    if(address)
     {
       changeLoading(true)
       await storeNFT()

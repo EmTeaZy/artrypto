@@ -13,7 +13,7 @@ import {useAccount, WagmiConfig} from "wagmi";
 import {CacheProvider} from "@emotion/react";
 import createEmotionCache from "../utils/createEmotionCache";
 import SwitchGoerli from "../components/SwitchGoerli";
-
+import { ThirdwebProvider } from "@thirdweb-dev/react";
 const publicRoutes = [
   "/admin/login",
   "/admin/signup",
@@ -29,29 +29,34 @@ const publicRoutes = [
 const clientSideEmotionCache = createEmotionCache();
 function MyApp(props) {
   const router = useRouter();
-  const {isConnected} = useAccount();
+  const { isConnected } = useAccount();
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
   return (
     <>
       <CacheProvider value={emotionCache}>
         <ThemeProvider theme={theme}>
-          <AuthContextProvider>
-            <SnackbarContextProvider>
-              <Head />
-              <WagmiConfig client={wagmiClient}>
-                {(!router.pathname.includes("admin") || router.pathname.includes("login")) && <Navbar /> }
-                {(!router.pathname.includes("admin") || router.pathname.includes("login")) && isConnected && <SwitchGoerli/> }
-                {publicRoutes.includes(router.pathname) ? (
-                  <Component {...pageProps} />
-                ) : (
-                  <ProtectedRoute>
+          <ThirdwebProvider activeChain={"goerli"}>
+            <AuthContextProvider>
+              <SnackbarContextProvider>
+                <Head />
+                <WagmiConfig client={wagmiClient}>
+                  {(!router.pathname.includes("admin") ||
+                    router.pathname.includes("login")) && <Navbar />}
+                  {(!router.pathname.includes("admin") ||
+                    router.pathname.includes("login")) &&
+                    isConnected && <SwitchGoerli />}
+                  {publicRoutes.includes(router.pathname) ? (
                     <Component {...pageProps} />
-                  </ProtectedRoute>
-                )}
-                {/*<Footer/>*/}
-              </WagmiConfig>
-            </SnackbarContextProvider>
-          </AuthContextProvider>
+                  ) : (
+                    <ProtectedRoute>
+                      <Component {...pageProps} />
+                    </ProtectedRoute>
+                  )}
+                  {/*<Footer/>*/}
+                </WagmiConfig>
+              </SnackbarContextProvider>
+            </AuthContextProvider>
+          </ThirdwebProvider>
         </ThemeProvider>
       </CacheProvider>
     </>

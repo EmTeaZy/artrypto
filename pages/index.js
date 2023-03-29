@@ -7,13 +7,7 @@ import UsersList from "../src/components/dashboard/UsersList";
 import Hero from "../components/HeroSection/Hero";
 
 const index = () => {
-  //get metamask account from wagmi hook
-  const { isConnected } = useAccount();
 
-  useEffect(
-    () => console.log(isConnected ? "Connected" : "Not connected"),
-    [isConnected]
-  );
 
   return (
     <>
