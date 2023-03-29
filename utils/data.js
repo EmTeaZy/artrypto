@@ -42,7 +42,7 @@ export const NFTsData = [
         price: 0.15,
     },
     {
-        id: 7,
+        id: 8,
         title: 'Demon Cat',
         linkImg: "/images/8.webp",
         price: 0.55,
