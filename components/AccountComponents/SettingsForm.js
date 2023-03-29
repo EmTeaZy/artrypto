@@ -1,7 +1,7 @@
 import {Box, Button, Grid, TextField, Typography} from "@mui/material";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import {useSnackbar} from "../context/SnackbarContextProvider";
+import {useSnackbar} from "../../context/SnackbarContextProvider";
 
 const SettingsForm = ({walletAddress}) => {
 
