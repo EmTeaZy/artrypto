@@ -5,10 +5,8 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import { CardActionArea } from "@mui/material";
 import NFTCard from "./NFTCard";
-import { useAccount } from "wagmi";
 
 const CreatedNFTs = ({ address }) => {
-  //const { address } = useAccount();
   const [nfts, setnfts] = useState();
   const [gotNFT, setStatus] = useState(false);
   const [addresss, setAddress] = useState("");
