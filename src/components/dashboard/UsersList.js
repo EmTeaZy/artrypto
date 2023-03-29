@@ -3,7 +3,6 @@ import {IconButton, Table, TableBody, TableCell, TableHead, TableRow, Typography
 import BaseCard from "../baseCard/BaseCard";
 import axios from "axios";
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import Link from "next/link";
 import { useRouter } from "next/router";
 
 const UsersList = () => {

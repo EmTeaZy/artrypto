@@ -48,6 +48,13 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 const Searchbar = () => {
+
+  const handleSearch = e => {
+    if(e.keyCode === 13){
+      console.log(e.target.value)
+    }
+  }
+
   return (
     <>
       <Search>
@@ -57,6 +64,7 @@ const Searchbar = () => {
         <StyledInputBase
           placeholder="Search"
           inputProps={{ "aria-label": "search" }}
+          onKeyDown={handleSearch}
         />
       </Search>
     </>
