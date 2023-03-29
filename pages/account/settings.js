@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import { useAddress } from "@thirdweb-dev/react";
 import React from "react";
-import SettingsForm from "../../components/SettingsForm";
+import SettingsForm from "../../components/AccountComponents/SettingsForm";
 import FullLayout from "../../src/layouts/FullLayout";
 
 const Settings = () => {

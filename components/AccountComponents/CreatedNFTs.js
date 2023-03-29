@@ -7,14 +7,14 @@ import { CardActionArea } from "@mui/material";
 import NFTCard from "./NFTCard";
 import { useOwnedNFTs, useAddress, useContract } from "@thirdweb-dev/react";
 import { NFT_MINTING_CONTRACT_ADDRESS } from "../../constants";
+import { useRouter } from "next/router";
 
 const CreatedNFTs = ({ nfts }) => {
   const [gotNFT, setStatus] = useState(false);
   const contractAddress = NFT_MINTING_CONTRACT_ADDRESS;
   const { contract } = useContract(contractAddress);
   const myaddress = useAddress();
-  const {data,isLoading,error,} = useOwnedNFTs(contract, myaddress);
-
+  const { data, isLoading, error } = useOwnedNFTs(contract, myaddress);
   return (
     <>
       <Box
@@ -32,7 +32,11 @@ const CreatedNFTs = ({ nfts }) => {
         ) : (
           <></>
         )}
-        {nfts ? nfts.map((NFT) => <NFTCard nft={NFT.metadata} />) : <></>}
+        {nfts ? (
+          nfts.map((NFT) => <NFTCard  nft={NFT.metadata} />)
+        ) : (
+          <></>
+        )}
       </Box>
     </>
   );

@@ -4,10 +4,12 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import { CardActionArea } from "@mui/material";
 import { Box, Typography } from "@mui/material";
+import { useRouter } from "next/router";
 const NFTCard = ({ nft }) => {
+  const router = useRouter();
   return (
     <>
-      <Card sx={{ Width: 300 }}>
+      <Card onClick={() => {router.push({pathname:"/nfts/NFTDisplay",query:nft})}} sx={{ Width: 300 }}>
         <CardActionArea>
           <Box
             sx={{

@@ -23,7 +23,7 @@ export default function Carousel() {
                 {NFTsData.map((item) => (
                     <div key={item.id}
                          className="card"
-                         onClick={() => router.push(`/nfts/${item.id}`)}>
+                         >
                         <div className="card-top">
                             <img src={item.linkImg} alt={item.title}/>
                         </div>
