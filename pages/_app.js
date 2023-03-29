@@ -21,7 +21,8 @@ const publicRoutes = [
   "/account/settings",
   "/artwork/create",
   "/view/profile",
-  "/nfts/NFTDisplay"
+  "/nfts/[id]",
+  "/nfts/[contractAddress]/[id]/sell",
 ];
 
 // Client-side cache, shared for the whole session of the user in the browser.

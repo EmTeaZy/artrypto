@@ -22,7 +22,7 @@ const NFTCard = ({ nft }) => {
             <CardMedia
               component="img"
               sx={{ width: 170 }}
-              image={nft.image}
+              image={nft.metadata.image}
               alt="Live from space album cover"
             />
             <CardContent>
@@ -32,10 +32,10 @@ const NFTCard = ({ nft }) => {
                 gutterBottom
                 component="div"
               >
-                {nft.name}
+                {nft.metadata.name}
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                {nft.description}
+                {nft.metadata.description}
               </Typography>
             </CardContent>
           </Box>

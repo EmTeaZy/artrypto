@@ -37,19 +37,12 @@ const Account = () => {
     }
   };
 
-  const contractAddress = NFT_MINTING_CONTRACT_ADDRESS;
-  const { contract } = useContract(contractAddress);
-  const { data, isLoading, error } = useOwnedNFTs(contract, address);
-  const [nfts, setnfts] = useState();
-  useEffect(() => {
-    setnfts(data)
-  }, [nfts]);
   return (
     <>
       <Box bgcolor={"primary.main"} px={8} py={4}>
         <UserDetails user={user} check={"user"} />
         <hr style={{ borderColor: "white" }} />
-        <CreatedNFTs nfts={nfts} />
+        <CreatedNFTs />
       </Box>
     </>
   );
