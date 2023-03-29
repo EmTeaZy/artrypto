@@ -6,7 +6,7 @@ import { abi, NFT_MINTING_CONTRACT_ADDRESS } from "../../constants";
 import { Contract } from "ethers";
 import { useSnackbar } from "../../context/SnackbarContextProvider";
 import { useRouter } from "next/router";
-import { useAddress } from "@thirdweb-dev/react";
+import { useAddress, useSigner } from "@thirdweb-dev/react";
 
 const GetArtworkDetails = () => {
   const [image, setSelectedImage] = useState(null);
@@ -16,19 +16,11 @@ const GetArtworkDetails = () => {
   const { show } = useSnackbar();
   const router = useRouter();
   const [setLoading, changeLoading] = useState();
-
-  const {
-    data: signer,
-    isError,
-    isLoading,
-  } = useSigner({
-    chainId: goerli.id,
-  });
+  const signer = useSigner()
 
   //generate metadata to mint NFT
   const generateMetaData = async () => {
     const nftstorage = new NFTStorage({ token: NFT_STORAGE_KEY });
-
     // call client.store, passing in the image & metadata
     return nftstorage.store({
       image,
@@ -39,6 +31,7 @@ const GetArtworkDetails = () => {
 
   //mint NFT
   const mintNFT = async (metadata) => {
+    console.log(signer)
     const mintingcontract = new Contract(
       NFT_MINTING_CONTRACT_ADDRESS,
       abi,
