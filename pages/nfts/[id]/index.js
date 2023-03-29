@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {useRouter} from 'next/router'
-import {NFTsData} from "../../utils/data";
+import {NFTsData} from "../../../../utils/data";
 import {Box, Button, Typography} from "@mui/material";
-import EventList from '../../components/NFTs/EventList';
+import EventList from '../../../../components/NFTs/EventList';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import axios from "axios";
-import {useAuth} from "../../context/AuthContext";
+import {useAuth} from "../../../../context/AuthContext";
 
 const NFTDisplay = () => {
 
