@@ -6,8 +6,14 @@ import { abi, NFT_MINTING_CONTRACT_ADDRESS } from "../../constants";
 import { Contract } from "ethers";
 import { useSnackbar } from "../../context/SnackbarContextProvider";
 import { useRouter } from "next/router";
-import { useAddress, useSigner } from "@thirdweb-dev/react";
-
+import {
+  useAddress,
+  useSigner,
+  useMintNFT,
+  useContract,
+  Web3Button,
+} from "@thirdweb-dev/react";
+const contractAddress = "0xBE960Dd4A1425F816cDBDcEBD9Ee7551C1d772CB";
 const GetArtworkDetails = () => {
   const [image, setSelectedImage] = useState(null);
   const [name, changeName] = useState("");
@@ -16,8 +22,9 @@ const GetArtworkDetails = () => {
   const { show } = useSnackbar();
   const router = useRouter();
   const [setLoading, changeLoading] = useState();
-  const signer = useSigner()
-
+  const signer = useSigner();
+  const { contract } = useContract(contractAddress);
+  const { mutateAsync: mintNft, isLoading, error } = useMintNFT(contract);
   //generate metadata to mint NFT
   const generateMetaData = async () => {
     const nftstorage = new NFTStorage({ token: NFT_STORAGE_KEY });
@@ -30,21 +37,9 @@ const GetArtworkDetails = () => {
   };
 
   //mint NFT
-  const mintNFT = async (metadata) => {
-    console.log(signer)
-    const mintingcontract = new Contract(
-      NFT_MINTING_CONTRACT_ADDRESS,
-      abi,
-      signer
-    );
-    try {
-      const mintresponse = await mintingcontract.safeMint(address, metadata);
-      await mintresponse.wait();
-      show("NFT minted successfully");
-      router.push("/");
-    } catch (err) {
-      console.log(err);
-    }
+  const callMintNFT = async (metadata) => {
+    const tx = await contract.erc721.mint(metadata);
+     show("NFT minted succesfully");
   };
 
   //store nft in ipfs and generate metadata
@@ -52,14 +47,14 @@ const GetArtworkDetails = () => {
     const metadata = await generateMetaData();
     show("Metadata created successfully");
     console.log(metadata.url);
-    await mintNFT(metadata.url);
+    await callMintNFT(metadata.url);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!name || !description || !image) {
-      show("All fields must be provided..", "error");
+      show("All fields must be provided.", "error");
       return;
     }
 
@@ -67,6 +62,7 @@ const GetArtworkDetails = () => {
       changeLoading(true);
       await storeNFT();
       changeLoading(false);
+      router.push("/")
     } else console.log("wallet not connected");
   };
 
