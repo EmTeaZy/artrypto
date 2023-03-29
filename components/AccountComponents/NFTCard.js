@@ -5,11 +5,14 @@ import CardMedia from "@mui/material/CardMedia";
 import { CardActionArea } from "@mui/material";
 import { Box, Typography } from "@mui/material";
 import { useRouter } from "next/router";
+import {NFT_MINTING_CONTRACT_ADDRESS} from "../../constants"
+
 const NFTCard = ({ nft }) => {
   const router = useRouter();
+  const contractAddress = NFT_MINTING_CONTRACT_ADDRESS;
   return (
     <>
-      <Card onClick={() => {router.push({pathname:"/nfts/NFTDisplay",query:nft})}} sx={{ Width: 300 }}>
+      <Card onClick={() => {router.push(`/nfts/${contractAddress}/${nft.metadata.id}`)}} sx={{ Width: 300 }}>
         <CardActionArea>
           <Box
             sx={{

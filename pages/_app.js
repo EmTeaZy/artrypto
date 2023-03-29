@@ -21,7 +21,7 @@ const publicRoutes = [
   "/account/settings",
   "/artwork/create",
   "/view/profile",
-  "/nfts/[id]",
+  "/nfts/[contractAddress]/[id]",
   "/nfts/[contractAddress]/[id]/sell",
 ];
 

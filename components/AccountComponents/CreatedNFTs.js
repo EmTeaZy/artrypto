@@ -9,25 +9,25 @@ import { useOwnedNFTs, useAddress, useContract } from "@thirdweb-dev/react";
 import { NFT_MINTING_CONTRACT_ADDRESS } from "../../constants";
 import { useRouter } from "next/router";
 
-const CreatedNFTs = () => {
+const CreatedNFTs = ({address}) => {
   const [nfts, setnfts] = useState();
   const [gotNFT, setStatus] = useState(true);
   const contractAddress = NFT_MINTING_CONTRACT_ADDRESS;
   const { contract } = useContract(contractAddress);
-  const myaddress = useAddress();
+  const myaddress = address;
   const {data,isLoading,error,} = useOwnedNFTs(contract, myaddress);
   useEffect(() => {
    setnfts(data)
    console.log(data)
   }, [nfts]);
-  const fetchNfts=()=>{
+  const fetchNfts=(e)=>{
     setnfts(data)
     console.log("hi")
     setStatus(true)
   }
   return (
     <>
-    <Button onClick={()=>{fetchNfts}}>Fetch Nfts</Button>
+    <Button onClick={(e)=>{fetchNfts(e)}}>Fetch Nfts</Button>
       <Box
         sx={{
           display: "flex",
