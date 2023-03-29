@@ -13,7 +13,6 @@ import {
   useContract,
   Web3Button,
 } from "@thirdweb-dev/react";
-const contractAddress = "0xBE960Dd4A1425F816cDBDcEBD9Ee7551C1d772CB";
 const GetArtworkDetails = () => {
   const [image, setSelectedImage] = useState(null);
   const [name, changeName] = useState("");
@@ -23,8 +22,8 @@ const GetArtworkDetails = () => {
   const router = useRouter();
   const [setLoading, changeLoading] = useState();
   const signer = useSigner();
+  const contractAddress = NFT_MINTING_CONTRACT_ADDRESS;
   const { contract } = useContract(contractAddress);
-  const { mutateAsync: mintNft, isLoading, error } = useMintNFT(contract);
   //generate metadata to mint NFT
   const generateMetaData = async () => {
     const nftstorage = new NFTStorage({ token: NFT_STORAGE_KEY });
