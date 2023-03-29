@@ -1,15 +1,16 @@
 import { Box, Typography } from "@mui/material";
-import React from "react";
-import { useNetwork } from "wagmi";
+import React, { useEffect } from "react";
+import { useAddress, useChainId } from "@thirdweb-dev/react";
 
 const SwitchGoerli = () => {
-  const { chain, chains } = useNetwork();
+  const chainID = useChainId();
+  const address = useAddress();
   return (
     <>
-      {chain?.name !== "Goerli" ? (
-        <Box sx={{bgcolor:"warning.main" , textAlign:"center"}}>
+      {chainID !== 5 && address ? (
+        <Box sx={{ bgcolor: "warning.main", textAlign: "center" }}>
           <Typography color="black" variant="subtitle2">
-            Change your Ethereum network to Goerli testnet from Metamask
+            Change your Chain network to Goerli testnet from wallet
           </Typography>
         </Box>
       ) : (

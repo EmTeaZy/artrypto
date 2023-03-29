@@ -1,17 +1,16 @@
-import {Box} from "@mui/material";
+import { Box } from "@mui/material";
+import { useAddress } from "@thirdweb-dev/react";
 import React from "react";
-import {useAccount} from "wagmi";
 import SettingsForm from "../../components/SettingsForm";
 import FullLayout from "../../src/layouts/FullLayout";
 
-
 const Settings = () => {
-  const { address } = useAccount()
+  const address = useAddress();
   return (
     <>
       <FullLayout check={"user"}>
         <Box>
-        <SettingsForm walletAddress={address}/>
+          <SettingsForm walletAddress={address} />
         </Box>
       </FullLayout>
     </>

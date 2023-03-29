@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -7,16 +6,14 @@ import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import MoreIcon from "@mui/icons-material/MoreVert";
-import {IconButton, Typography, useMediaQuery} from "@mui/material";
+import { IconButton, Typography, useMediaQuery } from "@mui/material";
 import Searchbar from "./NavbarComponents/Searchbar";
 import Iconbutton from "./NavbarComponents/Icon-button";
-import {AccountCircle} from "@mui/icons-material";
+import { AccountCircle } from "@mui/icons-material";
 import AdminPanelSettingsTwoToneIcon from "@mui/icons-material/AdminPanelSettingsTwoTone";
-import {useRouter} from "next/router";
-import {useAccount, useConnect} from "wagmi";
-import {InjectedConnector} from "wagmi/connectors/injected";
-import {withStyles} from "@material-ui/styles";
-import {useTheme} from "@mui/material/styles";
+import { useRouter } from "next/router";
+import { withStyles } from "@material-ui/styles";
+import { useTheme } from "@mui/material/styles";
 import Image from "next/image";
 import { ConnectWallet } from "@thirdweb-dev/react";
 import { useAddress } from "@thirdweb-dev/react";
@@ -42,9 +39,8 @@ const NavbarComp = (props) => {
 
   const router = useRouter();
   //metamask account hook
-  const address = useAddress()
+  const address = useAddress();
   const [buttonStatus, changeStatus] = useState("Connect To Metamask Wallet");
-
 
   //dialogbox
   // const [open, setOpen] = useState(false);
@@ -52,8 +48,7 @@ const NavbarComp = (props) => {
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
   const handleClickOpen = async () => {
     if (!address) {
-      alert("connect your wallet first")
-      
+      alert("connect your wallet first");
     } else router.push("/account");
   };
 
@@ -90,18 +85,18 @@ const NavbarComp = (props) => {
       <MenuItem
         sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
       >
-          <IconButton
-            size="large"
-            edge="end"
-            aria-label="admin"
-            onClick={() => {
-              router.push("/admin");
-            }}
-            color="primary"
-          >
-            <AdminPanelSettingsTwoToneIcon />
-          </IconButton>
-         <Typography color="text.secondary">Admin</Typography>
+        <IconButton
+          size="large"
+          edge="end"
+          aria-label="admin"
+          onClick={() => {
+            router.push("/admin");
+          }}
+          color="primary"
+        >
+          <AdminPanelSettingsTwoToneIcon />
+        </IconButton>
+        <Typography color="text.secondary">Admin</Typography>
       </MenuItem>
     </Menu>
   );
@@ -151,7 +146,11 @@ const NavbarComp = (props) => {
                 />
               </IconButton>
               <Box mx={1}>
-                <ConnectWallet accentColor="transparent" colorMode="dark" className=""/>
+                <ConnectWallet
+                  accentColor="transparent"
+                  colorMode="dark"
+                  className=""
+                />
               </Box>
             </Box>
             <Box sx={{ display: { xs: "flex", md: "none" } }}>
