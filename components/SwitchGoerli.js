@@ -5,9 +5,6 @@ import { useAddress, useChainId } from "@thirdweb-dev/react";
 const SwitchGoerli = () => {
   const chainID = useChainId();
   const address = useAddress();
-  useEffect(()=>{
-    console.log(chainID)
-  })
   return (
     <>
       {chainID !== 80001 && address ? (
