@@ -47,26 +47,26 @@ function MyApp(props) {
     <>
       <CacheProvider value={emotionCache}>
         <ThemeProvider theme={theme}>
-          <ThirdwebSDKProvider activeChain="goerli" signer={mysigner}>
-            <ThirdwebProvider activeChain="goerli">
-              <AuthContextProvider>
-                <SnackbarContextProvider>
-                  <Head />
-                  <SwitchGoerli />
-                  {(!router.pathname.includes("admin") ||
-                    router.pathname.includes("login")) && <Navbar />}
-                  {publicRoutes.includes(router.pathname) ? (
-                    <Component {...pageProps} />
-                  ) : (
-                    <ProtectedRoute>
+            <ThirdwebSDKProvider activeChain="mumbai" signer={mysigner}>
+              <ThirdwebProvider activeChain="mumbai">
+                <AuthContextProvider>
+                  <SnackbarContextProvider>
+                    <Head />
+                    <SwitchGoerli />
+                    {(!router.pathname.includes("admin") ||
+                      router.pathname.includes("login")) && <Navbar />}
+                    {publicRoutes.includes(router.pathname) ? (
                       <Component {...pageProps} />
-                    </ProtectedRoute>
-                  )}
-                  {/*<Footer/>*/}
-                </SnackbarContextProvider>
-              </AuthContextProvider>
-            </ThirdwebProvider>
-          </ThirdwebSDKProvider>
+                    ) : (
+                      <ProtectedRoute>
+                        <Component {...pageProps} />
+                      </ProtectedRoute>
+                    )}
+                    {/*<Footer/>*/}
+                  </SnackbarContextProvider>
+                </AuthContextProvider>
+              </ThirdwebProvider>
+            </ThirdwebSDKProvider>
         </ThemeProvider>
       </CacheProvider>
     </>

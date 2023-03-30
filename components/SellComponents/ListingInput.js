@@ -10,7 +10,13 @@ import {
   Button,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import { useAddress, useContract, useSigner } from "@thirdweb-dev/react";
+import {
+  useAddress,
+  useContract,
+  useSigner,
+  useCreateDirectListing,
+  Web3Button,
+} from "@thirdweb-dev/react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import React from "react";
@@ -28,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
     color: "black",
   },
 }));
-const ListingInput = ({ id,changeBasePrice }) => {
+const ListingInput = ({ id, changeBasePrice }) => {
   const { show } = useSnackbar();
   const classes = useStyles();
   const router = useRouter();
@@ -38,11 +44,18 @@ const ListingInput = ({ id,changeBasePrice }) => {
   const signer = useSigner();
   const { contract } = useContract(marketplaceAddress, "marketplace");
   const [basePrice, setBasePrice] = useState(0);
+  const [minBid, setMinBid] = useState(0);
   const [saleType, setSaleType] = useState("fixed");
   const [auctionDuration, setAuctionDuration] = useState("");
+  const [check, changeCheck] = useState(false);
+
   const handleBasePriceChange = (event) => {
     setBasePrice(event.target.value);
-    changeBasePrice(event.target.value)
+    changeBasePrice(event.target.value);
+  };
+
+  const handleMinBidChange = (event) => {
+    setMinBid(event.target.value);
   };
 
   const handleSaleTypeChange = (event) => {
@@ -81,27 +94,47 @@ const ListingInput = ({ id,changeBasePrice }) => {
   const directListing = async () => {
     const listing = {
       assetContractAddress: contractAddress,
-      tokenId: id,
+      tokenId: Number(id),
       startTimestamp: new Date(),
       listingDurationInSeconds:
         new Date().getTime() + Number(auctionDuration) * 24 * 60 * 60 * 1000,
       quantity: 1,
-      currencyContractAddress: "0x7af963cF6D228E564e2A0aA0DdBF06210B38615D",
+      currencyContractAddress: NATIVE_TOKEN_ADDRESS,
       buyoutPricePerToken: basePrice.toString(),
     };
-    console.log(listing);
-     const tx = await contract.direct.createListing(listing);
+    const tx = await contract.direct.createListing(listing);
+  };
+  const auctionListing = async () => {
+    const listing = {
+      assetContractAddress: contractAddress,
+      tokenId: Number(id),
+      startTimestamp: new Date(),
+      listingDurationInSeconds:
+        new Date().getTime() + Number(auctionDuration) * 24 * 60 * 60 * 1000,
+      quantity: 1,
+      currencyContractAddress: NATIVE_TOKEN_ADDRESS,
+      buyoutPricePerToken: basePrice.toString(),
+      reservePricePerToken: minBid.toString(),
+    };
+    const tx = await contract.auction.createListing(listing);
   };
   const listForSale = async () => {
+    changeCheck(true);
     if (saleType === "fixed") {
       await directListing();
-      show("NFT Listed for Sale");
-      router.push("/");
     }
+    else if(saleType==="auction"){
+      await auctionListing();
+    }
+    show("NFT Listed for Sale");
+    router.push("/");
   };
   return (
     <>
       <form onSubmit={handleSubmit}>
+      <Typography variant="subtitle3" >
+      The price on which a buyer can pay to instantly buy
+        </Typography>
         <TextField
           label="Base Price"
           color="secondary"
@@ -110,7 +143,6 @@ const ListingInput = ({ id,changeBasePrice }) => {
           onChange={handleBasePriceChange}
           required
           type="number"
-          InputProps={{ inputProps: { min: 0.001 } }}
           margin="normal"
         />
         <Typography variant="subtitle1" sx={{ color: "gray" }}>
@@ -166,10 +198,35 @@ const ListingInput = ({ id,changeBasePrice }) => {
             </Select>
           </FormControl>
         </Box>
-
-        <Button variant="contained" color="primary" type="submit" fullWidth>
-          List for Sale
-        </Button>
+        {saleType === "auction" && (
+          <Box >
+          <Typography variant="subtitle3">The minimum price per token necessary to bid on this auction</Typography>
+            <TextField
+              label="Minimum Bid"
+              color="secondary"
+              fullWidth
+              value={minBid}
+              onChange={handleMinBidChange}
+              required
+              type="number"
+              margin="normal"
+            />
+            <Typography variant="subtitle1" sx={{ color: "gray" }}>
+              ${(minBid * rate).toFixed(2)}
+            </Typography>
+          </Box>
+        )}
+        <Box sx={{mt:3}}>
+          <Button
+            variant="contained"
+            color="primary"
+            type="submit"
+            fullWidth
+            disabled={check}
+          >
+            {!check ? <>List For Sale</> : <>Listing</>}
+          </Button>
+        </Box>
       </form>
     </>
   );
