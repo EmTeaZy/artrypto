@@ -14,10 +14,9 @@ import AdminPanelSettingsTwoToneIcon from "@mui/icons-material/AdminPanelSetting
 import { useRouter } from "next/router";
 import { withStyles } from "@material-ui/styles";
 import { useTheme } from "@mui/material/styles";
-import Image from "next/image";
 import { ConnectWallet } from "@thirdweb-dev/react";
 import { useAddress } from "@thirdweb-dev/react";
-import { useEffect } from "react";
+import { useSnackbar } from "../context/SnackbarContextProvider";
 
 //hover of nav-elements
 const styles = {
@@ -30,6 +29,8 @@ const styles = {
 const NavbarComp = (props) => {
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const {show} = useSnackbar();
+
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
   };
@@ -48,7 +49,7 @@ const NavbarComp = (props) => {
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
   const handleClickOpen = async () => {
     if (!address) {
-      alert("connect your wallet first");
+      show("Please connect your wallet first", "danger");
     } else router.push("/account");
   };
 
