@@ -19,6 +19,11 @@ const Menuitems = [
     icon: "grid",
     href: "/admin/viewUsers",
   },
+  {
+    title: "Ownerships",
+    icon: "grid",
+    href: "/admin/viewOwnerships",
+  },
 ];
 
 export default Menuitems;
