@@ -26,6 +26,7 @@
     "apexcharts": "^3.36.3",
     "axios": "^1.2.2",
     "bootstrap": "^5.2.2",
+    "crypto": "^1.0.1",
     "eslint": "8.22.0",
     "eslint-config-next": "13.0.4",
     "ethers": "^5.7.2",

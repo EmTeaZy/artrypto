@@ -16,7 +16,6 @@ const UsersList = () => {
     const fetchUsers = () => {
         axios.get("/api/getUsers")
             .then(res => {
-                console.log(res.data);
                 setUsers(res.data)
             })
             .catch(err => console.error("Fetching users error: ", err))
