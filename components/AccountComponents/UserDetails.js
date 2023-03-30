@@ -5,6 +5,7 @@ import CreateButton from "./CreateButton";
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import {useSnackbar} from "../../context/SnackbarContextProvider";
 import {withStyles} from "@material-ui/styles";
+import { Tooltip } from "@material-ui/core";
 
 const styles = {
     navlinkhover: {
@@ -43,6 +44,7 @@ const UserDetails = ({ user, check, classes }) => {
             <Typography mx={1} color="text.primary" variant="h5">
               {user?.walletAddress || " "}
             </Typography>
+            <Tooltip title="Copy Wallet address">
               <ContentCopyIcon
                   color="light"
                   className={classes.navlinkhover}
@@ -51,6 +53,7 @@ const UserDetails = ({ user, check, classes }) => {
                       navigator.clipboard.writeText(user?.walletAddress)
                           .then(() => show("Copied to clipboard!"))
                   }}/>
+            </Tooltip>
           </Box>
           {check === "user" ? (
             <>

@@ -17,6 +17,7 @@ import { useTheme } from "@mui/material/styles";
 import { ConnectWallet } from "@thirdweb-dev/react";
 import { useAddress } from "@thirdweb-dev/react";
 import { useSnackbar } from "../context/SnackbarContextProvider";
+import { Tooltip } from "@material-ui/core";
 
 //hover of nav-elements
 const styles = {
@@ -29,7 +30,7 @@ const styles = {
 const NavbarComp = (props) => {
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-  const {show} = useSnackbar();
+  const { show } = useSnackbar();
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
@@ -123,29 +124,33 @@ const NavbarComp = (props) => {
             <Box
               sx={{ display: { xs: "none", md: "flex" }, alignItems: "center" }}
             >
-              <IconButton
-                size="large"
-                edge="end"
-                aria-label="account of current user"
-                aria-haspopup="true"
-                onClick={handleClickOpen}
-                color="inherit"
-              >
-                <AccountCircle className={props.classes.navlinkhover} />
-              </IconButton>
-              <IconButton
-                size="large"
-                edge="end"
-                aria-label="admin"
-                onClick={() => {
-                  router.push("/admin");
-                }}
-                color="inherit"
-              >
-                <AdminPanelSettingsTwoToneIcon
-                  className={props.classes.navlinkhover}
-                />
-              </IconButton>
+              <Tooltip title="Account">
+                <IconButton
+                  size="large"
+                  edge="end"
+                  aria-label="account of current user"
+                  aria-haspopup="true"
+                  onClick={handleClickOpen}
+                  color="inherit"
+                >
+                  <AccountCircle className={props.classes.navlinkhover} />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title="Admin Panel">
+                <IconButton
+                  size="large"
+                  edge="end"
+                  aria-label="admin"
+                  onClick={() => {
+                    router.push("/admin");
+                  }}
+                  color="inherit"
+                >
+                  <AdminPanelSettingsTwoToneIcon
+                    className={props.classes.navlinkhover}
+                  />
+                </IconButton>
+              </Tooltip>
               <Box mx={1}>
                 <ConnectWallet
                   accentColor="transparent"
