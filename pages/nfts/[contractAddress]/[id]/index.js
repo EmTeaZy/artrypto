@@ -40,7 +40,7 @@ const NFTDisplay = () => {
           <div className="left-container">
             <CardMedia
               component="img"
-              sx={{ width: 370 }}
+              sx={{ width: 370,borderRadius:"20px" }}
               image={data?.metadata.image || ''}
               alt="Live from space album cover"
             />

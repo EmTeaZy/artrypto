@@ -11,7 +11,13 @@ import "../utils/globals.css";
 import { CacheProvider } from "@emotion/react";
 import createEmotionCache from "../utils/createEmotionCache";
 import SwitchGoerli from "../components/SwitchGoerli";
-import { ThirdwebProvider, useAddress } from "@thirdweb-dev/react";
+import {
+  ThirdwebProvider,
+  ThirdwebSDKProvider,
+  useAddress,
+} from "@thirdweb-dev/react";
+import { ethers } from "ethers";
+import { useEffect, useState } from "react";
 const publicRoutes = [
   "/admin/login",
   "/admin/signup",
@@ -30,29 +36,37 @@ const clientSideEmotionCache = createEmotionCache();
 function MyApp(props) {
   const router = useRouter();
   const address = useAddress();
+  const [mysigner, changeSigner] = useState();
+  useEffect(() => {
+    changeSigner(
+      new ethers.providers.Web3Provider(window.ethereum).getSigner()
+    );
+  }, []);
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
   return (
     <>
       <CacheProvider value={emotionCache}>
         <ThemeProvider theme={theme}>
-          <ThirdwebProvider activeChain="goerli">
-            <AuthContextProvider>
-              <SnackbarContextProvider>
-                <Head />
-                <SwitchGoerli />
-                {(!router.pathname.includes("admin") ||
-                  router.pathname.includes("login")) && <Navbar />}
-                {publicRoutes.includes(router.pathname) ? (
-                  <Component {...pageProps} />
-                ) : (
-                  <ProtectedRoute>
+          <ThirdwebSDKProvider activeChain="goerli" signer={mysigner}>
+            <ThirdwebProvider activeChain="goerli">
+              <AuthContextProvider>
+                <SnackbarContextProvider>
+                  <Head />
+                  <SwitchGoerli />
+                  {(!router.pathname.includes("admin") ||
+                    router.pathname.includes("login")) && <Navbar />}
+                  {publicRoutes.includes(router.pathname) ? (
                     <Component {...pageProps} />
-                  </ProtectedRoute>
-                )}
-                {/*<Footer/>*/}
-              </SnackbarContextProvider>
-            </AuthContextProvider>
-          </ThirdwebProvider>
+                  ) : (
+                    <ProtectedRoute>
+                      <Component {...pageProps} />
+                    </ProtectedRoute>
+                  )}
+                  {/*<Footer/>*/}
+                </SnackbarContextProvider>
+              </AuthContextProvider>
+            </ThirdwebProvider>
+          </ThirdwebSDKProvider>
         </ThemeProvider>
       </CacheProvider>
     </>
