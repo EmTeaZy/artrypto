@@ -1,10 +1,10 @@
 import React from "react";
-import OwnershipTable from "../../components/AdminComponents/OwnershipTable";
+import TransactionTable from "../../components/AdminComponents/TransactionTable";
 
 const ViewOwnerships = () => {
   return (
     <>
-     <OwnershipTable />
+     <TransactionTable />
     </>
   );
 };
