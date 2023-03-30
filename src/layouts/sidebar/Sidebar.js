@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import NextLink from "next/link";
 import PropTypes from "prop-types";
 import {Box, Drawer, List, ListItem, ListItemIcon, ListItemText, useMediaQuery,} from "@mui/material";
@@ -7,9 +7,23 @@ import LogoIcon from "../logo/LogoIcon";
 import Menuitems from "./MenuItems";
 import UserSettings from "./UserSettings";
 import {useRouter} from "next/router";
+import {useAuth} from "../../../context/AuthContext";
 
 const Sidebar = ({isMobileSidebarOpen, onSidebarClose, isSidebarOpen,check}) => {
+
     const [open, setOpen] = React.useState(true);
+    const [role, setRole] = useState("");
+    const {getUserRole} = useAuth();
+    const curl = useRouter();
+    const location = curl.pathname;
+    const [items, setItems] = useState([]);
+
+    useEffect(() => getRole, [])
+
+    const getRole = async () => {
+        const r = await getUserRole();
+        setRole(r);
+    }
 
     const lgUp = useMediaQuery((theme) => theme.breakpoints.up("lg"));
 
@@ -20,18 +34,21 @@ const Sidebar = ({isMobileSidebarOpen, onSidebarClose, isSidebarOpen,check}) => 
             setOpen(index);
         }
     };
-    let curl = useRouter();
-    const location = curl.pathname;
-    let items;
-    if(check=="admin")
-    {
-        items=Menuitems
-    }
-    else 
-     items = UserSettings
+
+    useEffect(() => {
+        if(check==="admin") {
+            if (role === "superadmin")
+                setItems(Menuitems);
+            else
+                setItems(Menuitems.filter(i => i.title !== "Admins"));
+        }
+        else
+            setItems(UserSettings);
+    }, [role])
+
     const SidebarContent = (
         <Box p={2}  height="100%" bgcolor={"primary.main"}>
-        {check=="admin"? <LogoIcon toLink={"/admin"}/>:<LogoIcon toLink={"/"}/>}
+        {check==="admin"? <LogoIcon toLink={"/admin"}/>:<LogoIcon toLink={"/"}/>}
             <Box mt={4}>
                 <List>
                     {items.map((item, index) => (
