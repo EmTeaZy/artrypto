@@ -4,6 +4,8 @@ import AddIcon from '@mui/icons-material/Add';
 import {Box, IconButton} from "@mui/material";
 import {useRouter} from "next/router";
 import SettingsSharpIcon from "@mui/icons-material/SettingsSharp";
+import Tooltip from '@material-ui/core/Tooltip';
+
 //hover of nav-elements
 const styles = {
   navlinkhover: {
@@ -17,6 +19,7 @@ const CreateButton = (props) => {
   return (
     <>
       <Box>
+      <Tooltip title="Mint NFT">
         <IconButton
           size="large"
           edge="end"
@@ -27,6 +30,8 @@ const CreateButton = (props) => {
         >
           <AddIcon fontSize="medium" className={props.classes.navlinkhover} />
         </IconButton>
+      </Tooltip>
+      <Tooltip title="Update User">
         <IconButton
           size="large"
           edge="end"
@@ -37,6 +42,7 @@ const CreateButton = (props) => {
         >
           <SettingsSharpIcon className={props.classes.navlinkhover}/>
         </IconButton>
+      </Tooltip>
       </Box>
     </>
   );
