@@ -18,13 +18,6 @@ const Sidebar = ({isMobileSidebarOpen, onSidebarClose, isSidebarOpen,check}) => 
     const location = curl.pathname;
     const [items, setItems] = useState([]);
 
-    useEffect(() => getRole, [])
-
-    const getRole = async () => {
-        const r = await getUserRole();
-        setRole(r);
-    }
-
     const lgUp = useMediaQuery((theme) => theme.breakpoints.up("lg"));
 
     const handleClick = (index) => {
@@ -35,8 +28,9 @@ const Sidebar = ({isMobileSidebarOpen, onSidebarClose, isSidebarOpen,check}) => 
         }
     };
 
-    useEffect(() => {
+    const filterItems = async () => {
         if(check==="admin") {
+            const role = await getUserRole();
             if (role === "superadmin")
                 setItems(Menuitems);
             else
@@ -44,7 +38,9 @@ const Sidebar = ({isMobileSidebarOpen, onSidebarClose, isSidebarOpen,check}) => 
         }
         else
             setItems(UserSettings);
-    }, [role])
+    }
+
+    useEffect(() => filterItems, [])
 
     const SidebarContent = (
         <Box p={2}  height="100%" bgcolor={"primary.main"}>
