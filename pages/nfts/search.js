@@ -1,29 +1,32 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { NFTsData } from "../../utils/data";
-import NFTCard from "../../components/carousel/NFTCard";
 import { Typography, Grid } from "@mui/material";
-
+import { useContract, useNFTs } from "@thirdweb-dev/react";
+import {NFT_MINTING_CONTRACT_ADDRESS} from "../../constants"
+import NFTCard  from "../../components/AccountComponents/NFTCard"
 const Search = () => {
   const router = useRouter();
   const [NFTs, setNFTs] = useState([]);
-
+  const { contract } = useContract(NFT_MINTING_CONTRACT_ADDRESS);
+  const { data, isLoading, error } = useNFTs(contract, { start: 0, count: 100 });
   useEffect(() => {
-    let nfts = NFTsData.filter((nft) =>
-      nft.title.toLowerCase().includes(router.query.keyword.toLowerCase())
+    let nfts = data?.filter((nft) =>
+      nft.metadata.name.toLowerCase().includes(router.query.keyword.toLowerCase())
     );
     setNFTs(nfts);
-  }, [router.query.keyword]);
-
+  }, [router.query.keyword,data]);
+  
+  useEffect(() => console.log(data));
   useEffect(() => console.log(NFTs), []);
 
   return (
-    <div className="d-flex">
-      {NFTs.length > 0 ? (
+    <div className="d-flex p-5">
+      {NFTs ? (
         <Grid className="mt-3 ms-3" container rowSpacing={2} columnSpacing={{ xs: 1, sm: 2, md: 2 }}>
           {NFTs.map((nft) => (
             <Grid item xs={5} md={3}>
-              <NFTCard item={nft} />
+              <NFTCard nft={nft}/>
             </Grid>
           ))}
         </Grid>
