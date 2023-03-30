@@ -5,9 +5,12 @@ import { useAddress, useChainId } from "@thirdweb-dev/react";
 const SwitchGoerli = () => {
   const chainID = useChainId();
   const address = useAddress();
+  useEffect(()=>{
+    console.log(chainID)
+  })
   return (
     <>
-      {chainID !== 5 && address ? (
+      {chainID !== 80001 && address ? (
         <Box sx={{ bgcolor: "warning.main", textAlign: "center" }}>
           <Typography color="black" variant="subtitle2">
             Change your Chain network to Goerli testnet from wallet

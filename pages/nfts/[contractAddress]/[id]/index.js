@@ -57,7 +57,7 @@ const NFTDisplay = () => {
             <div>
               <Typography variant="h1">{data?.metadata.name || ''}</Typography>
               <Typography variant="subtitle1">
-                Owned by {data?.owner || ''}
+                Owned by <Typography color="secondary">{data?.owner || ''}</Typography> 
               </Typography>
             </div>
 

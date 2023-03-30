@@ -18,6 +18,7 @@ const CreatedNFTs = ({address}) => {
   const {data,isLoading,error,} = useOwnedNFTs(contract, myaddress);
   useEffect(() => {
    setnfts(data)
+   console.log(nfts)
   });
   const fetchNfts=(e)=>{
     setnfts(data)
