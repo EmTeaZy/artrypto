@@ -5,51 +5,28 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import { CardActionArea } from "@mui/material";
 import NFTCard from "./NFTCard";
-import { useAccount } from "wagmi";
+import { useOwnedNFTs, useAddress, useContract } from "@thirdweb-dev/react";
+import { NFT_MINTING_CONTRACT_ADDRESS } from "../../constants";
+import { useRouter } from "next/router";
 
-const CreatedNFTs = ({ address }) => {
-  //const { address } = useAccount();
+const CreatedNFTs = ({address}) => {
   const [nfts, setnfts] = useState();
-  const [gotNFT, setStatus] = useState(false);
-  const [addresss, setAddress] = useState("");
-  const [loading, setLoading] = useState(false);
-
-  const fetchNFTs = async () => {
-    setAddress(address);
-    const walletAddress = addresss;
-    const data = JSON.stringify(walletAddress);
-    console.log(data);
-    setLoading(true);
-    await fetch("/api/getNFTs", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: data,
-    }).then((nftss) => {
-      nftss.json().then((assets) => {
-        if (assets) {
-          setnfts(assets.assets);
-          return;
-        } else setStatus(true);
-      });
-      setLoading(false);
-    });
-  };
+  const [gotNFT, setStatus] = useState(true);
+  const contractAddress = NFT_MINTING_CONTRACT_ADDRESS;
+  const { contract } = useContract(contractAddress);
+  const myaddress = address;
+  const {data,isLoading,error,} = useOwnedNFTs(contract, myaddress);
+  useEffect(() => {
+   setnfts(data)
+  });
+  const fetchNfts=(e)=>{
+    setnfts(data)
+    console.log("hi")
+    setStatus(true)
+  }
   return (
     <>
-      <Button
-        disabled={loading}
-        variant="outlined"
-        color="primary"
-        onClick={() => {
-          fetchNFTs();
-        }}
-      >
-        <Typography variant="h1">
-          {loading ? "Fetching NFTs..." : "Created NFTs"}
-        </Typography>
-      </Button>
+    <Button onClick={(e)=>{fetchNfts(e)}}>Fetch Nfts</Button>
       <Box
         sx={{
           display: "flex",
@@ -58,7 +35,7 @@ const CreatedNFTs = ({ address }) => {
           mx: "auto",
         }}
       >
-        {gotNFT ? (
+        {!gotNFT ? (
           <Typography color={"text.danger"} variant="subtitle 1">
             No NFTs minted
           </Typography>

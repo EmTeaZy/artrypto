@@ -1,4 +1,5 @@
 import {useState} from "react";
+import {useRouter} from "next/router";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import Slider from "react-slick";
@@ -10,6 +11,7 @@ import 'slick-carousel/slick/slick-theme.css';
 export default function Carousel() {
 
     const [sliderRef, setSliderRef] = useState(null)
+    const router = useRouter();
 
     return (
         <div className="d-flex align-items-center">
@@ -19,7 +21,9 @@ export default function Carousel() {
                 onClick={sliderRef?.slickPrev}/>
             <Slider style={{width: "94%"}} ref={setSliderRef} {...settings}>
                 {NFTsData.map((item) => (
-                    <div key={item.id} className="card">
+                    <div key={item.id}
+                         className="card"
+                         >
                         <div className="card-top">
                             <img src={item.linkImg} alt={item.title}/>
                         </div>
