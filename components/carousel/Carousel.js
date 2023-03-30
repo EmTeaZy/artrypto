@@ -4,9 +4,9 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import Slider from "react-slick";
 import {NFTsData} from "../../utils/data";
-import {Typography} from "@mui/material";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import NFTCard from "./NFTCard";
 
 export default function Carousel() {
 
@@ -20,23 +20,7 @@ export default function Carousel() {
                 sx={arrowStyles}
                 onClick={sliderRef?.slickPrev}/>
             <Slider style={{width: "94%"}} ref={setSliderRef} {...settings}>
-                {NFTsData.map((item) => (
-                    <div key={item.id}
-                         className="card"
-                         >
-                        <div className="card-top">
-                            <img src={item.linkImg} alt={item.title}/>
-                        </div>
-                        <div className="text-start">
-                            <Typography sx={{margin: "10px 0 0 10px"}} variant="h3">
-                                {item.title}
-                            </Typography>
-                            <Typography sx={{marginLeft: "10px"}} variant="subtitle1">
-                                {item.price}ETH
-                            </Typography>
-                        </div>
-                    </div>
-                ))}
+                {NFTsData.map(item => <NFTCard item={item}/>)}
             </Slider>
             <ChevronRightIcon
                 color="secondary"
