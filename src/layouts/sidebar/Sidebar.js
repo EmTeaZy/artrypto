@@ -11,8 +11,7 @@ import {useAuth} from "../../../context/AuthContext";
 
 const Sidebar = ({isMobileSidebarOpen, onSidebarClose, isSidebarOpen,check}) => {
 
-    const [open, setOpen] = React.useState(true);
-    const [role, setRole] = useState("");
+    const [open, setOpen] = useState(true);
     const {getUserRole} = useAuth();
     const curl = useRouter();
     const location = curl.pathname;
