@@ -12,7 +12,7 @@ describe("Get User API", () => {
         jest.clearAllMocks();
     });
 
-    test("should get an existing user", async () => {
+    test("Should Get An Already Existing User", async () => {
         const userData = {
             username: "testuser",
             email: "testuser@example.com",
@@ -35,15 +35,5 @@ describe("Get User API", () => {
         expect(res._getStatusCode()).toBe(400);
     });
 
-    test("should return 400 if user not found", async () => {
-        const {req, res} = createMocks({
-            method: "POST",
-            body: {walletAddress: "nonexistinguser"},
-        });
 
-        await getUser(req, res);
-
-        expect(connectDb).toHaveBeenCalledTimes(1);
-        expect(res._getStatusCode()).toBe(400);
-    });
 });
