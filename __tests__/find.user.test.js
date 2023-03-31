@@ -1,8 +1,7 @@
 import getUser from "../pages/api/findUser";
 import connectDb from "../middleware/mongoose";
-import { createMocks } from "node-mocks-http";
-import { beforeEach, describe, expect, jest, test } from "@jest/globals";
-import User from "../models/User";
+import {createMocks} from "node-mocks-http";
+import {beforeEach, describe, expect, jest, test} from "@jest/globals";
 
 jest.mock("../middleware/mongoose");
 jest.mock("mongoose");
@@ -25,9 +24,9 @@ describe("Get User API", () => {
             },
         };
 
-        const { req, res } = createMocks({
+        const {req, res} = createMocks({
             method: "POST",
-            body: { walletAddress: "12345" },
+            body: {walletAddress: "12345"},
         });
 
         await getUser(req, res);
@@ -37,9 +36,9 @@ describe("Get User API", () => {
     });
 
     test("should return 400 if user not found", async () => {
-        const { req, res } = createMocks({
+        const {req, res} = createMocks({
             method: "POST",
-            body: { walletAddress: "nonexistinguser" },
+            body: {walletAddress: "nonexistinguser"},
         });
 
         await getUser(req, res);
