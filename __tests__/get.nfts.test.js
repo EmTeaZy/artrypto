@@ -29,5 +29,23 @@ describe('get Nfts API', () => {
         expect(res.status).toHaveBeenCalledWith(400);
     });
 
+    test('returns 400 on invalid request test case', async () => {
+        const req = {
+            method: 'GET',
+            body: {
+                invalidParam: 'value',
+            },
+        };
+        const res = {
+            status: jest.fn().mockReturnThis(),
+            send: jest.fn(),
+        };
+
+        await getNftsHandler(req, res);
+
+        expect(fetch).not.toHaveBeenCalled();
+        expect(res.status).toHaveBeenCalledWith(400);
+        expect(res.send).toHaveBeenCalled();
+    });
 
 });
