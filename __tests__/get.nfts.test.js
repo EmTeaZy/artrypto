@@ -3,7 +3,7 @@ import getNftsHandler from '../pages/api/getNfts';
 
 jest.mock('node-fetch');
 
-describe('getNfts API', () => {
+describe('get Nfts API', () => {
     test('returns nfts data for a wallet address', async () => {
         const walletAddress = '0x1234567890abcdef';
         const expectedNfts = [{name: 'NFT1'}, {name: 'NFT2'}];

@@ -47,7 +47,6 @@
     "mongoose": "^6.8.2",
     "next": "13.0.4",
     "nft.storage": "^7.0.0",
-    "node-fetch": "^3.3.1",
     "node-mocks-http": "^1.12.2",
     "prop-types": "^15.8.1",
     "react": "18.2.0",
