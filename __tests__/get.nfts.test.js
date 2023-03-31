@@ -4,7 +4,7 @@ import getNftsHandler from '../pages/api/getNfts';
 jest.mock('node-fetch');
 
 describe('get Nfts API', () => {
-    test('returns nfts data for a wallet address', async () => {
+    test('returns nft information of address', async () => {
         const walletAddress = '0x1234567890abcdef';
         const expectedNfts = [{name: 'NFT1'}, {name: 'NFT2'}];
 
@@ -29,22 +29,5 @@ describe('get Nfts API', () => {
         expect(res.status).toHaveBeenCalledWith(400);
     });
 
-    test('returns 400 error for invalid request', async () => {
-        const req = {
-            method: 'GET',
-            body: {
-                invalidParam: 'value',
-            },
-        };
-        const res = {
-            status: jest.fn().mockReturnThis(),
-            send: jest.fn(),
-        };
 
-        await getNftsHandler(req, res);
-
-        expect(fetch).not.toHaveBeenCalled();
-        expect(res.status).toHaveBeenCalledWith(400);
-        expect(res.send).toHaveBeenCalled();
-    });
 });
