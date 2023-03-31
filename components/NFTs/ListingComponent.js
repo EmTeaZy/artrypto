@@ -9,10 +9,9 @@ import {NFT_MINTING_CONTRACT_ADDRESS} from "../../constants"
 
 const NFTCard = ({ nft }) => {
   const router = useRouter();
-  const contractAddress = NFT_MINTING_CONTRACT_ADDRESS;
   return (
     <>
-      <Card onClick={() => {router.push(`/nfts/${contractAddress}/${nft.metadata.id}`)}} sx={{ Width: 300 }}>
+      <Card sx={{ Width: 300 }}>
         <CardActionArea>
           <Box
             sx={{
@@ -25,7 +24,7 @@ const NFTCard = ({ nft }) => {
             <CardMedia
               component="img"
               sx={{ width: 170 }}
-              image={nft.metadata?.image||nft.asset.image}
+              image={nft.asset.image}
               alt="Live from space album cover"
             />
             <CardContent>
@@ -35,10 +34,10 @@ const NFTCard = ({ nft }) => {
                 gutterBottom
                 component="div"
               >
-                {nft.metadata?.name||nft.asset.name}
+                {nft.asset.name}
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                {nft.metadata?.description||nft.asset.name}
+                {nft.asset.description}
               </Typography>
             </CardContent>
           </Box>

@@ -10,7 +10,7 @@ const SwitchGoerli = () => {
       {chainID !== 80001 && address ? (
         <Box sx={{ bgcolor: "warning.main", textAlign: "center" }}>
           <Typography color="black" variant="subtitle2">
-            Change your Chain network to Goerli testnet from wallet
+            Change your Chain network to Mumbai testnet from wallet
           </Typography>
         </Box>
       ) : (
