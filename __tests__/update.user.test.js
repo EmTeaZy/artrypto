@@ -52,5 +52,32 @@ describe('Update User API', () => {
         expect(res._getJSONData()).toEqual({user: {}});
     });
 
+    test('test case that returns an error', async () => {
+        const userData = {
+            username: 'testuser',
+            email: 'testuser@example.com',
+            bio: 'A test user.',
+            walletAddress: '0x0000000000000000000000000000000000000000',
+            links: {
+                twitter: 'https://twitter.com/testuser',
+                github: 'https://github.com/testuser'
+            }
+        };
 
+        const {req, res} = createMocks({
+            method: 'POST',
+            body: userData,
+        });
+
+        const userUpdateSpy = jest.spyOn(User, 'updateOne').mockReturnValue({
+            exec: jest.fn().mockRejectedValueOnce('User update failed.')
+        });
+
+        await updateUser(req, res);
+
+        expect(connectDb).toHaveBeenCalledTimes(1);
+        expect(userUpdateSpy).toHaveBeenCalledTimes(1);
+        expect(res._getStatusCode()).toBe(200);
+        expect(res._getJSONData()).toEqual({user: {}});
+    });
 });
