@@ -12,7 +12,7 @@ describe('User API', () => {
         jest.clearAllMocks();
     });
 
-    test('should create a new user', async () => {
+    test('Test To Check If It Adds User', async () => {
         const userData = {
             username: 'testuser',
             email: 'testuser@example.com',
@@ -29,27 +29,5 @@ describe('User API', () => {
         expect(res._getStatusCode()).toBe(400);
     });
 
-    test('should not create a new user', async () => {
-        const userData = {
-            username: 'testuser',
-            email: 'testuser@example.com',
-            bio: 'Test user bio',
-            walletAddress: '0x1234567890abcdef',
-            imgid: '12345',
-            links: {
-                website: 'https://example.com',
-                twitter: 'https://twitter.com/example'
-            }
-        };
 
-        const {req, res} = createMocks({
-            method: 'POST',
-            body: userData,
-        });
-
-        await postRequest(req, res);
-
-        expect(connectDb).toHaveBeenCalledTimes(1);
-        expect(res._getStatusCode()).toBe(400);
-    });
 });
