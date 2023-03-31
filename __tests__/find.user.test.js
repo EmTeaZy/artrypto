@@ -35,5 +35,16 @@ describe("Get User API", () => {
         expect(res._getStatusCode()).toBe(400);
     });
 
+    test("if user is not found return 400", async () => {
+        const {req, res} = createMocks({
+            method: "POST",
+            body: {walletAddress: "nonexistinguser"},
+        });
+
+        await getUser(req, res);
+
+        expect(connectDb).toHaveBeenCalledTimes(1);
+        expect(res._getStatusCode()).toBe(400);
+    });
 
 });
