@@ -18,7 +18,7 @@ import { ConnectWallet } from "@thirdweb-dev/react";
 import { useAddress } from "@thirdweb-dev/react";
 import { useSnackbar } from "../context/SnackbarContextProvider";
 import { Tooltip } from "@material-ui/core";
-
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 //hover of nav-elements
 const styles = {
   navlinkhover: {
@@ -147,6 +147,21 @@ const NavbarComp = (props) => {
                   color="inherit"
                 >
                   <AdminPanelSettingsTwoToneIcon
+                    className={props.classes.navlinkhover}
+                  />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title="Listed NFTs">
+                <IconButton
+                  size="large"
+                  edge="end"
+                  aria-label="admin"
+                  onClick={() => {
+                    router.push("/nfts/listedsale");
+                  }}
+                  color="inherit"
+                >
+                  <ShoppingCartIcon
                     className={props.classes.navlinkhover}
                   />
                 </IconButton>

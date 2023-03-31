@@ -65,7 +65,7 @@ const Sell = () => {
             />
             <Box sx={{ mt: 2 }}>
               <Typography variant="h2">{data?.metadata.name || ""}</Typography>
-              <Typography variant="h4">{basePrice} eth</Typography>
+              <Typography variant="h4">{basePrice} ETH</Typography>
               <Typography variant="subtitle1" sx={{ color: "gray" }}>
                 ${(basePrice * rate).toFixed(2)}
               </Typography>

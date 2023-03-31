@@ -30,6 +30,7 @@ const publicRoutes = [
   "/nfts/search",
   "/nfts/[contractAddress]/[id]",
   "/nfts/[contractAddress]/[id]/sell",
+  "/nfts/listedsale",
 ];
 
 // Client-side cache, shared for the whole session of the user in the browser.
@@ -48,26 +49,26 @@ function MyApp(props) {
     <>
       <CacheProvider value={emotionCache}>
         <ThemeProvider theme={theme}>
-            <ThirdwebSDKProvider activeChain="mumbai" signer={mysigner}>
-              <ThirdwebProvider activeChain="mumbai">
-                <AuthContextProvider>
-                  <SnackbarContextProvider>
-                    <Head />
-                    <SwitchGoerli />
-                    {(!router.pathname.includes("admin") ||
-                      router.pathname.includes("login")) && <Navbar />}
-                    {publicRoutes.includes(router.pathname) ? (
+          <ThirdwebSDKProvider activeChain="mumbai" signer={mysigner}>
+            <ThirdwebProvider activeChain="mumbai">
+              <AuthContextProvider>
+                <SnackbarContextProvider>
+                  <Head />
+                  <SwitchGoerli />
+                  {(!router.pathname.includes("admin") ||
+                    router.pathname.includes("login")) && <Navbar />}
+                  {publicRoutes.includes(router.pathname) ? (
+                    <Component {...pageProps} />
+                  ) : (
+                    <ProtectedRoute>
                       <Component {...pageProps} />
-                    ) : (
-                      <ProtectedRoute>
-                        <Component {...pageProps} />
-                      </ProtectedRoute>
-                    )}
-                    {/*<Footer/>*/}
-                  </SnackbarContextProvider>
-                </AuthContextProvider>
-              </ThirdwebProvider>
-            </ThirdwebSDKProvider>
+                    </ProtectedRoute>
+                  )}
+                  {/*<Footer/>*/}
+                </SnackbarContextProvider>
+              </AuthContextProvider>
+            </ThirdwebProvider>
+          </ThirdwebSDKProvider>
         </ThemeProvider>
       </CacheProvider>
     </>
