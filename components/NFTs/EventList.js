@@ -7,8 +7,6 @@ import TableCell, {tableCellClasses} from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-
 
 const StyledTableCell = styled(TableCell)(({theme}) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -78,8 +76,8 @@ const EventList = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {dummyEvents.map((event) => (
-                            <StyledTableRow key={event.name}>
+                        {dummyEvents.map((event,index) => (
+                            <StyledTableRow key={index}>
                                 <StyledTableCell component="th" scope="row">
                                     {event.event}
                                 </StyledTableCell>
