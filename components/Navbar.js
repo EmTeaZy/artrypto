@@ -6,28 +6,19 @@ import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import MoreIcon from "@mui/icons-material/MoreVert";
+import { Tooltip } from "@mui/material";
 import { IconButton, Typography, useMediaQuery } from "@mui/material";
 import Searchbar from "./NavbarComponents/Searchbar";
 import Iconbutton from "./NavbarComponents/Icon-button";
 import { AccountCircle } from "@mui/icons-material";
 import AdminPanelSettingsTwoToneIcon from "@mui/icons-material/AdminPanelSettingsTwoTone";
 import { useRouter } from "next/router";
-import { withStyles } from "@material-ui/styles";
 import { useTheme } from "@mui/material/styles";
 import { ConnectWallet } from "@thirdweb-dev/react";
 import { useAddress } from "@thirdweb-dev/react";
 import { useSnackbar } from "../context/SnackbarContextProvider";
-import { Tooltip } from "@material-ui/core";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-//hover of nav-elements
-const styles = {
-  navlinkhover: {
-    "&:hover": {
-      color: "#EFBA0A",
-    },
-  },
-};
-const NavbarComp = (props) => {
+const NavbarComp = () => {
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const { show } = useSnackbar();
@@ -133,7 +124,13 @@ const NavbarComp = (props) => {
                   onClick={handleClickOpen}
                   color="inherit"
                 >
-                  <AccountCircle className={props.classes.navlinkhover} />
+                  <AccountCircle
+                    sx={{
+                      "&:hover": {
+                        color: "#EFBA0A",
+                      },
+                    }}
+                  />
                 </IconButton>
               </Tooltip>
               <Tooltip title="Admin Panel">
@@ -147,7 +144,11 @@ const NavbarComp = (props) => {
                   color="inherit"
                 >
                   <AdminPanelSettingsTwoToneIcon
-                    className={props.classes.navlinkhover}
+                    sx={{
+                      "&:hover": {
+                        color: "#EFBA0A",
+                      },
+                    }}
                   />
                 </IconButton>
               </Tooltip>
@@ -162,7 +163,11 @@ const NavbarComp = (props) => {
                   color="inherit"
                 >
                   <ShoppingCartIcon
-                    className={props.classes.navlinkhover}
+                    sx={{
+                      "&:hover": {
+                        color: "#EFBA0A",
+                      },
+                    }}
                   />
                 </IconButton>
               </Tooltip>
@@ -202,4 +207,4 @@ const NavbarComp = (props) => {
     </>
   );
 };
-export default withStyles(styles)(NavbarComp);
+export default NavbarComp;

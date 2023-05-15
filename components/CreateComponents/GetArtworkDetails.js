@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { NFTStorage } from "nft.storage";
 import { NFT_STORAGE_KEY } from "../../config/Nftstorage";
 import { abi, NFT_MINTING_CONTRACT_ADDRESS } from "../../constants";
-import { Contract } from "ethers";
 import { useSnackbar } from "../../context/SnackbarContextProvider";
 import { useRouter } from "next/router";
 import {

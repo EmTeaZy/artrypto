@@ -1,4 +1,3 @@
-import { makeStyles } from "@material-ui/styles";
 import {
   CardMedia,
   FormControl,
@@ -29,14 +28,8 @@ import {
 } from "../../constants";
 import { NATIVE_TOKEN_ADDRESS } from "@thirdweb-dev/sdk";
 
-const useStyles = makeStyles((theme) => ({
-  select: {
-    color: "black",
-  },
-}));
 const ListingInput = ({ id, changeBasePrice }) => {
   const { show } = useSnackbar();
-  const classes = useStyles();
   const router = useRouter();
   const address = useAddress();
   const contractAddress = NFT_MINTING_CONTRACT_ADDRESS;
@@ -156,10 +149,10 @@ const ListingInput = ({ id, changeBasePrice }) => {
             label="Sale Type"
             color="secondary"
           >
-            <MenuItem value="fixed" classes={{ root: classes.select }}>
+            <MenuItem value="fixed" sx={{color:'black'}}>
               Fixed Price
             </MenuItem>
-            <MenuItem classes={{ root: classes.select }} value="auction">
+            <MenuItem sx={{color:'black'}} value="auction">
               Auction
             </MenuItem>
           </Select>
@@ -174,25 +167,25 @@ const ListingInput = ({ id, changeBasePrice }) => {
               label="Auction Duration"
               color="secondary"
             >
-              <MenuItem classes={{ root: classes.select }} value="1">
+              <MenuItem sx={{color:'black'}} value="1">
                 1 day
               </MenuItem>
-              <MenuItem classes={{ root: classes.select }} value="3">
+              <MenuItem sx={{color:'black'}} value="3">
                 3 days
               </MenuItem>
-              <MenuItem classes={{ root: classes.select }} value="7">
+              <MenuItem sx={{color:'black'}} value="7">
                 7 days
               </MenuItem>
-              <MenuItem classes={{ root: classes.select }} value="30">
+              <MenuItem sx={{color:'black'}} value="30">
                 1 month
               </MenuItem>
-              <MenuItem classes={{ root: classes.select }} value="90">
+              <MenuItem sx={{color:'black'}} value="90">
                 3 months
               </MenuItem>
-              <MenuItem classes={{ root: classes.select }} value="120">
+              <MenuItem sx={{color:'black'}} value="120">
                 6 months
               </MenuItem>
-              <MenuItem classes={{ root: classes.select }} value="365">
+              <MenuItem sx={{color:'black'}} value="365">
                 1 year
               </MenuItem>
             </Select>
