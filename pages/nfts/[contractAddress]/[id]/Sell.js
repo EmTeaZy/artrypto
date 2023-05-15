@@ -1,14 +1,4 @@
-
-import {
-  CardMedia,
-  FormControl,
-  MenuItem,
-  Typography,
-  TextField,
-  InputLabel,
-  Select,
-  Button,
-} from "@mui/material";
+import { CardMedia, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { useAddress, useContract, useNFT } from "@thirdweb-dev/react";
 import { useRouter } from "next/router";
