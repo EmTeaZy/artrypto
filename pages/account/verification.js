@@ -5,13 +5,19 @@ import {Box, Button, Card, CardContent, Typography} from "@mui/material";
 import {createCanvasFromMedia} from 'face-api.js';
 import FullLayout from "../../src/layouts/FullLayout";
 import * as faceapi from "face-api.js";
+import axios from "axios";
 
 const Verification = () => {
     const webcamRef = useRef(null);
     const [screenshot, setScreenshot] = useState(null);
 
+    const loadModels = async () => {
+        const res = await axios.get("/api/models");
+        console.log("Response: ", res.data);
+    }
+
     const detectFaceWithFaceJS = async () => {
-        await faceapi.nets.ssdMobilenetv1.loadFromDisk('./models');
+        await loadModels();
         console.log("Models: ", faceapi.nets)
 
         const image = await createCanvasFromMedia(screenshot);

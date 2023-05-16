@@ -4,15 +4,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9705c03e-2e71-4970-a751-54ad26fb29d7" name="Changes" comment="gitignore">
-      <change afterPath="$PROJECT_DIR$/pages/account/verification.js" afterDir="false" />
+    <list default="true" id="9705c03e-2e71-4970-a751-54ad26fb29d7" name="Changes" comment="Added the models and the base code for the authentication">
+      <change afterPath="$PROJECT_DIR$/pages/api/models.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/weights/face_expression_model-shard1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/weights/face_expression_model-weights_manifest.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/weights/face_landmark_68_model-shard1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/weights/face_landmark_68_model-weights_manifest.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/weights/face_landmark_68_tiny_model-shard1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/weights/face_landmark_68_tiny_model-weights_manifest.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/weights/face_recognition_model-shard1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/weights/face_recognition_model-shard2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/weights/face_recognition_model-weights_manifest.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/weights/tiny_face_detector_model-shard1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/weights/tiny_face_detector_model-weights_manifest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/_app.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/account/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/account/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/artrypto-icon.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layouts/FullLayout.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/FullLayout.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layouts/sidebar/UserSettings.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/sidebar/UserSettings.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/account/verification.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/account/verification.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/models/face_expression_model-shard1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/models/face_expression_model-weights_manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/models/face_landmark_68_model-shard1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/models/face_landmark_68_model-weights_manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/models/face_landmark_68_tiny_model-shard1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/models/face_landmark_68_tiny_model-weights_manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/models/face_recognition_model-shard1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/models/face_recognition_model-shard2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/models/face_recognition_model-weights_manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/models/tiny_face_detector_model-shard1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/models/tiny_face_detector_model-weights_manifest.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,7 +47,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="table-for-ownerships" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -47,25 +65,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/user/Desktop/Temporary Work&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs.jest.jest_package&quot;: &quot;/Users/hamzafer/Desktop/TZ/Projects/artrypto/node_modules/jest&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\Users\\user\\Desktop\\Temporary Work\\artrypto\\node_modules\\prettier&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Applications/WebStorm.app/Contents/plugins/javascript-impl/jsLanguageServicesImpl/external&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "facial-verification",
+    "ignore.virus.scanning.warn.message": "true",
+    "javascript.nodejs.core.library.configured.version": "16.14.0",
+    "javascript.nodejs.core.library.typings.version": "16.18.30",
+    "last_opened_file_path": "C:/Users/user/Desktop/Temporary Work",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs.jest.jest_package": "/Users/hamzafer/Desktop/TZ/Projects/artrypto/node_modules/jest",
+    "nodejs_package_manager_path": "yarn",
+    "prettierjs.PrettierConfiguration.Package": "C:\\Users\\user\\Desktop\\Temporary Work\\artrypto\\node_modules\\prettier",
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
+    "ts.external.directory.path": "/Applications/WebStorm.app/Contents/plugins/javascript-impl/jsLanguageServicesImpl/external",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="npm.dev">
     <configuration name="User API" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
@@ -110,6 +131,7 @@
       <workItem from="1680385425068" duration="288000" />
       <workItem from="1684156998755" duration="324000" />
       <workItem from="1684222898652" duration="2254000" />
+      <workItem from="1684235002355" duration="3997000" />
     </task>
     <task id="LOCAL-00001" summary="Created a table filled with sample value for the ownerships">
       <created>1680182024408</created>
@@ -146,7 +168,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680221920096</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Added the models and the base code for the authentication">
+      <created>1684235430446</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1684235430446</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -164,10 +193,12 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Created a table filled with sample value for the ownerships" />
     <MESSAGE value="shelveee" />
     <MESSAGE value="gitignore" />
-    <option name="LAST_COMMIT_MESSAGE" value="gitignore" />
+    <MESSAGE value="Added the models and the base code for the authentication" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added the models and the base code for the authentication" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
