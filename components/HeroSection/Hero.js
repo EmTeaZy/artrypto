@@ -34,7 +34,7 @@ const Hero = () => {
 
         
         <Box>
-            <Image src={Profile} width={730} height={410}></Image>
+            <Image src={Profile} width={730} height={410} alt="hero_image"></Image>
         </Box>
       </Box>
     </>

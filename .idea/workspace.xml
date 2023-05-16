@@ -4,33 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9705c03e-2e71-4970-a751-54ad26fb29d7" name="Changes" comment="Added the models and the base code for the authentication">
-      <change afterPath="$PROJECT_DIR$/pages/api/models.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/weights/face_expression_model-shard1" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/weights/face_expression_model-weights_manifest.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/weights/face_landmark_68_model-shard1" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/weights/face_landmark_68_model-weights_manifest.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/weights/face_landmark_68_tiny_model-shard1" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/weights/face_landmark_68_tiny_model-weights_manifest.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/weights/face_recognition_model-shard1" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/weights/face_recognition_model-shard2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/weights/face_recognition_model-weights_manifest.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/weights/tiny_face_detector_model-shard1" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/weights/tiny_face_detector_model-weights_manifest.json" afterDir="false" />
+    <list default="true" id="9705c03e-2e71-4970-a751-54ad26fb29d7" name="Changes" comment="More stuff">
+      <change afterPath="$PROJECT_DIR$/components/AccountComponents/VerificationPrompt.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/models/face_expression_model-shard1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/models/face_expression_model-weights_manifest.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/models/tiny_face_detector_model-shard1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/models/tiny_face_detector_model-weights_manifest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/HeroSection/Hero.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/HeroSection/Hero.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/carousel/Carousel.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/carousel/Carousel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/account/verification.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/account/verification.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/models/face_expression_model-shard1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/models/face_expression_model-weights_manifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/models/face_landmark_68_model-shard1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/models/face_landmark_68_model-weights_manifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/models/face_landmark_68_tiny_model-shard1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/models/face_landmark_68_tiny_model-weights_manifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/models/face_recognition_model-shard1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/models/face_recognition_model-shard2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/models/face_recognition_model-weights_manifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/models/tiny_face_detector_model-shard1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/models/tiny_face_detector_model-weights_manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/api/models.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/weights/face_expression_model-shard1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/weights/face_expression_model-weights_manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/weights/face_landmark_68_model-shard1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/weights/face_landmark_68_model-weights_manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/weights/face_landmark_68_tiny_model-shard1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/weights/face_landmark_68_tiny_model-weights_manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/weights/face_recognition_model-shard1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/weights/face_recognition_model-shard2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/weights/face_recognition_model-weights_manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/weights/tiny_face_detector_model-shard1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/weights/tiny_face_detector_model-weights_manifest.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +71,7 @@
     "ignore.virus.scanning.warn.message": "true",
     "javascript.nodejs.core.library.configured.version": "16.14.0",
     "javascript.nodejs.core.library.typings.version": "16.18.30",
-    "last_opened_file_path": "C:/Users/user/Desktop/Temporary Work",
+    "last_opened_file_path": "C:/Users/user/Desktop/Temporary Work/artrypto/pages/account/images",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
@@ -87,6 +83,14 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\user\Desktop\Temporary Work\artrypto\pages\account\images" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\user\Desktop\Temporary Work\artrypto\public" />
+    </key>
+  </component>
   <component name="RunManager" selected="npm.dev">
     <configuration name="User API" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
@@ -131,7 +135,7 @@
       <workItem from="1680385425068" duration="288000" />
       <workItem from="1684156998755" duration="324000" />
       <workItem from="1684222898652" duration="2254000" />
-      <workItem from="1684235002355" duration="3997000" />
+      <workItem from="1684235002355" duration="16661000" />
     </task>
     <task id="LOCAL-00001" summary="Created a table filled with sample value for the ownerships">
       <created>1680182024408</created>
@@ -175,7 +179,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684235430446</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="More stuff">
+      <created>1684239353398</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1684239353398</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -198,7 +209,8 @@
     <MESSAGE value="shelveee" />
     <MESSAGE value="gitignore" />
     <MESSAGE value="Added the models and the base code for the authentication" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added the models and the base code for the authentication" />
+    <MESSAGE value="More stuff" />
+    <option name="LAST_COMMIT_MESSAGE" value="More stuff" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

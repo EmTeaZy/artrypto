@@ -20,7 +20,7 @@ export default function Carousel() {
                 sx={arrowStyles}
                 onClick={sliderRef?.slickPrev}/>
             <Slider style={{width: "94%"}} ref={setSliderRef} {...settings}>
-                {NFTsData.map(item => <NFTCard item={item}/>)}
+                {NFTsData.map(item => <NFTCard key={item.id} item={item}/>)}
             </Slider>
             <ChevronRightIcon
                 color="secondary"

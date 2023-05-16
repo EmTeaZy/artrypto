@@ -1,71 +1,135 @@
-import React, {useRef, useState} from 'react';
-import Webcam from 'react-webcam';
-import {PhotoCamera} from '@mui/icons-material';
-import {Box, Button, Card, CardContent, Typography} from "@mui/material";
-import {createCanvasFromMedia} from 'face-api.js';
+import React, {useEffect, useRef, useState} from 'react';
+import {PhotoCamera, CheckCircle, SentimentVerySatisfied, SentimentVeryDissatisfied} from '@mui/icons-material';
+import {Box, Button, Typography} from "@mui/material";
+import * as faceapi from 'face-api.js';
 import FullLayout from "../../src/layouts/FullLayout";
-import * as faceapi from "face-api.js";
-import axios from "axios";
+import VerificationPrompt from '../../components/AccountComponents/VerificationPrompt'
+import {useSnackbar} from "../../context/SnackbarContextProvider";
 
 const Verification = () => {
-    const webcamRef = useRef(null);
-    const [screenshot, setScreenshot] = useState(null);
 
-    const loadModels = async () => {
-        const res = await axios.get("/api/models");
-        console.log("Response: ", res.data);
+    const videoRef = useRef(null);
+    const height = 480;
+    const length = 640;
+    const {show} = useSnackbar();
+
+    const [isPrompt, setIsPrompt] = useState(true);
+
+    const [isNeutral, setIsNeutral] = useState(true);
+    const [isSmiling, setIsSmiling] = useState(false);
+    const [isSad, setIsSad] = useState(false);
+
+    const beginVerification = () => {
+        setIsPrompt(false);
     }
 
-    const detectFaceWithFaceJS = async () => {
-        await loadModels();
-        console.log("Models: ", faceapi.nets)
+    useEffect(() => {
+        if (!isPrompt)
+            startVideo();
+    }, [isPrompt])
 
-        const image = await createCanvasFromMedia(screenshot);
-        const detections = await faceapi.detectSingleFace(image);
+    const startVideo = () => {
+        navigator.getUserMedia({
+            video: {}
+        }, stream => videoRef.current.srcObject = stream, error => {
+            console.log(error)
+        });
 
-        if (detections) {
-            console.log('Face detected using face.js');
-        } else {
-            console.log('No face detected using face.js');
+    }
+
+    useEffect(() => {
+        loadModels()
+    }, [])
+
+    const loadModels = async () => {
+        await faceapi.loadTinyFaceDetectorModel('/models');
+        await faceapi.loadFaceExpressionModel('/models');
+    }
+
+    const detectFace = async () => {
+        try {
+            const detections =
+                await faceapi.detectAllFaces(videoRef.current, new faceapi.TinyFaceDetectorOptions)
+                    .withFaceExpressions();
+
+            console.log(detections)
+
+            const obj = detections[0]?.expressions;
+
+            console.log("You look ", Object.keys(obj).reduce((a, b) => obj[a] > obj[b] ? a : b))
+
+            if (detections.length !== 0)
+                show("Face detected successfully!");
+            else
+                show("We couldn't detect your face. Please try again.", "danger")
+        } catch (ex) {
+            console.log("An error occurred:", ex)
         }
-    };
+    }
 
-    const captureScreenshot = () => {
-        const imageSrc = webcamRef.current.getScreenshot();
-        setScreenshot(imageSrc);
-        detectFaceWithFaceJS();
+    const renderCheckIcon = (state) => {
+        return state ? (
+            <CheckCircle color="success" size="small"/>
+        ) : null;
     };
 
     return (
         <>
             <FullLayout check={"user"}>
-                <Box>
-                    <Card>
-                        <CardContent>
-                            <Typography variant="h5" component="h2">
-                                Webcam Component
+                {isPrompt ?
+                    <VerificationPrompt begin={beginVerification}/>
+                    :
+                    <Box sx={{marginTop: '-3rem'}}>
+                        <Box sx={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            flexDirection: 'column',
+                            textAlign: 'center'
+                        }}>
+                            <Typography variant="h1">
+                                Verification
                             </Typography>
-                            <div style={{display: 'flex', justifyContent: 'center', marginTop: '1rem'}}>
-                                <Webcam audio={false} ref={webcamRef} screenshotFormat="image/jpeg"/>
-                            </div>
-                            <div style={{display: 'flex', justifyContent: 'center', marginTop: '1rem'}}>
-                                <Button
-                                    variant="contained"
-                                    color="primary"
-                                    startIcon={<PhotoCamera/>}
-                                    onClick={captureScreenshot}
-                                >
-                                    Take Screenshot
-                                </Button>
-                            </div>
-                            {screenshot && (
-                                <div style={{display: 'flex', justifyContent: 'center', marginTop: '1rem'}}>
-                                    <img src={screenshot} alt="screenshot" style={{maxWidth: '100%'}}/>
-                                </div>
-                            )}
-                        </CardContent>
-                    </Card>
-                </Box>
+                            <Typography variant="subtitle1">
+                                You can verify yourself here and earn access to a blue tick. <br/>
+                                A blue tick let's you do all kinds of cool stuff!
+                            </Typography>
+                        </Box>
+                        <Box sx={{display: 'flex', justifyContent: 'center', marginTop: '1rem'}}>
+                                <Box display="flex" alignItems="center" sx={{marginLeft: '2rem', marginRight: '2rem '}}>
+                                    {renderCheckIcon(isSmiling)}
+                                    <Typography variant="subtitle1" sx={{paddingLeft: '8px'}}>
+                                        Smiling
+                                    </Typography>
+                                </Box>
+                                <Box display="flex" alignItems="center" sx={{marginLeft: '2rem', marginRight: '2rem '}}>
+                                    {renderCheckIcon(isNeutral)}
+                                    <Typography variant="subtitle1" sx={{paddingLeft: '8px'}}>
+                                        Neutral
+                                    </Typography>
+                                </Box>
+                                <Box display="flex" alignItems="center" sx={{marginLeft: '2rem', marginRight: '2rem '}}>
+                                    {renderCheckIcon(isSad)}
+                                    <Typography variant="subtitle1" sx={{paddingLeft: '8px'}}>
+                                        Sad
+                                    </Typography>
+                            </Box>
+                        </Box>
+                        <Box sx={{display: 'flex', justifyContent: 'center', marginTop: '1rem'}}>
+                            <video ref={videoRef} muted autoPlay height={height} width={length}></video>
+                        </Box>
+                        <Box sx={{display: 'flex', justifyContent: 'center', marginTop: '1rem', marginBottom: '1rem'}}>
+                            <Button
+                                size="large"
+                                variant="contained"
+                                color="primary"
+                                startIcon={<PhotoCamera/>}
+                                onClick={detectFace}
+                            >
+                                Capture
+                            </Button>
+                        </Box>
+                    </Box>
+                }
             </FullLayout>
         </>
     );
