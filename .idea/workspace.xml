@@ -5,28 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9705c03e-2e71-4970-a751-54ad26fb29d7" name="Changes" comment="More stuff">
-      <change afterPath="$PROJECT_DIR$/components/AccountComponents/VerificationPrompt.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/models/face_expression_model-shard1" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/models/face_expression_model-weights_manifest.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/models/tiny_face_detector_model-shard1" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/models/tiny_face_detector_model-weights_manifest.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/AccountComponents/SuccessMessage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/api/verifyUser.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/HeroSection/Hero.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/HeroSection/Hero.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/carousel/Carousel.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/carousel/Carousel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/User.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/User.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/account/verification.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/account/verification.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/api/models.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/weights/face_expression_model-shard1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/weights/face_expression_model-weights_manifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/weights/face_landmark_68_model-shard1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/weights/face_landmark_68_model-weights_manifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/weights/face_landmark_68_tiny_model-shard1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/weights/face_landmark_68_tiny_model-weights_manifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/weights/face_recognition_model-shard1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/weights/face_recognition_model-shard2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/weights/face_recognition_model-weights_manifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/weights/tiny_face_detector_model-shard1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/weights/tiny_face_detector_model-weights_manifest.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,7 +53,7 @@
     "git-widget-placeholder": "facial-verification",
     "ignore.virus.scanning.warn.message": "true",
     "javascript.nodejs.core.library.configured.version": "16.14.0",
-    "javascript.nodejs.core.library.typings.version": "16.18.30",
+    "javascript.nodejs.core.library.typings.version": "16.18.31",
     "last_opened_file_path": "C:/Users/user/Desktop/Temporary Work/artrypto/pages/account/images",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -136,6 +119,7 @@
       <workItem from="1684156998755" duration="324000" />
       <workItem from="1684222898652" duration="2254000" />
       <workItem from="1684235002355" duration="16661000" />
+      <workItem from="1684317492752" duration="5219000" />
     </task>
     <task id="LOCAL-00001" summary="Created a table filled with sample value for the ownerships">
       <created>1680182024408</created>

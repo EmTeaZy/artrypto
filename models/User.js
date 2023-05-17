@@ -17,7 +17,12 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
-    }, 
+    },
+    isVerified: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
     imgid: {
         type: String,
         required: true,
