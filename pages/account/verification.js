@@ -21,8 +21,20 @@ const Verification = () => {
 
     const [isNeutral, setIsNeutral] = useState(false);
     const [isSmiling, setIsSmiling] = useState(false);
-    const [isSad, setIsSad] = useState(false);
+    const [isSurprised, setIsSurprised] = useState(false);
     const [isVerified, setIsVerified] = useState(false)
+
+    const fetchStatus = () => {
+        axios.get(`/api/getStatus?walletAddress=${address}`)
+            .then(res => {
+                if(res.data){
+                    setIsVerified(res.data.status);
+                }
+            })
+            .catch(err => console.error(err))
+    }
+
+    useEffect(() => fetchStatus, []);
 
     const beginVerification = () => {
         setIsPrompt(false);
@@ -47,14 +59,14 @@ const Verification = () => {
     }, [])
 
     useEffect(() => {
-        if (isNeutral && isSmiling && isSad){
+        if (isNeutral && isSmiling && isSurprised){
             setIsVerified(true);
 
             axios.post("/api/verifyUser", {walletAddress: address, isVerified: true})
                 .then(() => console.log("User verified successfully"))
                 .catch(err => console.error(err));
         }
-    }, [isSmiling, isNeutral, isSad])
+    }, [isSmiling, isNeutral, isSurprised])
 
     const loadModels = async () => {
         await faceapi.loadTinyFaceDetectorModel('/models');
@@ -78,8 +90,8 @@ const Verification = () => {
                     case "happy":
                         setIsSmiling(true);
                         break;
-                    case "sad":
-                        setIsSad(true);
+                    case "surprised":
+                        setIsSurprised(true);
                         break;
                     default:
                         show(`Unknown expression detected: ${expression}`, "warning");
@@ -143,9 +155,9 @@ const Verification = () => {
                                     </Box>
                                     <Box display="flex" alignItems="center"
                                          sx={expressionStyles}>
-                                        {renderCheckIcon(isSad)}
+                                        {renderCheckIcon(isSurprised)}
                                         <Typography variant="h2" sx={{paddingLeft: '8px'}}>
-                                            Sad
+                                            Surprised
                                         </Typography>
                                     </Box>
                                 </Box>
