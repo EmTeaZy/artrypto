@@ -35,6 +35,7 @@ const SuccessMessage = () => {
                 <Box display="flex" alignItems="center" sx={{flexDirection: 'column'}}>
                     <AnimatedCheckCircle color="success" sx={{ marginTop: '3rem', marginRight: '8px', height: '12rem', width: '12rem' }} />
                     <Typography sx={{marginTop: '2rem'}} variant="h1">Verification Complete!</Typography>
+                    <Typography variant="subtitle1"> You should see a blue tick with your name soon. </Typography>
                 </Box>
             )}
             <Typography variant="h2" sx={{ marginTop: '2rem' }}>
