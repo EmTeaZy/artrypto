@@ -15,6 +15,8 @@ import { MARKETPLACE_CONTRACT_ADDRESS } from "../../constants";
 import { ethers } from "ethers";
 import BuyTimer from "./BuyTimer";
 import BuyDialog from "./BuyDialog";
+import LocalOfferIcon from "@mui/icons-material/LocalOffer";
+import BigDialog from "./BidDialog";
 const NftviewActions = ({ Nftdata }) => {
   const [rate, setRate] = useState(0);
   const router = useRouter();
@@ -68,6 +70,12 @@ const NftviewActions = ({ Nftdata }) => {
     }
   };
 
+  const [openBid, setOpenBid] = React.useState(false);
+
+  const handleCloseBid = () => {
+    setOpenBid(false);
+  };
+
   return (
     <>
       {saleData ? (
@@ -78,6 +86,7 @@ const NftviewActions = ({ Nftdata }) => {
                 <Typography variant="subtitle1" my={5} color="red">
                   Nft not listed for sale
                 </Typography>
+
                 {Nftdata.owner === address ? (
                   <Button
                     size="large"
@@ -119,27 +128,48 @@ const NftviewActions = ({ Nftdata }) => {
                     Nft Already listed for sale
                   </Typography>
                 ) : (
-                  <Button
-                    size="large"
-                    variant="contained"
-                    style={{ width: "20rem", height: "4rem" }}
-                    startIcon={
-                      Nftdata?.owner === address ? (
-                        <AddCircleTwoTone />
-                      ) : (
-                        <ShoppingBasketIcon />
-                      )
-                    }
-                    onClick={() => {
-                      handleClick();
-                    }}
-                  >
-                    {Nftdata?.owner === address ? "list for sale" : "Buy Now"}
-                  </Button>
+                  <>
+                    <Box sx={{ display: "flex", flexDirection: "column" }}>
+                      <Button
+                        size="large"
+                        variant="contained"
+                        style={{ width: "20rem", height: "4rem" }}
+                        startIcon={
+                          Nftdata?.owner === address ? (
+                            <AddCircleTwoTone />
+                          ) : (
+                            <ShoppingBasketIcon />
+                          )
+                        }
+                        onClick={() => {
+                          handleClick();
+                        }}
+                      >
+                        {Nftdata?.owner === address
+                          ? "list for sale"
+                          : "Buy Now"}
+                      </Button>
+                      <Button
+                        size="large"
+                        variant="contained"
+                        style={{ width: "20rem", height: "4rem", mt: "20px" }}
+                        startIcon={<LocalOfferIcon />}
+                        onClick={() => setOpenBid(!open)}
+                      >
+                        Make an Offer
+                      </Button>
+                    </Box>
+                  </>
                 )}
                 <BuyDialog
                   open={open}
                   handleClose={handleClose}
+                  Nftdata={Nftdata}
+                  listingdata={saleData}
+                />
+                <BigDialog
+                  open={openBid}
+                  handleClose={handleCloseBid}
                   Nftdata={Nftdata}
                   listingdata={saleData}
                 />

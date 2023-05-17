@@ -36,8 +36,15 @@ const GetArtworkDetails = () => {
 
   //mint NFT
   const callMintNFT = async (metadata) => {
-    const tx = await contract.erc721.mint(metadata);
-     show("NFT minted succesfully");
+    try
+    {
+      const tx = await contract.erc721.mint(metadata);
+      show("NFT minted succesfully");
+    }
+    catch(error)
+    {
+      show("NFT not minted","error")
+    }
   };
 
   //store nft in ipfs and generate metadata

@@ -90,12 +90,18 @@ const ListingInput = ({ id, changeBasePrice }) => {
       tokenId: Number(id),
       startTimestamp: new Date(),
       listingDurationInSeconds:
-        new Date().getTime() + Number(auctionDuration) * 24 * 60 * 60 * 1000,
+        new Date().getTime() + 365 * 24 * 60 * 60 * 1000,
       quantity: 1,
       currencyContractAddress: NATIVE_TOKEN_ADDRESS,
       buyoutPricePerToken: basePrice.toString(),
     };
-    const tx = await contract.direct.createListing(listing);
+    try {
+      const tx = await contract.direct.createListing(listing);
+      show("Nft listed for sale successfully");
+      console.log(tx);
+    } catch (error) {
+      show("NFT not listed for sale, internel error", "error");
+    }
   };
   const auctionListing = async () => {
     const listing = {
@@ -109,24 +115,29 @@ const ListingInput = ({ id, changeBasePrice }) => {
       buyoutPricePerToken: basePrice.toString(),
       reservePricePerToken: minBid.toString(),
     };
-    const tx = await contract.auction.createListing(listing);
+    try {
+      const tx = await contract.auction.createListing(listing);
+      show("Nft listed for sale successfully");
+      console.log(tx);
+    } catch (err) {
+      console.log(err);
+      show("NFT not listed for sale, internel error", "error");
+    }
   };
   const listForSale = async () => {
     changeCheck(true);
     if (saleType === "fixed") {
       await directListing();
-    }
-    else if(saleType==="auction"){
+    } else if (saleType === "auction") {
       await auctionListing();
     }
-    show("NFT Listed for Sale");
     router.push("/");
   };
   return (
     <>
       <form onSubmit={handleSubmit}>
-      <Typography variant="subtitle3" >
-      The price on which a buyer can pay to instantly buy
+        <Typography variant="subtitle3">
+          The price on which a buyer can pay to instantly buy
         </Typography>
         <TextField
           label="Base Price"
@@ -149,67 +160,71 @@ const ListingInput = ({ id, changeBasePrice }) => {
             label="Sale Type"
             color="secondary"
           >
-            <MenuItem value="fixed" sx={{color:'black'}}>
+            <MenuItem value="fixed" sx={{ color: "black" }}>
               Fixed Price
             </MenuItem>
-            <MenuItem sx={{color:'black'}} value="auction">
+            <MenuItem sx={{ color: "black" }} value="auction">
               Auction
             </MenuItem>
           </Select>
         </FormControl>
 
-        <Box>
-          <FormControl variant="outlined" fullWidth margin="normal">
-            <InputLabel color="secondary">Sale Duration</InputLabel>
-            <Select
-              value={auctionDuration}
-              onChange={handleAuctionDurationChange}
-              label="Auction Duration"
-              color="secondary"
-            >
-              <MenuItem sx={{color:'black'}} value="1">
-                1 day
-              </MenuItem>
-              <MenuItem sx={{color:'black'}} value="3">
-                3 days
-              </MenuItem>
-              <MenuItem sx={{color:'black'}} value="7">
-                7 days
-              </MenuItem>
-              <MenuItem sx={{color:'black'}} value="30">
-                1 month
-              </MenuItem>
-              <MenuItem sx={{color:'black'}} value="90">
-                3 months
-              </MenuItem>
-              <MenuItem sx={{color:'black'}} value="120">
-                6 months
-              </MenuItem>
-              <MenuItem sx={{color:'black'}} value="365">
-                1 year
-              </MenuItem>
-            </Select>
-          </FormControl>
-        </Box>
         {saleType === "auction" && (
-          <Box >
-          <Typography variant="subtitle3">The minimum price per token necessary to bid on this auction</Typography>
-            <TextField
-              label="Minimum Bid"
-              color="secondary"
-              fullWidth
-              value={minBid}
-              onChange={handleMinBidChange}
-              required
-              type="number"
-              margin="normal"
-            />
-            <Typography variant="subtitle1" sx={{ color: "gray" }}>
-              ${(minBid * rate).toFixed(2)}
-            </Typography>
-          </Box>
+          <>
+            <Box>
+              <FormControl variant="outlined" fullWidth margin="normal">
+                <InputLabel color="secondary">Sale Duration</InputLabel>
+                <Select
+                  value={auctionDuration}
+                  onChange={handleAuctionDurationChange}
+                  label="Auction Duration"
+                  color="secondary"
+                >
+                  <MenuItem sx={{ color: "black" }} value="1">
+                    1 day
+                  </MenuItem>
+                  <MenuItem sx={{ color: "black" }} value="3">
+                    3 days
+                  </MenuItem>
+                  <MenuItem sx={{ color: "black" }} value="7">
+                    7 days
+                  </MenuItem>
+                  <MenuItem sx={{ color: "black" }} value="30">
+                    1 month
+                  </MenuItem>
+                  <MenuItem sx={{ color: "black" }} value="90">
+                    3 months
+                  </MenuItem>
+                  <MenuItem sx={{ color: "black" }} value="120">
+                    6 months
+                  </MenuItem>
+                  <MenuItem sx={{ color: "black" }} value="365">
+                    1 year
+                  </MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+            <Box>
+              <Typography variant="subtitle3">
+                The minimum price per token necessary to bid on this auction
+              </Typography>
+              <TextField
+                label="Minimum Bid"
+                color="secondary"
+                fullWidth
+                value={minBid}
+                onChange={handleMinBidChange}
+                required
+                type="number"
+                margin="normal"
+              />
+              <Typography variant="subtitle1" sx={{ color: "gray" }}>
+                ${(minBid * rate).toFixed(2)}
+              </Typography>
+            </Box>
+          </>
         )}
-        <Box sx={{mt:3}}>
+        <Box sx={{ mt: 3 }}>
           <Button
             variant="contained"
             color="primary"
