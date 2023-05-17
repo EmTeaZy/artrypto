@@ -1,10 +1,9 @@
-import { Box } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import {Box} from "@mui/material";
+import React, {useEffect, useState} from "react";
 import UserDetails from "../../components/AccountComponents/UserDetails";
 import axios from "axios";
 import CreatedNFTs from "../../components/AccountComponents/CreatedNFTs";
-import { useAddress, useContract, useOwnedNFTs } from "@thirdweb-dev/react";
-import { NFT_MINTING_CONTRACT_ADDRESS } from "../../constants";
+import {useAddress} from "@thirdweb-dev/react";
 
 const Account = () => {
   const address = useAddress();
