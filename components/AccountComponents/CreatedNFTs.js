@@ -1,13 +1,25 @@
-import { Box, Button, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Card,
+  CardActionArea,
+  CardContent,
+  CardMedia,
+  Typography,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import { CardActionArea } from "@mui/material";
 import NFTCard from "./NFTCard";
-import { useOwnedNFTs, useAddress, useContract } from "@thirdweb-dev/react";
-import { NFT_MINTING_CONTRACT_ADDRESS } from "../../constants";
-import { useRouter } from "next/router";
+import {
+  useOwnedNFTs,
+  useContract,
+  useListings,
+  Marketplace,
+  useActiveListings,
+} from "@thirdweb-dev/react";
+import {
+  NFT_MINTING_CONTRACT_ADDRESS,
+  MARKETPLACE_CONTRACT_ADDRESS,
+} from "../../constants";
 
 const CreatedNFTs = ({ address }) => {
   const [nfts, setnfts] = useState();
@@ -20,6 +32,68 @@ const CreatedNFTs = ({ address }) => {
     setnfts(data);
     console.log(nfts);
   });
+
+  const ListedNfts = () => {
+    const { contract } = useContract(
+      MARKETPLACE_CONTRACT_ADDRESS,
+      "marketplace"
+    );
+    const {
+      data: listings,
+      isLoading,
+      error,
+    } = useActiveListings(contract, {seller:address, start: 0, count: 100 });
+    return (
+      <>
+        {listings?.map((listing) => (
+          <>
+            {listing?.sellerAddress === address && listing?.type === 1 ? (
+              <Card
+                onClick={() => {
+                  router.push(`/nfts/${contractAddress}/${listing?.asset?.id}`);
+                }}
+                sx={{ maxWidth: 250, minWidth: 250 }}
+              >
+                <CardActionArea>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <CardMedia
+                      component="img"
+                      sx={{ width: 150 }}
+                      image={listing?.asset?.image || nft.asset.image}
+                      alt="Live from space album cover"
+                    />
+                    <CardContent>
+                      <Typography
+                        variant="h5"
+                        color="text.tertiary"
+                        gutterBottom
+                        component="div"
+                      >
+                        {listing?.asset?.name || " "}
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {listing?.asset?.description || " "}
+                      </Typography>
+                    </CardContent>
+                  </Box>
+                </CardActionArea>
+              </Card>
+            ) : (
+              <></>
+            )}
+          </>
+        ))}
+      </>
+    );
+  };
+
   return (
     <>
       <Typography variant="h1">Created NFTs</Typography>
@@ -39,7 +113,12 @@ const CreatedNFTs = ({ address }) => {
           <></>
         )}
         {data ? (
-          data.map((NFT) => <NFTCard nft={NFT} />)
+          data.map((NFT) => (
+            <>
+              <NFTCard nft={NFT} />
+              {/* <ListedNfts /> */}
+            </>
+          ))
         ) : (
           <Typography variant="subtitle1" sx={{ color: "green" }}>
             Fetching Nfts...

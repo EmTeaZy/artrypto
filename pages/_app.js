@@ -30,6 +30,7 @@ const publicRoutes = [
   "/nfts/search",
   "/nfts/[contractAddress]/[id]",
   "/nfts/[contractAddress]/[id]/sell",
+  "/nfts/[contractAddress]/[id]/exchange",
   "/nfts/listedsale",
 ];
 

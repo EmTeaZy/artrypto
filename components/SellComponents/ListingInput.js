@@ -27,6 +27,7 @@ import {
   NFT_MINTING_CONTRACT_ADDRESS,
 } from "../../constants";
 import { NATIVE_TOKEN_ADDRESS } from "@thirdweb-dev/sdk";
+import moment from "moment";
 
 const ListingInput = ({ id, changeBasePrice }) => {
   const { show } = useSnackbar();
@@ -89,8 +90,9 @@ const ListingInput = ({ id, changeBasePrice }) => {
       assetContractAddress: contractAddress,
       tokenId: Number(id),
       startTimestamp: new Date(),
-      listingDurationInSeconds:
-        new Date().getTime() + 365 * 24 * 60 * 60 * 1000,
+      listingDurationInSeconds: moment()
+        .add(auctionDuration, "days")
+        .diff(moment(), "seconds"),
       quantity: 1,
       currencyContractAddress: NATIVE_TOKEN_ADDRESS,
       buyoutPricePerToken: basePrice.toString(),
@@ -108,8 +110,10 @@ const ListingInput = ({ id, changeBasePrice }) => {
       assetContractAddress: contractAddress,
       tokenId: Number(id),
       startTimestamp: new Date(),
-      listingDurationInSeconds:
-        new Date().getTime() + Number(auctionDuration) * 24 * 60 * 60 * 1000,
+      listingDurationInSeconds: moment()
+        .add(auctionDuration, "days")
+        .diff(moment(), "seconds"),
+      // new Date().getTime()/1000 + Number(auctionDuration) * 24 * 60 * 60,
       quantity: 1,
       currencyContractAddress: NATIVE_TOKEN_ADDRESS,
       buyoutPricePerToken: basePrice.toString(),
@@ -169,41 +173,41 @@ const ListingInput = ({ id, changeBasePrice }) => {
           </Select>
         </FormControl>
 
+        <Box>
+          <FormControl variant="outlined" fullWidth margin="normal">
+            <InputLabel color="secondary">Sale Duration</InputLabel>
+            <Select
+              value={auctionDuration}
+              onChange={handleAuctionDurationChange}
+              label="Auction Duration"
+              color="secondary"
+            >
+              <MenuItem sx={{ color: "black" }} value="1">
+                1 day
+              </MenuItem>
+              <MenuItem sx={{ color: "black" }} value="3">
+                3 days
+              </MenuItem>
+              <MenuItem sx={{ color: "black" }} value="7">
+                7 days
+              </MenuItem>
+              <MenuItem sx={{ color: "black" }} value="30">
+                1 month
+              </MenuItem>
+              <MenuItem sx={{ color: "black" }} value="90">
+                3 months
+              </MenuItem>
+              <MenuItem sx={{ color: "black" }} value="120">
+                6 months
+              </MenuItem>
+              <MenuItem sx={{ color: "black" }} value="365">
+                1 year
+              </MenuItem>
+            </Select>
+          </FormControl>
+        </Box>
         {saleType === "auction" && (
           <>
-            <Box>
-              <FormControl variant="outlined" fullWidth margin="normal">
-                <InputLabel color="secondary">Sale Duration</InputLabel>
-                <Select
-                  value={auctionDuration}
-                  onChange={handleAuctionDurationChange}
-                  label="Auction Duration"
-                  color="secondary"
-                >
-                  <MenuItem sx={{ color: "black" }} value="1">
-                    1 day
-                  </MenuItem>
-                  <MenuItem sx={{ color: "black" }} value="3">
-                    3 days
-                  </MenuItem>
-                  <MenuItem sx={{ color: "black" }} value="7">
-                    7 days
-                  </MenuItem>
-                  <MenuItem sx={{ color: "black" }} value="30">
-                    1 month
-                  </MenuItem>
-                  <MenuItem sx={{ color: "black" }} value="90">
-                    3 months
-                  </MenuItem>
-                  <MenuItem sx={{ color: "black" }} value="120">
-                    6 months
-                  </MenuItem>
-                  <MenuItem sx={{ color: "black" }} value="365">
-                    1 year
-                  </MenuItem>
-                </Select>
-              </FormControl>
-            </Box>
             <Box>
               <Typography variant="subtitle3">
                 The minimum price per token necessary to bid on this auction
@@ -227,7 +231,7 @@ const ListingInput = ({ id, changeBasePrice }) => {
         <Box sx={{ mt: 3 }}>
           <Button
             variant="contained"
-            color="primary"
+            sx={{ color: "#F2B809" }}
             type="submit"
             fullWidth
             disabled={check}
