@@ -8,6 +8,7 @@ import { useContract, useNFT } from "@thirdweb-dev/react";
 import NftviewActions from "../../../../components/NftviewActions/NftviewActions";
 import { useState } from "react";
 import ViewOffer from "../../../../components/NftviewActions/ViewOffer";
+import axios from "axios";
 
 const NFTDisplay = () => {
   const router = useRouter();
@@ -15,6 +16,34 @@ const NFTDisplay = () => {
   const { contract } = useContract(contractAddress);
   const { data } = useNFT(contract, id);
   const [listingdata, setlistingdata] = useState();
+  const [user, setUser] = useState({});
+  useEffect(() => getUserData, []);
+  const getUserData = async () => {
+    if (address) {
+      await axios
+        .post("/api/findUser", { walletAddress: address })
+        .then((res) => {
+          if (res.data) {
+            setUser(res.data);
+          } else {
+            let img = Math.floor(Math.random() * (7 - 1 + 1) + 1).toString();
+            axios
+              .post("/api/addUser", {
+                username: "unnamed",
+                walletAddress: address,
+                imgid: img,
+              })
+              .then((res) => {
+                if (res.data) {
+                  setUser(res.data.user);
+                } else {
+                  console.log("mongo error");
+                }
+              });
+          }
+        });
+    }
+  };
   return (
     <div className="d-flex flex-column">
       <div className="d-flex w-full m-auto">
@@ -62,6 +91,7 @@ const NFTDisplay = () => {
                 Nftdata={data}
                 listingdata={listingdata}
                 setlistingdata={setlistingdata}
+                user={user}
               />
             ) : (
               <></>

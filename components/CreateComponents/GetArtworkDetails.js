@@ -12,7 +12,7 @@ import {
   useContract,
   Web3Button,
 } from "@thirdweb-dev/react";
-const GetArtworkDetails = () => {
+const GetArtworkDetails = ({ user }) => {
   const [image, setSelectedImage] = useState(null);
   const [name, changeName] = useState("");
   const [description, changeDetails] = useState("");
@@ -36,14 +36,11 @@ const GetArtworkDetails = () => {
 
   //mint NFT
   const callMintNFT = async (metadata) => {
-    try
-    {
+    try {
       const tx = await contract.erc721.mint(metadata);
       show("NFT minted succesfully");
-    }
-    catch(error)
-    {
-      show("NFT not minted","error")
+    } catch (error) {
+      show("NFT not minted", "error");
     }
   };
 
@@ -57,18 +54,22 @@ const GetArtworkDetails = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (user?.isVerified) {
+      if (!name || !description || !image) {
+        show("All fields must be provided.", "error");
+        return;
+      }
 
-    if (!name || !description || !image) {
-      show("All fields must be provided.", "error");
-      return;
+      if (address) {
+        changeLoading(true);
+        await storeNFT();
+        changeLoading(false);
+        router.push("/");
+      } else console.log("wallet not connected");
+    } else {
+      show("User not verified, verify user first.", "error");
+      router.push("/account");
     }
-
-    if (address) {
-      changeLoading(true);
-      await storeNFT();
-      changeLoading(false);
-      router.push("/")
-    } else console.log("wallet not connected");
   };
 
   return (

@@ -18,8 +18,9 @@ import BuyDialog from "./BuyDialog";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import BigDialog from "./BidDialog";
 import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
+import { useSnackbar } from "../../context/SnackbarContextProvider";
 
-const NftviewActions = ({ Nftdata, listingdata, setlistingdata }) => {
+const NftviewActions = ({ Nftdata, listingdata, setlistingdata, user }) => {
   const [rate, setRate] = useState(0);
   const router = useRouter();
   const { id, contractAddress } = router.query;
@@ -34,6 +35,7 @@ const NftviewActions = ({ Nftdata, listingdata, setlistingdata }) => {
     count: 1, // Limit the number of results
     start: 0, // Start from the nth result (useful for pagination)
   });
+  const show = useSnackbar();
   useEffect(() => {
     axios
       .get(
@@ -67,21 +69,39 @@ const NftviewActions = ({ Nftdata, listingdata, setlistingdata }) => {
   };
 
   const handleClick = () => {
-    if (Nftdata.owner === address) {
-      router.push(`/nfts/${contractAddress}/${id}/sell`);
+    if (user?.isVerified) {
+      if (Nftdata.owner === address) {
+        router.push(`/nfts/${contractAddress}/${id}/sell`);
+      } else {
+        setOpen(true);
+      }
     } else {
-      setOpen(true);
+      show("User not verified!", "error");
+      router.push("/account");
     }
   };
 
   const handleClickExchange = () => {
-    router.push(`/nfts/${contractAddress}/${id}/exchange`);
+    if (user?.isVerified) {
+      router.push(`/nfts/${contractAddress}/${id}/exchange`);
+    } else {
+      show("User not verified!", "error");
+      router.push("/account");
+    }
   };
 
   const [openBid, setOpenBid] = React.useState(false);
 
   const handleCloseBid = () => {
     setOpenBid(false);
+  };
+  const handleOpenBid = () => {
+    if (user?.isVerified) {
+      setOpenBid(true);
+    } else {
+      show("User not verified!", "error");
+      router.push("/account");
+    }
   };
 
   return (
@@ -226,7 +246,7 @@ const NftviewActions = ({ Nftdata, listingdata, setlistingdata }) => {
                           variant="contained"
                           style={{ mt: "20px", width: "20rem", height: "4rem" }}
                           startIcon={<LocalOfferIcon />}
-                          onClick={() => setOpenBid(!open)}
+                          onClick={() => handleOpenBid()}
                         >
                           {saleData?.type === 0
                             ? "Make an Offer"
