@@ -6,12 +6,15 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { useContract, useNFT } from "@thirdweb-dev/react";
 import NftviewActions from "../../../../components/NftviewActions/NftviewActions";
+import { useState } from "react";
+import ViewOffer from "../../../../components/NftviewActions/ViewOffer";
 
 const NFTDisplay = () => {
   const router = useRouter();
-  const { id, contractAddress, useraddress } = router.query;
+  const { id, contractAddress } = router.query;
   const { contract } = useContract(contractAddress);
   const { data } = useNFT(contract, id);
+  const [listingdata, setlistingdata] = useState();
   return (
     <div className="d-flex flex-column">
       <div className="d-flex w-full m-auto">
@@ -55,12 +58,36 @@ const NFTDisplay = () => {
               </Typography>
             </div>
             {data ? (
-              <NftviewActions Nftdata={data} useraddress={useraddress} />
+              <NftviewActions
+                Nftdata={data}
+                listingdata={listingdata}
+                setlistingdata={setlistingdata}
+              />
             ) : (
               <></>
             )}
           </div>
         </div>
+      </div>
+      <div className="m-5">
+        <Typography variant="h1">
+          {listingdata?.type === 0 ? "All Offers" : "All Bids"}
+        </Typography>
+        {listingdata ? (
+          <>
+            {listingdata === "N/A" ? (
+              <Typography variant="subtitle1" sx={{ color: "red" }}>
+                NFT not listed for sale
+              </Typography>
+            ) : (
+              <ViewOffer listingdata={listingdata} nftdata={data} />
+            )}
+          </>
+        ) : (
+          <Typography variant="subtitle1" sx={{ color: "green" }}>
+            {listingdata?.type === 0 ? "Loading Active Offers....." : "loading All Bids....."}
+          </Typography>
+        )}
       </div>
       <div className="m-5">
         <Typography variant="h1">Item Activity</Typography>

@@ -15,7 +15,11 @@ import { MARKETPLACE_CONTRACT_ADDRESS } from "../../constants";
 import { ethers } from "ethers";
 import BuyTimer from "./BuyTimer";
 import BuyDialog from "./BuyDialog";
-const NftviewActions = ({ Nftdata }) => {
+import LocalOfferIcon from "@mui/icons-material/LocalOffer";
+import BigDialog from "./BidDialog";
+import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
+
+const NftviewActions = ({ Nftdata, listingdata, setlistingdata }) => {
   const [rate, setRate] = useState(0);
   const router = useRouter();
   const { id, contractAddress } = router.query;
@@ -47,7 +51,9 @@ const NftviewActions = ({ Nftdata }) => {
     if (data) {
       if (data.length === 0) {
         setSale("N/A");
+        setlistingdata("N/A");
       } else {
+        setlistingdata(data[0]);
         setSale(data[0]);
         console.log(data[0]);
       }
@@ -68,6 +74,16 @@ const NftviewActions = ({ Nftdata }) => {
     }
   };
 
+  const handleClickExchange = () => {
+    router.push(`/nfts/${contractAddress}/${id}/exchange`);
+  };
+
+  const [openBid, setOpenBid] = React.useState(false);
+
+  const handleCloseBid = () => {
+    setOpenBid(false);
+  };
+
   return (
     <>
       {saleData ? (
@@ -78,6 +94,19 @@ const NftviewActions = ({ Nftdata }) => {
                 <Typography variant="subtitle1" my={5} color="red">
                   Nft not listed for sale
                 </Typography>
+                {Nftdata.owner != address ? (
+                  <Button
+                    size="large"
+                    variant="contained"
+                    style={{ mt: "20px", width: "20rem", height: "4rem" }}
+                    startIcon={<CurrencyExchangeIcon />}
+                    onClick={() => handleClickExchange()}
+                  >
+                    Exchange NFT
+                  </Button>
+                ) : (
+                  <></>
+                )}
                 {Nftdata.owner === address ? (
                   <Button
                     size="large"
@@ -96,46 +125,116 @@ const NftviewActions = ({ Nftdata }) => {
               </>
             ) : (
               <>
-                <div className="mt-5">
-                  <Typography variant="h2">
-                    Current Price <br />
-                  </Typography>
-                  <Typography variant="h1">
-                    {saleData?.buyoutCurrencyValuePerToken?.displayValue || " "}{" "}
-                    {saleData?.buyoutCurrencyValuePerToken?.name || " "}
-                  </Typography>
-                  <Typography variant="subtitle1" sx={{ color: "gray" }}>
-                    $
-                    {(
-                      Number(
-                        saleData?.buyoutCurrencyValuePerToken?.displayValue
-                      ) * rate || 0
-                    ).toFixed(2)}
-                  </Typography>
-                  <BuyTimer time={saleData?.secondsUntilEnd?._hex} />
-                </div>
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    flexWrap: "wrap",
+                  }}
+                >
+                  <div className="me-5 mt-5">
+                    <Typography variant="h2">
+                      Current Price <br />
+                    </Typography>
+                    <Typography variant="h1">
+                      {saleData?.buyoutCurrencyValuePerToken?.displayValue ||
+                        " "}{" "}
+                      {saleData?.buyoutCurrencyValuePerToken?.name || " "}
+                    </Typography>
+                    <Typography variant="subtitle1" sx={{ color: "gray" }}>
+                      $
+                      {(
+                        Number(
+                          saleData?.buyoutCurrencyValuePerToken?.displayValue
+                        ) * rate || 0
+                      ).toFixed(2)}
+                    </Typography>
+                  </div>
+                  {saleData?.type === 1 ? (
+                    <>
+                      <div className="mt-5">
+                        <Typography variant="h2">
+                          Minimum Bid <br />
+                        </Typography>
+                        <Typography variant="h1">
+                          {saleData?.reservePriceCurrencyValuePerToken
+                            ?.displayValue || " "}{" "}
+                          {saleData?.reservePriceCurrencyValuePerToken?.name ||
+                            " "}
+                        </Typography>
+                        <Typography variant="subtitle1" sx={{ color: "gray" }}>
+                          $
+                          {(
+                            Number(
+                              saleData?.reservePriceCurrencyValuePerToken
+                                ?.displayValue
+                            ) * rate || 0
+                          ).toFixed(2)}
+                        </Typography>
+                        <Box sx={{ mt: "15px" }}>
+                          <Typography variant="h2">
+                            Bidding Time Remaining <br />
+                          </Typography>
+                          <BuyTimer
+                            startTime={saleData?.startTimeInEpochSeconds?._hex}
+                            endTime={saleData?.endTimeInEpochSeconds?._hex}
+                          />
+                        </Box>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                </Box>
                 {saleData?.sellerAddress === address ? (
                   <Typography variant="h3" sx={{ mt: "10px", color: "green" }}>
                     Nft Already listed for sale
                   </Typography>
                 ) : (
-                  <Button
-                    size="large"
-                    variant="contained"
-                    style={{ width: "20rem", height: "4rem" }}
-                    startIcon={
-                      Nftdata?.owner === address ? (
-                        <AddCircleTwoTone />
-                      ) : (
-                        <ShoppingBasketIcon />
-                      )
-                    }
-                    onClick={() => {
-                      handleClick();
-                    }}
-                  >
-                    {Nftdata?.owner === address ? "list for sale" : "Buy Now"}
-                  </Button>
+                  <>
+                    <Box
+                      sx={{
+                        mt: "30px",
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Button
+                        size="large"
+                        variant="contained"
+                        mt={10}
+                        style={{ width: "20rem", height: "4rem", mb: "10px" }}
+                        startIcon={
+                          saleData?.sellerAddress === address ? (
+                            <AddCircleTwoTone />
+                          ) : (
+                            <ShoppingBasketIcon />
+                          )
+                        }
+                        onClick={() => {
+                          handleClick();
+                        }}
+                      >
+                        {saleData?.sellerAddress === address
+                          ? "list for sale"
+                          : "Buy Now"}
+                      </Button>
+                      <Box sx={{ mt: "10px" }}>
+                        <Button
+                          size="large"
+                          variant="contained"
+                          style={{ mt: "20px", width: "20rem", height: "4rem" }}
+                          startIcon={<LocalOfferIcon />}
+                          onClick={() => setOpenBid(!open)}
+                        >
+                          {saleData?.type === 0
+                            ? "Make an Offer"
+                            : "Bid on NFT"}
+                        </Button>
+                      </Box>
+                    </Box>
+                  </>
                 )}
                 <BuyDialog
                   open={open}
@@ -143,6 +242,34 @@ const NftviewActions = ({ Nftdata }) => {
                   Nftdata={Nftdata}
                   listingdata={saleData}
                 />
+                <BigDialog
+                  open={openBid}
+                  handleClose={handleCloseBid}
+                  Nftdata={Nftdata}
+                  listingdata={saleData}
+                />
+                {saleData?.sellerAddress != address ? (
+                  <Box
+                    mt={"10px"}
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Button
+                      size="large"
+                      variant="contained"
+                      style={{ mt: "20px", width: "20rem", height: "4rem" }}
+                      startIcon={<CurrencyExchangeIcon />}
+                      onClick={() => handleClickExchange()}
+                    >
+                      Exchange NFT
+                    </Button>
+                  </Box>
+                ) : (
+                  <></>
+                )}
               </>
             )}
           </Box>

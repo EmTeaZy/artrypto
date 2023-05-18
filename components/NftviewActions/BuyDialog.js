@@ -33,11 +33,20 @@ export default function BuyDialog(props) {
   };
   const buyNFT = async () => {
     setLoading(true);
-    const res = await contract.buyoutListing(Number(listingdata.id), 1);
-    setLoading(false);
-    show("Nft bought Successfully!!");
-    handleClose();
-    router.push("/account");
+    try
+    {
+
+      const res = await contract.buyoutListing(Number(listingdata.id), 1);
+      setLoading(false);
+      show("Nft bought Successfully!!");
+      handleClose();
+      router.push("/account");
+    }catch(error)
+    {
+      console.log(error)
+      show("transaction not successfull","error")
+      handleClose()
+    }
   };
   return (
     <div>

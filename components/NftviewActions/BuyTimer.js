@@ -1,28 +1,41 @@
-import { Box } from "@mui/material";
-import React from "react";
+import { Box, Typography } from "@mui/material";
+import moment from "moment/moment";
+import React, { useRef } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 
-const BuyTimer = ({ time }) => {
-  const [remainingtime, changeTime] = useState(time);
+const BuyTimer = ({ startTime, endTime }) => {
+  const [, setSeconds] = useState(0);
+  const ref = useRef();
+  const duration =
+    startTime && endTime
+      ? moment.duration(moment.unix(Number(endTime)).diff(moment()))
+      : 0;
+  console.log(duration, startTime, endTime);
   useEffect(() => {
-    console.log(remainingtime)
-    const decimalValue = parseInt(remainingtime);
-    console.log(decimalValue);
-    const totalSeconds = Math.floor(decimalValue / 1000);
-    const hours = Math.floor(totalSeconds / 3600);
-    const minutes = Math.floor((totalSeconds % 3600) / 60);
-    const seconds = Math.floor(totalSeconds % 60);
-
-    const formattedTime = `${hours.toString().padStart(2, "0")}:${minutes
-      .toString()
-      .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
-
-    console.log("Formatted Time: ", formattedTime);
-  }, []);
+    ref.current = setInterval(() => {
+      setSeconds(new Date());
+    }, 1000);
+    return () => {
+      clearInterval(ref.current);
+    };
+  }, [ref]);
   return (
     <>
-      <Box></Box>
+      <Box sx={{ display: "flex" }}>
+        <Typography variant="h1">
+          {duration.get("hours")}
+          {"h:"}
+        </Typography>
+        <Typography variant="h1">
+          {duration.get("minutes")}
+          {"m:"}
+        </Typography>
+        <Typography variant="h1">
+          {duration.get("seconds")}
+          {"s"}
+        </Typography>
+      </Box>
     </>
   );
 };
