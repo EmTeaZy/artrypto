@@ -5,14 +5,9 @@ const UserSettings = [
       href: "/account/settings",
     },
     {
-      title: "Featured Items",
+      title: "Verification",
       icon: "disc",
-      href: "",
-    },
-    {
-      title: "Notifications",
-      icon: "notifications",
-      href: "",
+      href: "/account/verification",
     },
   ];
   

@@ -25,6 +25,7 @@ const publicRoutes = [
   "/",
   "/account",
   "/account/settings",
+  "/account/verification",
   "/artwork/create",
   "/view/profile",
   "/nfts/search",

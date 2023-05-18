@@ -5,6 +5,7 @@ import CreateButton from "./CreateButton";
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import {useSnackbar} from "../../context/SnackbarContextProvider";
 import { Tooltip } from "@mui/material";
+import VerifiedIcon from '@mui/icons-material/Verified';
 const UserDetails = ({ user, check, classes }) => {
   const {show} = useSnackbar();
   const imgsrc="/profiles/"+user.imgid+".png";
@@ -31,9 +32,12 @@ const UserDetails = ({ user, check, classes }) => {
             src={imgsrc}
             sx={{ width: 150, height: 150 }}
           />
-          <Typography mt={1} color="text.primary" variant="h1">
-            {user?.username || " "}
-          </Typography>
+            <Box display="flex" justifyContent="center" alignItems="center">
+                <Typography mt={1} color="text.primary" variant="h1">
+                    {user?.username || " "}
+                </Typography>
+                {user?.isVerified && <VerifiedIcon fontSize="large" sx={{color: '#4FB6EC', marginLeft: '1rem'}}/>}
+            </Box>
           <Typography variant="subtitle1" color="text.info" mb={1}>
             {user?.bio}
           </Typography>

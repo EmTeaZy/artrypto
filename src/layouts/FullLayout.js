@@ -36,7 +36,7 @@ const FullLayout = ({ children,check }) => {
   const lgUp = useMediaQuery((theme) => theme.breakpoints.up("lg"));
   return (
     <MainWrapper>
-    {check=="admin"?
+    {check==="admin"?
       <Header
         sx={{
           paddingLeft: isSidebarOpen && lgUp ? "265px" : "",
@@ -60,7 +60,7 @@ const FullLayout = ({ children,check }) => {
           }}
         >
           <Box bgcolor={"primary.main"} sx={{ minHeight: "calc(100vh - 170px)" }}>{children}</Box>
-          {check=="admin"?<Footer />:<></>}
+          {check==="admin"?<Footer />:<></>}
         </Container>
       </PageWrapper>
     </MainWrapper>
