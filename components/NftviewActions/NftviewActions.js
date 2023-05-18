@@ -35,7 +35,7 @@ const NftviewActions = ({ Nftdata, listingdata, setlistingdata, user }) => {
     count: 1, // Limit the number of results
     start: 0, // Start from the nth result (useful for pagination)
   });
-  const show = useSnackbar();
+  const {show} = useSnackbar();
   useEffect(() => {
     axios
       .get(
@@ -134,7 +134,7 @@ const NftviewActions = ({ Nftdata, listingdata, setlistingdata, user }) => {
                     style={{ width: "20rem", height: "4rem" }}
                     startIcon={<AddCircleTwoTone />}
                     onClick={() => {
-                      router.push(`/nfts/${contractAddress}/${id}/sell`);
+                      handleClick()
                     }}
                   >
                     list for sale

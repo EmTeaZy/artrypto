@@ -11,10 +11,9 @@ const BuyTimer = ({ startTime, endTime }) => {
     startTime && endTime
       ? moment.duration(moment.unix(Number(endTime)).diff(moment()))
       : 0;
-  console.log(duration, startTime, endTime);
   useEffect(() => {
     ref.current = setInterval(() => {
-      setSeconds(new Date());
+      if (duration.get("seconds") > 0) setSeconds(new Date());
     }, 1000);
     return () => {
       clearInterval(ref.current);

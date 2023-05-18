@@ -39,7 +39,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const ViewOffer = ({ listingdata, nftdata }) => {
+const ViewOffer = ({ listingdata, nftdata, user }) => {
   const router = useRouter();
   const [myoffers, setOffers] = useState([]);
   const { contract } = useContract(MARKETPLACE_CONTRACT_ADDRESS, "marketplace");
@@ -61,16 +61,25 @@ const ViewOffer = ({ listingdata, nftdata }) => {
   }, [isLoading]);
 
   const handleAcceptOffer = (offer) => {
-    acceptOffer(offer.offeror);
+    if (user?.isVerified) {
+      acceptOffer(offer.offeror);
+    } else {
+      show("user is not verified.", "error");
+      router.push("/account");
+    }
   };
   const acceptOffer = async (offeror) => {
     try {
-      const tx = await acceptDirectOffer(listingdata.id, offeror);
-      show("offer accepeted successfully");
+      const tx = await acceptDirectOffer(
+        listingdata?.id,
+        offeror
+      );
+      show("offer accepted successfully");
       router.push("/");
     } catch (error) {
       console.log(error);
-      show("Offer not accepted successfully", "error");
+      show("Offer not accepted", "error");
+      // router.push("/")
     }
   };
   return (
@@ -100,12 +109,12 @@ const ViewOffer = ({ listingdata, nftdata }) => {
                         ? "Offered Amount"
                         : "Bid Amount"}
                     </StyledTableCell>
-                    {listingdata?.sellerAddress === address &&
+                    {/* {listingdata?.sellerAddress === address &&
                     listingdata.type === 0 ? (
                       <StyledTableCell align="left">Actions</StyledTableCell>
                     ) : (
                       <></>
-                    )}
+                    )} */}
                   </TableRow>
                 </TableHead>
                 <TableBody>

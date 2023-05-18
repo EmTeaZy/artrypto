@@ -4,17 +4,19 @@ import { Box, CardMedia, Typography } from "@mui/material";
 import EventList from "../../../../components/NFTs/EventList";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import { useContract, useNFT } from "@thirdweb-dev/react";
+import { useAddress, useContract, useNFT } from "@thirdweb-dev/react";
 import NftviewActions from "../../../../components/NftviewActions/NftviewActions";
 import { useState } from "react";
 import ViewOffer from "../../../../components/NftviewActions/ViewOffer";
 import axios from "axios";
+import { useEffect } from "react";
 
 const NFTDisplay = () => {
   const router = useRouter();
   const { id, contractAddress } = router.query;
   const { contract } = useContract(contractAddress);
   const { data } = useNFT(contract, id);
+  const address = useAddress();
   const [listingdata, setlistingdata] = useState();
   const [user, setUser] = useState({});
   useEffect(() => getUserData, []);
@@ -110,12 +112,14 @@ const NFTDisplay = () => {
                 NFT not listed for sale
               </Typography>
             ) : (
-              <ViewOffer listingdata={listingdata} nftdata={data} />
+              <ViewOffer user={user} listingdata={listingdata} nftdata={data} />
             )}
           </>
         ) : (
           <Typography variant="subtitle1" sx={{ color: "green" }}>
-            {listingdata?.type === 0 ? "Loading Active Offers....." : "loading All Bids....."}
+            {listingdata?.type === 0
+              ? "Loading Active Offers....."
+              : "loading All Bids....."}
           </Typography>
         )}
       </div>

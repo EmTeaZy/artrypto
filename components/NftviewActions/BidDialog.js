@@ -7,12 +7,11 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { Typography } from "@mui/material";
-import { useContract, useSDK } from "@thirdweb-dev/react";
+import { useContract, useOffers, useSDK } from "@thirdweb-dev/react";
 import { useState } from "react";
 import { MARKETPLACE_CONTRACT_ADDRESS } from "../../constants";
 import { useSnackbar } from "../../context/SnackbarContextProvider";
 import { useRouter } from "next/router";
-import { set } from "mongoose";
 
 export default function BigDialog(props) {
   const { open, handleClose, Nftdata, listingdata } = props;
@@ -21,7 +20,7 @@ export default function BigDialog(props) {
   const router = useRouter();
   const { contract } = useContract(MARKETPLACE_CONTRACT_ADDRESS, "marketplace");
   const sdk = useSDK();
-
+  const { data: offers, isLoading } = useOffers(contract, listingdata.id);
   const [offerValue, setOfferValue] = useState();
   const handleOfferChange = (event) => {
     seterror(false);
@@ -41,13 +40,19 @@ export default function BigDialog(props) {
     const balance = await sdk?.wallet?.balance(
       "0x9c3c9283d3e44854697cd22d3faa240cfb032889"
     );
-    console.log(balance);
     const buyPrice = Number(
       listingdata?.reservePriceCurrencyValuePerToken?.displayValue
     );
+    const highestBid = offers.length!==0?Number(offers[0]?.totalOfferAmount) / 1e18:0;
+    console.log(highestBid);
     if (offerValue > buyPrice) {
       if (Number(balance.displayValue) >= offerValue) {
-        createOffer();
+          if (offerValue > highestBid) {
+            createOffer();
+          } else {
+            show("Your bid should be greater then the highest Bidder", "error");
+            setOfferValue(0);
+          }
       } else {
         show("Insufficient amount to make offer on this NFT", "error");
         setOfferValue(0);

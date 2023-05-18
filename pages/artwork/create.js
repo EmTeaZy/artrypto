@@ -1,9 +1,14 @@
 import { Box, Typography } from "@mui/material";
 import React from "react";
 import GetArtworkDetails from "../../components/CreateComponents/GetArtworkDetails";
+import { useEffect } from "react";
+import { useAddress } from "@thirdweb-dev/react-core";
+import { useState } from "react";
+import axios from "axios";
 
 const Create = () => {
    const [user, setUser] = useState({});
+   const address=useAddress()
    useEffect(() => getUserData, []);
    const getUserData = async () => {
      if (address) {
