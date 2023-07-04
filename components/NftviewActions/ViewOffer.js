@@ -126,7 +126,7 @@ const ViewOffer = ({ listingdata, nftdata, user }) => {
                       <StyledTableCell scope="row">
                         {Number(offer?.totalOfferAmount?._hex) / 1e18}
                       </StyledTableCell>
-                      {listingdata?.sellerAddress === address &&
+                      {/* {listingdata?.sellerAddress === address &&
                       listingdata.type === 0 ? (
                         <StyledTableCell scope="row">
                           <Button onClick={() => handleAcceptOffer(offer)}>
@@ -135,7 +135,7 @@ const ViewOffer = ({ listingdata, nftdata, user }) => {
                         </StyledTableCell>
                       ) : (
                         <></>
-                      )}
+                      )} */}
                     </StyledTableRow>
                   ))}
                 </TableBody>
